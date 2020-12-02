@@ -68,7 +68,7 @@ Trivially we have $d(h^*) = \eta$.
 We will now prove a very useful lemma linking $d(h)$ and the generalization error of $h$.
 \begin{lemma}
 \label{lem}
-Let $\epsilon>0$ be an arbitrary given number. If $L_D(h)>\epsilon$, then we have $d(h) - d(h^*) \geq \epsilon'$ in which $\epsilon' = \epsilon(1-2\eta)$.
+Let $\epsilon>0$ be an arbitrary given number. If $L_D(h)>\epsilon$, then we have $d(h) - d(h^*) > \epsilon'$ in which $\epsilon' = \epsilon(1-2\eta)$.
 \end{lemma}
 
 \begin{proof} 
@@ -97,7 +97,7 @@ We are now ready to state and prove our main claim.
 In the noisy label setting with noise parameters $\eta$ and $\eta$ with any distribution $D$, let $\epsilon, \delta >0$ be arbitrary given numbers. Given 
 $m\geq \frac{2}{\epsilon^2(1-2\eta)^2}\Big(\log(|\cH|) +  \log(\frac{2}{\delta})\Big)$ training samples, for any $h \in \cH$  with $L_D(h) >\epsilon$, we have 
 \begin{equation}
-\hat{d}(h) - \hat{d}(h^*)  \geq 0
+\hat{d}(h) - \hat{d}(h^*)  > 0
 \end{equation}
 with probability at least $\delta$.
 \end{theorem}
