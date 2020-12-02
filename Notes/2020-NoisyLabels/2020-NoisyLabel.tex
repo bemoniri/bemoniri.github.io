@@ -80,7 +80,7 @@ d(h) &= \eta \;\mathbb{P}[h^*(\bx) = h(\bx)] + (1-\eta)\; \mathbb{P}[h^*(\bx) \n
 \end{align} 
 For a given $h$, if $L_D(h)>\epsilon$, we have $d(h) - \eta = d(h) - d(h^*) > (1-2\eta) \epsilon = \epsilon'$.
 \end{proof}
- We will use the well known Hoeffding's inequality (Theorem \eqref{Hoeffding}) in our proof.
+ We now restate the well known Hoeffding's inequality (Theorem \eqref{Hoeffding}) as it is used in the proof of our main theorem.
 \begin{theorem}
 \label{Hoeffding}
 Let $X_1, X_2, \dots, X_m$ be independent random variables. Also assume that each $X_i$ takes values in $[a_i, b_i]$ with probability 1. For any $\epsilon>0$, the following inequalities hold for $S_m = \sum_{i = 1}^{m}X_i$:
@@ -138,7 +138,7 @@ Given $m\geq \frac{2}{\epsilon^2(1-2\eta)^2}\Big(\log(\frac{2}{\delta})+\log(|\c
 Thus, given $m\geq \frac{2}{\epsilon^2(1-2\eta)^2}\Big(\log(\frac{2}{\delta})+\log(|\cH|)\Big)$, the first term and third terms of \eqref{decomp} are both greater than $-\frac{\epsilon'}{2}$ with probability at least $1-\frac{\delta}{2}$.  Hence, with probability at least $1-\delta$, 
 \begin{align}
 \hat{d}(h) - \hat{d}(h^*) &= [\hat{d}(h) - d(h)]+[d(h) - d(h^*)]+[d(h^*) - \hat{d}(h^*)]\\
-&\geq -\frac{\epsilon'}{2} + \epsilon' - \frac{\epsilon'}{2} = 0,
+&> -\frac{\epsilon'}{2} + \epsilon' - \frac{\epsilon'}{2} = 0,
 \end{align}
 which proves the theorem.
 \end{proof}
