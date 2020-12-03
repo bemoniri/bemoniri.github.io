@@ -1,0 +1,221 @@
+\documentclass[]{article}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{corollary}[theorem]{Corollary}
+%\renewcommand{\baselinestretch}{1.15}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\thetab}{\boldsymbol{{\theta}}}
+\newcommand{\h}{\mathbf{h}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cH}{\mathcal{H}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\KL}{\mathrm{D}_{KL}}
+
+
+
+\title{Four Cute Facts on Basic Concentration Inequalities}
+\author{Behrad Moniri\\\texttt{bemoniri@live.com}}
+\date{}
+
+\usepackage{sectsty} \sectionfont{\fontsize{15}{15}\selectfont}
+\begin{document}
+%\setcounter{section}{-1}
+\maketitle
+
+\begin{abstract}
+Four cute fact on basic concentration inequalities are presented. First, we will provide a bound on the variance of a sub-Gaussian random variable. Then we go on to compare Chernoff and Moments bound, and also Bennett's and Bernstein's Inequalities. We finish this note by proving a bound on the expected value of a random variable satisfying a Bernstein's tail inequality. These results can be found (or are left as exercises) in well known textbooks such as \cite{concentration, wainwright2019high}.
+\end{abstract}
+
+\section{Bounding Variance of a  Sub-Gaussian Random Variable}
+
+\begin{theorem}
+Let $X$ be a zero-mean, $\sigma^2$-subGaussian random variable. $\mathrm{Var}[X] \leq \sigma^2$.
+\end{theorem}
+
+\begin{proof}
+By the subGaussian property, for any $\lambda \in \R$ we have 
+$\E[e^{\lambda Y}] \leq e^{\lambda^2 \sigma^2 / 2}$. We can write
+\begin{align}
+2 e^{\frac{\lambda^2\sigma^2}{2}} &\geq \E[e^{\lambda Y}] + \E[e^{-\lambda Y}]   \\
+&=2 + 2\sum_{k = 1}^{\infty} \lambda^{2k} \frac{\E[Y^{2k}]}{(2k)!}\\
+&\geq 2 + 2\lambda^2 \frac{\E[Y^2]}{2}.
+\end{align}
+Hence, for all $\lambda >0$, we have $ h(\lambda) = 1 + \frac{\lambda}{2} \E[Y^2] - e^{\lambda\sigma^2/2} \leq 0$. We have $h(0) = 0$, hence $h'(0)$ should be negative. Thus
+\begin{align}
+h'(\lambda) = \frac{1}{2}  \E[Y^2] - \frac{\sigma^2}{2}e^{\lambda \sigma^2/2}\Big|_{\lambda = 0} \leq 0 \implies \E[Y^2] \leq \sigma^2,
+\end{align}
+which concludes the proof.
+\end{proof}
+
+\begin{remark}
+The equality $\E[Y^2] = \sigma^2$ might not hold even if $\sigma$ is the smallest number satisfying $\E[e^{\lambda Y}] \leq e^{\lambda^2 \sigma^2 / 2}$. To see this, let $X$ be the following discrete random variable
+\begin{equation}
+X = 
+\begin{cases}
++1, & p\\
+0, & 1-2p\\
+-1, & p
+\end{cases}
+\end{equation}
+It can easily be seen that $\E[X] = 0$ and $\E[X^2] = 2p$. Assume that the equality holds with $\sigma^2 = \mathrm{Var}[X] = 2p$.
+\begin{align*}
+g(\lambda) &\triangleq \log\E[e^{\lambda X}] - \frac{\lambda^2 \sigma^2}{2} - \lambda \mu\\
+&= \log(pe^\lambda + p e^{-\lambda} + 1 - 2p) - \lambda^2 p \leq 0 \;\;\; \forall \lambda \in \R.
+\end{align*}
+Now, let  $p=0.1$ and $\lambda = 1$, then
+$$\log(0.1e^1 + 0.1e^{-1} + 1 - 0.2) - 1 \time 0.1 \approx 0.00311 \geq 0$$
+which is a contradiction.
+
+\end{remark}
+
+
+\section{Chernoff's vs. Moments Tail Bound}
+
+\begin{theorem}
+\label{cherrvsmom}
+Suppose that $X\geq 0$ and that the moment generating function of $X$ in an interval around zero. Given $\delta>0$ and integer $k$, we have
+\begin{equation}
+\inf_{k=0, 1, 2, ...} \frac{\E[X^k]}{\delta^k} \leq \inf_{\lambda>0} \frac{\E[e^{\lambda X}]}{e^{\lambda \delta}}.
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+We will prove that 
+$\forall \lambda > 0: \inf_{k=0, 1, 2, ...} \frac{\E[X^k]}{\delta^k} \le 
+\frac{\E[e^{\lambda X}]}{e^{\lambda \delta}}.$
+The theorem follows from this statement. Define $y_k := \frac{\E[X^k]}{\delta^k}$ and $z_k = \frac{1}{k!} \lambda^k \delta^k$. By Taylor's expansion
+\begin{equation}
+\frac{\E[e^{\lambda X}]}{e^{\lambda \delta}} = 
+\frac{\sum_{k=0}^{\infty} \frac{1}{k!} \lambda^k\E[X^k]}{
+	\sum_{k=0}^{\infty} \frac{1}{k!} \lambda^k\delta^k
+} = 
+\frac{\sum_{k=0}^{\infty} \frac{1}{k!} \lambda^k\delta^k y_k}{
+	\sum_{k=0}^{\infty} \frac{1}{k!} \lambda^k\delta^k
+} = \frac{\sum_{k = 0}^{\infty} z_k y_k}{\sum_{k = 0}^{\infty}z_k} \geq \inf_{k=0,1,2,...} y_k,
+\end{equation}
+which proves the theorem.
+\end{proof}
+
+\begin{corollary}
+We can write two different tail bounds for a positive variable $X$:
+\begin{equation}
+\Prob[X\geq t] \leq \inf_{k=0, 1, 2, ...}\frac{\mathbb{E}[X^k]}{t^k}
+\end{equation}
+and 
+\begin{equation}
+\Prob[X\geq t] \leq \inf_{\lambda>0}\frac{\E[e^{\lambda X}]}{e^{\lambda \delta}}.
+\end{equation}
+Theorem \eqref{cherrvsmom} states that the first bound is tighter than the second. However, the second bound is more popular, because of the ease of extending to to sum of i.i.d. random variables.
+\end{corollary}
+
+
+
+
+\section{Bennett's vs. Bernstein's Inequality}
+
+	Let $X_i$ be a mean-zero random variables such that $|X_i| < b$.  First, We intend to bound the moment generating function from above.  For every $\lambda \in \R$ we can write
+
+\begin{align*}
+\E(e^{\lambda X_i}) &= 
+1+	\E \Big(\sum_{k = 2}^{\infty}\frac{\lambda^k X_i^k}{k!}\Big)\\
+&= 1 + \sum_{k = 2}^{\infty} \frac{\lambda^k \E(X_i^2 X_i^{k-2})}{k!}\\
+&\leq 1 + \sum_{k = 2}^{\infty} \frac{\lambda^k \sigma_i^2 b^{k-2}}{k!}\\
+&= 1 + \frac{\sigma_i^2}{b^2} \sum_{k = 2}^{\infty} \frac{\lambda^k b^k}{k!}\\
+&= 1 + \frac{\sigma_i^2}{b^2} (e^{\lambda b} - \lambda b - 1)\\
+&\leq \exp\Big(\frac{\sigma_i^2}{b^2} (e^{\lambda b} - \lambda b - 1)\Big).
+\end{align*}
+Hence 
+\begin{equation}
+\label{behrad:2.7.moment}
+\log\E(e^{\lambda X_i}) \leq \frac{\sigma_i^2}{b^2} (e^{\lambda b} - \lambda b - 1).
+\end{equation}
+
+
+Since $X_i$s are independent random variables, we can write
+\begin{align}{}
+\label{behrad:2.7.tail}
+\Prob\Big(\sum_{i = 1}^{n} X_i \geq t\Big) &\leq \frac{\E\Big(\exp(\sum_{i = 1}^{n} \lambda X_i)\Big)}{e^{\lambda t}} = \frac{\prod_{i = 1}^{n} \E \Big(\exp(\lambda X_i)\Big)}{e^{\lambda t}}
+\end{align}
+
+Substituting \eqref{behrad:2.7.moment} in \eqref{behrad:2.7.tail} we arrive at the following bound:
+
+\begin{align*}
+\mathbb{P} \Big(\sum_{i = 1}^{n} X_i \geq t \Big) &\leq e^{-\lambda t} \prod_{i = 1}^{n} \E(\exp(\lambda X_i))\\
+&\leq e^{-\lambda t} \prod_{i = 1}^{n} \exp\Big(\frac{\sigma_i^2}{b^2}(e^{\lambda b} - 1 - \lambda b)\Big)
+\end{align*}
+
+Optimizing $\lambda$ yield the Bennett's inequality
+\begin{equation}
+\Prob\Big(\sum_{i = 1}^{n} X_i \geq t\Big) \leq \exp\Big(-\frac{n\sigma^2}{b^2} h\Big(\frac{bt}{n\sigma^2}\Big)\Big) ,
+\end{equation}
+where $h(t) = (1+t) \log(1+t)$ for $t>0$. Bernstein's inequality is a weakening of Bennett. Let $\Phi(x) = \frac{x^2}{2 + \frac{2}{3} x}$. It is easy to see that
+\begin{equation}
+\forall x \geq 0 \;\;\; (1+x) \log(1+x) - \frac{x^2}{2 + 2/3 x} \geq 0.
+\end{equation}
+Substituting $h$ with $\Phi$ in Bennett yield the Bernstein's inequality.
+
+\section{Bernstein's Expectation}
+\begin{theorem}
+	Consider a random variable $Z$ that satisfies the following Bernstein-type inequality:
+	\begin{equation}
+	\Prob(Z \geq t) \leq C \exp\Big(\frac{-t^2}{2\sigma^2 + 2bt}\Big).
+	\end{equation}
+	We have 
+	\begin{equation}
+	\E[Z] \leq 4b(1 + \log(C)) + 2\sigma \big(\sqrt{\pi} + \sqrt{\log(C)}\big).
+	\end{equation}
+\end{theorem}
+
+\begin{proof}
+	If $\sigma^2 \leq bt$ then $\sigma^2 + bt \leq 2bt$. Otherwise $\sigma^2 + bt \leq 2\sigma^2$. We can rewrite the bound on $Z$ in the following form:
+	\begin{align}
+	\Prob(Z \geq t) &\leq C \exp\Big(\frac{-t^2}{2\sigma^2 + 2bt}\Big) \leq 				
+	C\max\Big[\min\Big(\exp\big(\frac{-t^2}{4bt}\big),1\Big), \min\Big(\exp\big(\frac{-t^2}{4\sigma^2}\big),1\Big)	
+	\Big]\\		
+	&\leq C \Big[
+	\min\Big(\exp\big(\frac{-t^2}{4bt}\big),1\Big) +  \min\Big(\exp\big(\frac{-t^2}{4\sigma^2}\big),1\Big)	
+	\Big].
+	\end{align}
+	By writing the expected value as the integral of the tail probability function and bounding the tail probability, it is easy to derive a bound on $\E(Z)$.		
+	\begin{align}
+	\E[Z] &= \int_{0}^{\infty}\Prob(Z \geq t) \, dt\\ 
+	&\leq  \int_{0}^{\infty}\min\Big\{1, C\exp\big(\frac{-t}{4b}\big)\Big\} \, dt +
+	\int_{0}^{\infty} \min\Big\{1, C\exp\big(\frac{-t^2}{4\sigma^2}\big)\Big\} \, dt\\
+	&= 4b(1 + \log(C)) + 2\sigma \big(\sqrt{\pi} + \sqrt{\log(C)}\big).
+	\end{align}
+	Where the last inequality follows from computing the integrals.
+\end{proof}
+
+
+\bibliography{bib}
+\bibliographystyle{alpha}
+
+
+\end{document}
