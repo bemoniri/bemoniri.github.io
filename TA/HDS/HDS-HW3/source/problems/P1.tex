@@ -1,0 +1,23 @@
+\section
+[دم دلخواه!]
+{چینینگ فرآیند‌های با دم دلخواه}
+روش 
+\lr{Chaining}
+تنها به فرآیند‌های زیرگوسی محدود نمی‌شود. فرض نمایید که 
+$\{X_t\}_{t \in T}$
+فرآیندی تصادفی با میانگین صفر بوده و برای هر 
+$s, t \in T$
+و
+$\lambda \geq 0$
+داشته باشیم
+$$\log\mathbb{E}\Big[e^{\frac{\lambda \{X_t - X_s\}}{d(t, s)}}\Big] \leq \psi(\lambda).$$
+که در آن 
+$\psi$
+تابعی محدب است و 
+$\psi(0) = \psi'(0) = 0$.
+نشان دهید 
+
+$$\mathbb{E}\Big[\sup_{t \in T} X_t\Big] \leq C \int_{0}^{\infty} {\psi^*}^{-1} \Big(2\log\big(\mathcal{N}(T, d, \epsilon) \big)\Big)$$
+که در آن
+$\psi^*(x) = \sup_{\lambda \geq 0} \{\lambda x - \psi(\lambda)\}$
+است.

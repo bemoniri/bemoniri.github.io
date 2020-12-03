@@ -1,0 +1,16 @@
+
+\section{اصلاح کران دودلی برای فرآیند‌های لیپشیتز}
+فرض کنید 
+$\{X_t\}_{t\in T}$
+یک فرآیند تصادفی لیپشیتر و زیرگوسی باشد، یعنی
+$$\forall s, t \in T \;\;\; \mathbb{E}[\exp(\lambda(X_t - X_s))] \leq \exp\Big(\frac{\lambda^2 d^2(s, t)}{2}\Big)$$
+و با احتمال یک
+$$\forall s, t \in T \;\;\;  |X_t - X_s| \leq Cd(s, t).$$
+
+\begin{itemize}
+	\item
+	نشان دهید 
+	$$\mathbb{E}\big[\sup_{t\in T} X_t\big] \leq \inf_{\delta > 0} \Big\{2\delta C + 32 \int_{\delta}^{\infty} \sqrt{\log(\mathcal{N}(T, d, \epsilon))} d\epsilon\Big\}.$$
+	\textbf{رهنمایی:  }
+	با توجه به زیرگوسی بودن، فرآیند چینینگ را انجام دهید و از خاصیت لیپشیتز بودن فرآیند تصادفی برای کران‌زدن یکی از جملات استفاده کنید.
+\end{itemize}

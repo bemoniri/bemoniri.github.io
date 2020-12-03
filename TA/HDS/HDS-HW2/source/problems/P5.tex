@@ -1,0 +1,30 @@
+\section[]{ماتریس تصادفی گوسی}
+فرض کنید درایه‌های ماتریس تصادفی
+$A \in \mathbb{R}^{m \times N}$
+گاوسی استاندارد و مستقل از هم و
+$\vec{u},\vec{v} \in \mathbb{R}^N$
+دو بردار دلخواه داده‌شده باشند:
+
+الف) با استفاده از صورت‌های معادل متغیرهای زیرگوسی ثابت کنید:
+
+\[\begin{cases} 
+\vspace{2mm}
+\mathbb{P}\big[\vec{u}^\top A^\top A \vec{v} > a\big]\leq\begin{array}{rrclcl}
+\displaystyle
+\end{array}\dfrac{e^{-sa}}{({1-{2s} \vec{u}^\top \vec{v}})^{\frac{m}{{2}}}} &\quad s>0 \\
+\mathbb{P}\big[\vec{u}^\top A^\top A \vec{v}\leq a\big]\leq\begin{array}{rrclcl}
+\displaystyle
+\end{array}\dfrac{e^{sa}}{({1+{2s} \vec{u}^\top\vec{v}})^{\frac{m}{{2}}}} &\quad s>0  
+\end{cases}
+\]
+
+\textbf{راهنمایی:}
+ می‌توانید از رابطه‌ی
+$\mathrm{det}\{I - \vec{u}\vec{v}^\top\} = 1 - \vec{u}^\top \vec{v}$
+ استفاده نمایید.
+ 
+ ب) ثابت کنید: 
+ \begin{equation}
+ 	\nonumber
+ 	\mathbb{P}\big[\lvert\frac{1}{m}\vec{u}^\top A^\top A \vec{v} - \vec{u}^\top \vec{v} \rvert > \epsilon \vec{u}^\top \vec{v} \big] \leq 2e^{-m(\frac{\epsilon^2}{4}-\frac{\epsilon^3}{6})}
+ \end{equation}

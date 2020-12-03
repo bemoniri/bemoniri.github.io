@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}انگیزه}{2}{section.1}
+\contentsline {subsection}{\numberline {1.1}کاهش بعد تفسیرپذیر}{3}{subsection.1.1}
+\contentsline {section}{\numberline {2}ISM}{7}{section.2}
+\contentsline {subsection}{\numberline {2.1}ایده‌ی الگوریتم \relax \fontsize {14.4}{18}\selectfont \lr { ISM}\relax \fontsize {12}{14.5}\selectfont \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ }{8}{subsection.2.1}
+\contentsline {section}{\numberline {3}کاربردها}{11}{section.3}
+\contentsline {subsection}{\numberline {3.1}کاربردهای الگوریتم \relax \fontsize {17.28}{22}\selectfont \lr {ISM}\relax \fontsize {12}{14.5}\selectfont \abovedisplayskip 12\p@ plus3\p@ minus7\p@ \abovedisplayshortskip \z@ plus3\p@ \belowdisplayshortskip 6.5\p@ plus3.5\p@ minus3\p@ \belowdisplayskip \abovedisplayskip \let \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ \leftmargin \leftmargini \parsep 5\p@ plus2.5\p@ minus\p@ \topsep 10\p@ plus4\p@ minus6\p@ \itemsep 5\p@ plus2.5\p@ minus\p@ }{12}{subsection.3.1}
+\contentsline {section}{\numberline {4}شبیه‌سازی}{13}{section.4}
+\contentsline {section}{\numberline {5}مراجع}{14}{section.5}

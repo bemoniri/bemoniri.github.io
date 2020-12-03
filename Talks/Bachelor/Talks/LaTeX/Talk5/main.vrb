@@ -1,0 +1,11 @@
+\frametitle{Bibliography}
+
+You can cite an article
+\begin{itemize}
+\item normally using \texttt{\textbackslash cite}, e.g.: (\cite{article1})
+\item or display the full citation using \texttt{\textbackslash fullcite}, e.g.:  \fullcite{article1}
+\end{itemize}
+
+\vskip 0.5cm
+Look at the code of the following slide to see how to automatically split the bibliography on many slides. You can also use \texttt{\textbackslash nocite\{*\}} to display the non-cited publications as well.
+

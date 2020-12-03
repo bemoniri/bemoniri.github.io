@@ -1,0 +1,335 @@
+\documentclass{beamer}
+\mode<presentation> {
+%\usetheme{Dresden}
+\usetheme{CambridgeUS}
+}
+\newcommand{\subitem}{\par\qquad}
+\usepackage{booktabs}
+
+\usepackage{tikz}
+\usepackage{subfigure}	
+\usepackage[round]{natbib}   % omit 'round' option if you prefer square brackets
+\DeclareMathOperator*{\argmin}{argmin}
+\DeclareMathOperator*{\argmax}{argmax}
+\newtheorem{lem}{Lemma}
+\newtheorem{thm}{Theorem}
+\newtheorem{nots}{Note}
+\newtheorem{defs}{Definition}
+\usetikzlibrary{arrows,calc,positioning,decorations.pathreplacing} 
+\tikzset{
+	>=stealth',
+	punkt/.style={
+		circle,
+		draw=black, thick,
+		minimum height=2em,
+		inner sep=0pt,
+		text centered},
+	pil/.style={
+		->,
+		thick,
+		shorten <=2pt,
+		shorten >=2pt,},
+	cir/.style={
+		rectangle,
+		rounded corners,
+		draw=black, thick,
+		minimum width=1.5em,
+		text centered},
+	arr/.style={
+		->,
+		thick,
+		shorten <=2pt,
+		shorten >=2pt,},
+	layer/.style={
+		draw=black,
+		fill=white,
+		thick,
+		rectangle,
+		rounded corners,
+		minimum width=1.5em,
+		minimum height=12em
+	},
+	brace/.style={
+		thick,
+		decoration={
+			brace,
+			mirror,
+			raise=2.5cm
+		},
+		decorate
+	}
+}
+
+\newcommand{\drawlayer}[4]{
+	\node[layer, draw=#4] (#1) at (#2,#3) {};
+	\foreach \x in {-1.75, -1.25, -0.75, -0.25, 0.25, 0.75, 1.25, 1.75} \draw[thick, #4] (#2,\x+#3) circle (0.15);
+}
+\newcommand\irregularcircle[2]{
+	\pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+	+(0:\len pt)
+	\foreach \a in {10,20,...,350}{
+		\pgfextra {\pgfmathsetmacro\len{(#1)+rand*(#2)}}
+		-- +(\a:\len pt)
+	} -- cycle
+}
+
+\newcommand{\independent}{\mbox{${}\perp\mkern-11mu\perp{}$}}
+\newcommand{\notindependent}{\mbox{${}\not\!\perp\mkern-11mu\perp{}$}}
+\newcommand{\iid}{\overset{\text{iid}}{\sim}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% PARENTHESES 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\renewcommand{\dot}[2]{\langle {#1},\, {#2} \rangle}
+\newcommand{\pa}[1]{\left( #1 \right)}
+\newcommand{\pb}[1]{\left\{ #1 \right\}}
+\newcommand{\pc}[1]{\left[ #1 \right]}
+\newcommand{\pn}[1]{\left\| #1 \right\|}
+\newcommand{\ps}[1]{\left| #1 \right|}
+\newcommand{\ot}{\leftarrow}
+\newcommand{\given}{\, | \,}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATHCAL
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\D}{\mathcal{D}}
+\renewcommand{\P}{\mathcal{P}}
+\renewcommand{\Pr}{\mathbb{P}}
+\renewcommand{\H}{\mathcal{H}}
+\renewcommand{\L}{\mathcal{L}}
+\newcommand{\Hk}{{\mathcal{H}_k}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\Y}{\mathcal{Y}}
+\newcommand{\Z}{\mathcal{Z}}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\Ex}{\mathcal{E}}
+\newcommand{\Hyp}{\mathcal{H}}
+\newcommand{\B}{\mathcal{B}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% MATHBB 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\Pio}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rd}{\mathbb{R}^d}
+\newcommand{\Rq}{\mathbb{R}^q}
+\newcommand{\Rn}{\mathbb{R}^n}
+\newcommand{\Rm}{\mathbb{R}^m}
+\newcommand{\Rnd}{\mathbb{R}^{n \times d}}
+\newcommand{\Rnm}{\mathbb{R}^{n \times m}}
+\newcommand{\I}{\mathbb{I}}
+\newcommand{\Pa}{\mathrm{Pa}}
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\sig}{\mathrm{sign}\circ\!}
+\newcommand{\Rp}{R_{\varphi}}
+\newcommand{\Rpn}{\hat{R}_{\varphi}}
+\newcommand{\Rpnt}{\tilde{R}_{\varphi}}
+\newcommand{\f}{f^*}
+\newcommand{\fn}{\hat{f}_n}
+\newcommand{\fnt}{\tilde{f}_n}
+\newcommand{\fntm}{\tilde{f}^m_n}
+\newcommand{\Mk}{\M_k}
+\newcommand{\muP}{\mu_k(\P)}
+\renewcommand{\d}{{\mathrm{d}}}
+\newcommand{\Rad}{\mathrm{Rad}}
+\newcommand{\M}{\mathscr{M}}
+\newcommand{\head}[2]{\multicolumn{1}{>{\centering\arraybackslash}p{#1}}{\textbf{#2}}}
+\renewcommand{\do}{do}
+\title[de Finetti Theorem]{Subjective Theory of Probability} 
+\subtitle{Dutch Book (de Finetti's) Theorem}
+
+\author[Behrad Moniri]{Behrad Moniri}
+
+\institute[]
+{
+
+La soci\'{e}t\'{e} secr\'{e}te des statisticiens\\ et des ing\'{e}nieurs \'{e}lectriciens au ch\^{o}mage\\\vspace{0.5cm}
+\texttt{bemoniri@live.com}
+}
+\date{}
+
+%	\includegraphics[width=2cm]{digilogo.png}
+
+
+\newcommand{\bigCI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+
+\begin{document}
+\maketitle
+
+\begin{frame}
+\frametitle{Introduction}
+\begin{itemize}
+
+\item The most widely accepted view interprets probabilities:
+long run averages. This is based on the fact that averages should settle down to expectations over a long sequence of \textit{independent} trials.
+
+
+\pause
+\item de Finetti theorem provides an alternative view that does not depend on a preliminary concept of independence, and which concentrates attention on the \textit{linearity properties} of expectations.
+
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{itemize}
+\item
+Let $\Omega$ be your sample space and $X: \Omega \to \mathbb{R}$ be a bounded function (random variable). 
+\pause
+\item
+Forget about probability measures on $\Omega$. Suppose you consider $p(X)$ to be the \textit{fair price}  to pay now in order to receive $X$ at some later time.
+\pause
+\item By fair I mean that you should be prepared to accept a payment $p(X)$ from me now in return for giving me an amount $X$ later.
+\pause
+\item Your return: $X'(\omega) = X(\omega) - p(X)$. We call this \textit{fair return}.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Properties of fair bets!}
+
+Unless you start worrying about utilities, you should find the following properties reasonable:
+\pause
+\begin{itemize}
+	\item
+	\textbf{fair + fair = fair}. That is, if you consider $p(X)$ fair for $X$ and $p(Y)$ fair for $Y$, then you should be prepared to make both bets, paying $p(X) + p(Y)$ to receive $X + Y$.
+	\pause
+	\item
+	\textbf{constant $\times$ fair = fair}. You shouldn't object if I suggest you pay $cp(X)$ to receive $cX$ for constant $c$.
+
+\end{itemize}
+
+\pause
+
+These two conditions imply that imply that the collection of all fair returns is a vector space over field $\mathbb{R}$.
+\end{frame}
+
+\begin{frame}
+\frametitle{Properties of fair bets!}
+There is a third reasonable property that goes by several names: \textit{coherency} or
+\textit{nonexistence of a Dutch book}, the \textit{no-arbitrage requirement}, or \textit{the no-free-lunch principle}:
+\pause
+\begin{itemize}
+	\item
+	There is no fair return $X'$ for which $X'(\omega) < 0$ for all $\omega \in \Omega$, with strict inequality for at least one $\omega$.
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+\frametitle{Properties of fair bets!}
+\begin{lem}
+The previous properties imply that $p(.)$ is a linear, increasing functional on random variables.
+\end{lem}
+
+\begin{proof}
+For constants $\alpha$ and $\beta$ and random variables $X$ and $Y$ with fair prices $p(X)$ and $p(Y)$, consider the combined effect of the following fair bets:
+\begin{itemize}
+\item
+You pay me $\alpha p(X)$ to receive $\alpha X$.
+\item
+You pay me $\beta p(Y)$ to receive $\beta Y$.
+\item
+I pay you $p(\alpha X + \beta Y)$ to receive $\alpha X + \beta Y$.
+\end{itemize}
+
+Your net return is $c = p(\alpha X + \beta Y) - \alpha p(X) - \beta p(Y)$. 
+
+If $c>0$, (iii) is violated. If $c<0$, consider the other side bet to violate (iii). This proves linearity.
+
+\end{proof}
+\end{frame}
+
+\begin{frame}
+\begin{proof}
+
+To prove that $p(.)$ is increasing, suppose $\forall \omega \in \Omega:\;  X(\omega) \geq Y(\omega)$.
+
+ If you claim
+that $p(X) < p(Y)$ then I would be happy for you to accept the bet that delivers $(Y - p(Y)) - (X - p(X)) =
+-(X - Y) - (p(Y) - p(X))$,
+which is always $< 0$.
+\end{proof}
+
+\begin{nots}
+If both $X$ and $X-p(X)$ are fair, so is $X - \big(X-p(X)\big)$ with constant return. This imples that $p(X) = 0$.
+\end{nots}
+
+\end{frame}
+
+\begin{frame}
+\frametitle{de Finettin Theorem}
+\begin{thm}
+ $	 p(F_X \cup F_Y) = p(F_X) + p(F_Y)$ for disjoint $F_X, F_Y \subseteq \Omega$. Here we have used the de Finetti notation $p(A) = p(\mathbf{1}_A)$ for $A \subseteq \Omega$.
+\end{thm}
+\pause
+\begin{proof}
+	As a special case, consider the bet that returns $1$ if an event $F$ occurs, and $0$	otherwise. The previous theorem  implies   $$	 p(F_X \cup F_Y) =	p(F_X) + p(F_Y)$$ for disjoint $F_X$ and $F_Y$.
+\end{proof}
+\pause
+We can similiary show that $p(\Omega) = 1$ and $p(\emptyset) = 0$.
+
+\end{frame}
+
+\begin{frame}
+\frametitle{Conditional Probability and Contingent Bets}
+Things become much more interesting if you are prepared to make a bet to receive an amount $X$ but only when some event $F$ occurs. 
+\pause
+
+\begin{itemize}
+\item Typically, knowledge of the occurrence of $F$ should change the fair price, which we could denote by $p(X | F)$. 
+\pause
+\item The bet that returns $\big(X - p(X | F)\big) F$ is fair. 
+\pause
+\item The indicator function $F$ ensures that money changes hands only when $F$ occurs.
+\end{itemize}
+\end{frame}
+
+\begin{frame}
+\begin{thm}
+If $\Omega$ is partitioned into disjoint events $F_1, \dots, F_k$. and $X$ is a random variable, then $p(X) = \sum_{i = 1}^{k} p(Fi)\, p(X | F_i)$. 
+\end{thm}
+\begin{proof}
+For a single $F_i$, argue by linearity that $$0 = p (X F_i - p(X | F_i)F_i) = p(XF_i) - p(X | F_i)\,p(Fi).$$
+Sum over $i$, using linearity again, together with the fact that $X = \sum_i X Fi$, to deduce
+that $p(X) =\sum_i p(XF_i) = \sum_i p(F_i)p(X | F_i)$, as asserted.
+\end{proof}
+\end{frame}
+
+\begin{frame}
+
+\begin{itemize}
+	\item Why should we restrict the Lemma to finite partitions?
+	\pause
+	\item  If we allowed countable partitions we would get the countable additivity property-the key requirement in the theory of measures.
+		\pause
+	\item  If we accept that assumption, then why not accept that arbitrary combinations of fair events are fair?
+		\pause
+	\item
+	 For uncountably infinite collections we would run into awkward contradictions.
+	 	\pause	 
+	 \item  For example, suppose $\omega$ is generated from a uniform distribution on $[0, 1)$. Let $X_t = \mathbf{1}_{\omega = t}$.
+	 	\pause
+	  By symmetry one might expect $p(X_t) = c$ for
+	 some constant c that doesn't depend on t.
+	 \pause However
+	 
+	 $$1 = p(1) = p(\sum_{0\leq t \leq 1} X_t) \stackrel{?}{=} \sum_{0\leq t \leq 1} p(X_t) = \begin{cases}
+	 0 & c = 0\\
+	 \infty & \text{else}
+	 \end{cases}$$
+	 
+\end{itemize}
+
+
+
+
+\end{frame}
+
+\end{document}
+

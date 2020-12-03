@@ -1,0 +1,1434 @@
+
+\chapter[الگوریتم 
+\lr{ISM}
+]{
+\lr{Iterative Spectral Method}}
+
+در فصل قبل، بیان صورت کلّی مسئله‌ی کاهش بعد غیرخطی تفسیر‌پذیر پرداختیم. در این فصل، به معرفی الگوریتم
+\lr{Iterative Spectral Method}
+برای حل این مسئله می‌پردازیم. در ابتدا، به معرفی خانواده‌ی بزرگی از کرنل‌ها، به نام کرنل‌های
+\lr{ISM}
+می‌پردازیم و گارانتی‌هایی بر عملکرد الگوریتم
+\lr{Iterative Spectral Method}
+برای کرنل‌های 
+\lr{ISM}
+ارائه می‌کنیم.
+
+\section{کرنل‌های 
+\lr{ISM}}
+
+\begin{den}
+	\label{ISM-def}
+	(کرنل‌
+	\lr{ISM})
+کرنل متقارن و مثبت معین
+$k(., .)$،
+یک کرنل 
+\lr{ISM}
+است، اگر دو بار مشتق‌پذیر باشد و برای آن داشته باشیم:
+\begin{equation}
+\forall \bx_i, \; \bx_j \in \R^d \;\;
+k(\bx_iW, \bx_jW) = f(\beta_{ij})
+\end{equation}
+که در آن
+\begin{equation}
+\beta_{ij} = a(\bx_i, \bx_j)^\top WW^\top b(\bx_i, \bx_j).
+\end{equation}
+
+\end{den}
+
+دو نمونه‌ی
+\lr{$\bx_i$}
+و
+\lr{$\bx_j$}
+را در نظر می‌گیریم. اگر با کمک ماتریس
+\lr{$W$}
+بعد این نمونه‌ها را کاهش دهیم، به بردارهای
+\lr{$W^\top\bx_i$}
+و
+\lr{$W^\top\bx_j$}
+می‌رسیم. از طرف دیگر دو تابع برداری
+\lr{$a : \R^d\times\R^d \to \R^d$}
+و
+\lr{$b\R^d\times\R^d \to \R^d$}
+را در نظر می‌گیریم. اگر این دو تابع را به دو نمونه‌ی 
+\lr{$\bx_i$}
+و
+\lr{$\bx_j$}
+اعمال کنیم و خروجی‌های آن‌ها را با ماتریس
+\lr{$W$}
+کاهش بعد دهیم، به بردارهای
+\lr{$W^\top a(\bx_i, \bx_j)$}
+و
+\lr{$W^\top b(\bx_i, \bx_j)$}
+می‌رسیم. ضرب داخلی این دو بردار را
+\lr{$\beta_{ij}$}
+می‌نامیم.
+
+\[\beta_{ij} = \langle W^\top a(\bx_i, \bx_j), W^\top b(\bx_i, \bx_j)\rangle = a(\bx_i, \bx_j)^\top WW^\top b(\bx_i, \bx_j)\]
+
+پس تعریف کرنل
+\lr{ISM}
+را می‌توان به این صورت نوشت:
+
+\[k(W^\top\bx_i, W^\top\bx_j) = f\left(\langle W^\top a(\bx_i, \bx_j), W^\top b(\bx_i, \bx_j)\rangle\right)\]
+در نتیجه کرنل 
+\lr{ISM}،
+کرنلی است که اعمال آن بر روی دو نمونه‌ در فضای کاهش بعد یافته، معادل باشد با تابعی از ضرب داخلی دو تابع برداری از آن نمونه‌ها در فضای کاهش بعد یافته.
+%% Add the shohood
+
+
+\section{شرایط لازم مرتبه‌ی اول و مرتبه‌ی دوم }
+
+در ابتدا به بیان قضیه‌ی معروف شرایط لازم، در بهینه‌سازی غیرمحدب می‌پردازیم. 
+\begin{thm}
+یک مسئله‌ی بهینه‌سازی مقید غیرمحدّب را به فرم
+$\min_{h(W) = 0} f(W)$
+را در نظر بگیرید، که در آن
+$f: \R^{d\times q} \to \R$
+و
+$h: \R^{d\times q} \to \R^{q\times q}$
+توابعی دو بار مشتق‌پذیر با مشتق پیوسته بوده و 
+$\LL$
+لاگرانژین این مسئله‌ی بهینه‌سازی باشد. آن‌گاه، برای هر بهینه‌ی محلّی،  ماتریس
+$\Lambda^*$
+وجود دارد که  در شرایط زیر صدق می‌کند:
+\begin{itemize}
+\item
+شرط
+\lr{KKT}:
+\begin{equation}
+\nabla_W \LL(W^*, \Lambda^*) =0 \;\;\;\;\;
+\nabla_\Lambda \LL(W^*, \Lambda^*) =0
+\end{equation}
+
+\item
+شرایط لازم مرتبه‌ی دوم:
+\begin{equation}
+\tr (Z^\top \nabla^2_{WW} \LL (W^*, \Lambda^*)Z) \geq 0 \;\; \forall Z\neq 0 \;\;\;  \mathrm{with} \;\;\; \nabla h(W^*)^\top Z = 0
+\end{equation}
+\end{itemize}
+\end{thm}
+\begin{proof}
+	اثبات این قضیه در اکثر کتاب‌های بهینه‌سازی غیرمحدّب موجود است. به عنوان مثال 
+	\cite{nocedal2006numerical}
+	را ببینید.
+\end{proof}
+
+\section{جواب مسئله‌ی 
+\lr{IKDR}
+برای کرنل‌های 
+\lr{ISM}
+}
+در این بخش قصد داریم به بررسی شرایط لازم مرتبه‌ی اول و مرتبه‌ی دوم برای مسئله‌ی بهینه‌سازی
+\lr{IKDR}
+بپردازیم و الگوریتمی ارائه کنیم که نقاط ثابت آن، در این شرایط صدق کنند.
+\subsection{شرایط لازم مرتبه‌ی اول}
+\label{FONC}
+ در فصل قبل،  مسئله‌ی 
+\lr{IKDR}
+  را بدین صورت تعریف کردیم:
+\begin{equation}
+\max_W \;\; \tr(\Gamma K_{XW})\;\;\;\mathrm{s.t.}\;\;\;W^\top W=I
+\end{equation}
+
+می‌دانیم
+$\tr(\Gamma K_{XW})=\sum_{i,j} \Gamma_{i,j}K_{XW_{i,j}}$. 
+تعریف می‌کنیم
+$\mathbf{a} = a(x_i, x_j)$ و $ \mathbf{b} = b(x_i, x_j)$. 
+با این تعریف، لاگرانژین مسئله‌ برابر می‌شود با:
+    \begin{align}
+\begin{split}
+\mathcal{L}(W, \Lambda) = -\sum_{ij}
+\Gamma_{ij} f(\mathbf{a}^{T}WW^{T}\mathbf{b}) 
+- \tr[\Lambda(W^{T}W-I)]. \label{eq:Lagrangian}
+\end{split}
+\end{align}
+با مشتق‌گیری از این عبارت نسبت به 
+$W$
+داریم:
+    \begin{align}
+\begin{split}
+\nabla_W \mathcal{L}(W, \Lambda) = 
+-\sum_{ij}{\Gamma_{ij} f'(\mathbf{a}^{T}WW^{T}\mathbf{b})} (\mathbf{b}\mathbf{a}^\top  + \mathbf{a}\mathbf{b}^\top )W - 2 W \Lambda.
+\end{split}
+\label{eq:lagrangian_gradient}
+\end{align}
+
+اگر تعریف کنیم
+$A_{i,j}=\mathbf{ba}^\top +\mathbf{ab}^\top $
+و مشتق لاگرانژین را برابر با صفر قرار دهیم، به دست می‌آید:
+    \begin{align}
+\begin{split}
+0 = \left[-\frac{1}{2}\sum_{ij}{\Gamma_{ij} f'(\mathbf{a}^{T}WW^{T}\mathbf{b})} A_{i,j}\right] W - W \Lambda.
+\end{split}\label{eq:eig_decomp_1}
+\end{align}
+
+با تعریف 
+$\Psi_{i,j} = -\frac{1}{2}\Gamma_{i,j}f'(\mathbf{a}^{T}WW^{T}\mathbf{b})$،
+معادله‌ی فوق به صورت زیر ساده‌ می‌شود:
+    \begin{align}
+\begin{split}
+\left[\sum_{ij}{\Psi_{ij}} A_{i,j}\right] W = W \Lambda.
+\end{split}\label{eq:eig_decomp_2}
+\end{align}
+
+اگر تعریف کنیم
+$\Phi = [\sum_{i, j} \Psi_{ij}A_{i, j}]$
+داریم
+$\Phi W = W \Lambda$.
+این بدین معناست که  بردار‌ها‌‌ی‌ ویژه‌ی ماتریس 
+$\Phi$
+در شرایط لازم مرتبه‌ی اول
+\lr{(KKT)}
+صدق می‌کنند. از آن‌جا که بردار‌های ویژه‌ی $\Phi$ یکه‌ی متعامد هستند، شرط 
+\begin{equation}
+\nabla_\Lambda \LL = W^\top W - I = 0
+\end{equation}
+نیز ارضا می‌شود.
+
+
+
+\subsection{شرایط لازم مرتبه‌ی دوم}
+با در نظر گرفتن قید
+$h(W) = W^\top W - I = 0$،
+ابتدا جهت‌های 
+$\nabla h(W^*)^\top Z = 0$
+را به دست می‌آوریم. می‌دانیم:
+\begin{equation}
+\nabla h ( W^{\ast})^\top  Z = \lim_{t \to 0}  \frac{\partial}{\partial t} h ( W + t Z),
+\end{equation}
+در نتیجه می‌توان شرط را به صورت زیر بازنویسی کرد:
+\begin{equation}
+\begin{array}{lll}
+\nabla h ( W^{\ast})^\top  Z = 0 & = & 
+\lim_{t \rightarrow 0}
+\frac{\partial}{\partial t} [ ( W  + t Z)^\top  ( W 
++ t Z) - I],\\
+0 & = &
+\lim_{t \rightarrow 0}
+\frac{\partial}{\partial t} [ ( W^\top   W + t W^\top  Z + t
+Z^\top  W + t^2 Z^\top  Z) - I],\\
+0 & = & 
+\lim_{t \rightarrow 0}
+ W^\top  Z + Z^\top  W + 2 t Z^\top  Z.
+\end{array}
+\end{equation}
+ با صفر قرار دادن این عبارت، به دست می‌آید:
+ \begin{equation}
+   W^\top  Z + Z^\top  W = 0
+ \label{eq:constraint_2nd}
+ \end{equation}
+ 
+ از آن‌جا که 
+ $\Phi$
+ یک ماتریس متقارن است، مقادیر ویژه‌ی آن کل فضا را 
+ \lr{span}
+ می‌کنند. دو ماتریس
+ $W$
+ و 
+ $\bar{W}$
+ را به ترتیب مقادیر ویژه‌ای می‌گیریم که در الگوریتم انتخاب شده و انتخاب نشده‌اند. دو ماتریس جایگذاری (که ستون‌ها را در جای خود بگذارند)
+$B$
+ و 
+$\bar{B}$
+ وجود دارند که:
+\begin{equation}
+Z = WB + \bar{W}\bar{B}
+\end{equation}
+
+از آن‌جا که بردار‌های ویژه‌ی متفاوتی در 
+$W$
+و 
+$\bar{W}$
+قرار دارند و به واسطه‌ی تعامد بردار‌های ویژه،
+$W^\top \bar{W} = 0$
+است. با جای‌گذاری 
+$Z$
+در معادله‌ی 
+\eqref{eq:constraint_2nd}
+داریم:
+\begin{equation}
+\begin{array}{lll}
+0 & = & W^\top  ( W B + \bar{W}  \bar{B}) + ( W B + \bar{W}  \bar{B})^\top  W\\
+0 & = & B + B^\top  .
+\label{eq:antisym}
+\end{array}
+\end{equation}
+
+باید مشتق دوم  لاگرانژین را محاسبه کنیم. مجدداً می‌دانیم:
+\begin{equation}
+\nabla^2_{W W} \mathcal{L} ( W, \Lambda) Z = \begin{array}{l}
+\lim\\
+t \rightarrow 0
+\end{array} \frac{\partial}{\partial t} \nabla \mathcal{L} ( W + t Z).
+\end{equation}
+
+در بخش قبل، برای گرادیان لاگرانژین داشتیم:
+\begin{equation}
+\nabla_W \mathcal{L} ( W) = -\frac{1}{2}\left[ \sum_{i, j} \Gamma_{i, j} f' ( \beta)
+A_{i, j} \right] W - W \Lambda .
+\end{equation}
+
+با تغییر 
+$W$
+به 
+$W + tZ$
+در تعریف 
+$\beta{W}$
+داریم:
+\begin{equation}
+\begin{array}{lll}
+\beta ( W + t Z) & = & \mathbf{a} ( W + t Z) ( W + t Z)^\top 
+\mathbf{b},\\
+& = & \mathbf{a}^\top  W W^\top  \mathbf{b}+ [ \mathbf{a}^\top  ( W Z^\top  + Z
+W^\top ) \mathbf{b}] t + [ \mathbf{a}^\top  Z Z^\top  \mathbf{b}] t^2,\\
+& = & \beta + c_1 t + c_2 t^2,
+\label{eq:beta}
+\end{array}
+\end{equation}
+
+حال، با این دانسته‌ها می‌توانیم به سادگی مشتق دوم لاگرانژین را محاسبه کنیم:
+\small
+\begin{equation}
+\nabla^2_{W W} \mathcal{L} ( W, \Lambda) Z = \begin{array}{l}
+\lim\\
+t \rightarrow 0
+\end{array} \frac{\partial}{\partial t} \left[-\frac{1}{2} \sum_{i, j}  \Gamma_{i, j}
+f' ( \beta + c_1 t + c_2 t^2) A_{i, j} \right] ( W + t Z) - ( W + t Z)
+\Lambda .
+\end{equation}
+
+\normalsize
+با مشتق‌گیری و محاسه‌ی حد عبارت در 
+$t \to 0$:
+\small
+\begin{equation}
+\nabla^2_{W W} \mathcal{L} ( W, \Lambda) Z = \left[-\frac{1}{2} \sum_{i, j} \Gamma_{i,
+	j} f'' ( \beta) c_1 A_{i, j} \right] W + \left[ -\frac{1}{2} \sum_{i, j} \Gamma_{i, j}
+f' ( \beta) A_{i, j} \right] Z - Z \Lambda .
+\label{secderv}
+\end{equation}
+\normalsize
+حال به مسئله‌ی اصلی که محاسبه‌ی 
+$\tr(Z^\top \nabla^2_{WW} \LL (W, \Lambda)Z)$
+بود باز می‌گردیم. با توجه به معادله‌ی 
+\eqref{secderv}،
+این عبارت را می‌توان به صورت جمع سه جمله نوشت:
+\begin{equation}
+\tr(Z^\top \nabla^2_{WW} \LL (W, \Lambda)Z) = \mathcal{T}_1 + \mathcal{T}_2 + 
+\mathcal{T}_3
+\end{equation}
+که در آن‌:
+ \begin{align}
+\mathcal{T}_1 & = \tr \left( Z^\top  \left[ -\frac{1}{2}\sum_{i, j} \Gamma_{i,
+	j} f'' ( \beta) c_1 A_{i, j} \right] W \right),\\
+\mathcal{T}_2 & = \tr ( Z^\top  \Phi Z),
+\label{eq:app:T2}
+\\
+\mathcal{T}_3 & = - \tr ( Z^\top  Z \Lambda).
+\label{eq:app:T3}
+\end{align}
+
+فرض کنید 
+$\Lambda$
+و
+$\bar{\Lambda}$
+به ترتیب مقادیر ویژه‌ی ماتریس‌های
+$W$
+و 
+$\tilde{W}$
+باشند. می‌توان عبارت مربوط به 
+$\mathcal{T}_2$
+را می‌توان با جای‌گذاری 
+$Z$
+ساده کرد. 
+
+\[ \begin{array}{lll}
+\tr ( Z^\top  \Phi Z) & = & \tr ( ( W B + \bar{W} \bar{B})^\top  \Phi
+( W B + \bar{W} \bar{B}))\\
+& = & \tr (  B^\top  W^\top  \Phi W B + \bar{B}^\top  \bar{W}^\top  \Phi
+W B + B^\top  W^\top  \Phi \bar{W} \bar{B} + \bar{B}^\top  \bar{W}^\top  \Phi \bar{W}
+\bar{B})\\
+& = & \tr (  B^\top  W^\top  W \Lambda B + \bar{B}^\top  \bar{W}^\top  W
+\Lambda B + B^\top  W^\top  \bar{W} \bar{\Lambda} \bar{B} + \bar{B}^\top  \bar{W}^\top 
+\bar{W} \bar{\Lambda} \bar{B}) \\
+& = & \tr (  B^\top  \Lambda B + 0 + 0 + \bar{B}^\top 
+\bar{\Lambda} \bar{B}) \\
+& = & \tr (  B^\top  \Lambda B + \bar{B}^\top  \bar{\Lambda}
+\bar{B}) .
+\end{array} \]
+
+با جایگذاری
+$Z$
+در عبارت
+$\mathcal{T}_3$
+نیز به صورت مشابه بالا به دست می‌آید:
+\[ \begin{array}{lll}
+\tr ( Z^\top  Z \Lambda) & = & - \tr ( ( W B + \bar{W}
+\bar{B})^\top  ( W B + \bar{W} \bar{B}) \Lambda)\\
+& = & - \tr ( B^\top  W^\top  W B \Lambda + \bar{B}^\top  \bar{W}^\top  W B
+\Lambda + B^\top  W^\top  \bar{W} \bar{B} \Lambda + \bar{B}^\top  \bar{W}^\top  \bar{W}
+\bar{B} \Lambda)\\
+& = & - \tr ( B^\top  B \Lambda + 0 + 0 + \bar{B}^\top  \bar{B} \Lambda)\\
+& = & - \tr ( B \Lambda B^\top  + \bar{B} \Lambda \bar{B}^\top ) .
+\end{array} \]
+
+
+با این وجود، می‌توان شرط لازم مرتبه‌ی دوم را بدین صورت بازنویسی کرد:
+\begin{equation}
+\tr(Z^\top \nabla^2_{WW} \LL (W, \Lambda)Z) = 
+\tr ( B^\top  \Lambda B) + \tr (  \bar{B}^\top  \bar{\Lambda} \bar{B}) -
+\tr ( B \Lambda B^\top ) - \tr ( \bar{B} \Lambda \bar{B}^\top )
++\mathcal{T}_1 \geq 0.
+\label{eq:inequality_2}
+\end{equation}
+
+
+اما در معادله‌ی 
+\eqref{eq:antisym}
+نشان دادیم که ماتریس 
+$B$
+پاد متقارن است. بنابراین داریم:
+
+$$\tr{B\Lambda B^\top} = \tr(B^\top \Lambda B)$$
+یعنی:
+\begin{equation}
+ \tr ( 
+\bar{B}^\top  \bar{\Lambda} \bar{B}) - \tr ( \bar{B} \Lambda \bar{B}^\top )
++\mathcal{T}_1 \geq 0.
+\end{equation}
+\textbf
+{مقاله در این بخش اثبات دچار اشتباهاتی شده‌ بود که بعد از تماس ما با نویسنده‌ی مقاله و بیان مشکل موجود در اثبات،  او آن را اصلاح و نسخه‌ای اصلاح‌شده را برای ما ارسال نمود. ادامه‌ی این اثبات، در مقاله‌ی موجود در سایت 
+\lr{NIPS}
+غلط است.}
+
+از طرفی، اگر در فرم مربعی
+$ \tr ( \bar{B}^\top  \bar{\Lambda} \bar{B})$،
+به ازای هر درایه‌ی عضو
+$\bar{\Lambda}$، 
+کمینه‌ی درایه‌های آن (یعنی 
+$\min_i \bar{\Lambda}_i$)
+را بگذاریم، عبارت کوچک‌تر می‌شود. بنابراین:
+\[ \tr ( \bar{B}^\top  \bar{\Lambda} \bar{B}) \geq 
+(\min_i \bar{\Lambda}_i)\; \tr ( \bar{B} \bar{B}^\top ) \]
+
+مشابه عبارت قبل، اگر در 
+$\tr ( \bar{B} \Lambda \bar{B}^\top )$،
+تمام درایه‌ها را با بزرگترین درایه‌ی 
+$\Lambda_j$ 
+جایگزین کنیم، این عبارت بزرگ‌تر می‌شود:
+\[ \tr ( \bar{B} \Lambda \bar{B}^\top ) \leq 
+(\max_j \Lambda_j) \; \tr ( \bar{B}^\top  \bar{B}) \]
+
+در نتیجه،  شرط لازم مرتبه‌ی دوم به صورت زیر در می‌آید:
+\small
+\begin{equation}
+ \tr ( 
+\bar{B}^\top  \bar{\Lambda} \bar{B}) - \tr ( \bar{B} \Lambda \bar{B}^\top )
++\mathcal{T}_1 \geq (\min_i \bar{\Lambda}_i)\; \tr ( \bar{B} \bar{B}^\top ) - (\max_j \Lambda_j) \; \tr ( \bar{B}^\top  \bar{B}) + \mathcal{T}_1
+\end{equation}
+\normalsize
+
+تعریف کنید
+$\alpha = \tr(\bar{B}\bar{B}^\top) = \tr(\bar{B}^\top\bar{B})$.
+بنابراین، برای برقراری شرط لازم مرتبه‌ی دوم (معادل مثبت بودن عبارت‌ بالا)، کافی است داشته باشیم:
+\begin{equation}
+\min_i(\bar{\Lambda}_i) - 
+\max_j(\Lambda_j)  \geq \frac{1}{\alpha} \mathcal{T}_1 = \mathcal{C}
+\label{final}
+\end{equation}
+
+این شرط بدان معناست که فاصله‌ی بین کوچکترین مقدار ویژه‌ی مربوط به بردار ویژه‌های انتخاب‌نشده در الگوریتم، با بزرگترین مقدار ویژه‌ی انتخاب شده، بزرگ‌تر از حدی باشد. یعنی اگر قصد داشته ‌باشیم
+$q$
+بردار ویژه‌ی ماتریس 
+$\Phi$
+را به عنوان 
+$W$
+ انتخاب کنیم، باید 
+$q$
+بردار ویژه‌ی کوچک را انتخاب نماییم. از آن‌جایی که با توجه به روش‌های مثل
+\lr{Power Method}
+برای محاسبه‌ی مقادیر و بردار‌های ویژه، بهتر است که مقادیر ویژه‌ی بزرگ یک ماتریس را پیدا کنیم، فلذا در الگوریتم، ماتریس 
+$-\Phi$
+را به عنوان 
+$\Phi$
+در نظر می‌گیریم و مقادیر ویژه‌ی بزرگ آن را محاسبه می‌کنیم. 
+
+\subsection{الگوریتم 
+\lr{ISM}
+}
+
+حال، با توجه به نتایج بخش‌های قبل، تلاش می‌کنیم الگوریتمی ارائه دهیم که نقاط ثابت این الگوریتم، در شرایط لازم مرتبه‌ی اول و مرتبه‌ی دوم صدق کنند. با توجه به شرایط لازم مرتبه‌ی اول، برای یک کرنل
+\lr{ISM}
+داده‌شده، به تعریف ماتریس 
+$\Phi$
+می‌پردازیم.
+
+\begin{den}
+کرنل 
+\lr{ISM}
+تعریف شده در تعریف
+\eqref{ISM-def}
+را در نظر بگیرید. ماتریس 
+$\Phi$
+مربوط به این کرنل و مسئله‌ی بهینه‌سازی
+\begin{equation}
+\max_W \tr(\Gamma K_{XW})\;\;\;\mathrm{s.t.}\;\;\;W^\top W=I
+\end{equation}
+را بدین صورت تعریف می‌کنیم. توجه کنید که همان‌طور که در انتهای بخش قبل شاره شد، علامت منفی به این دلیل اضافه شده که در الگوریتم نهایی، به دنبال بردار ویژه‌ها‌ی مربوط به بزرگترین مقادیر ويژه باشیم:
+\begin{equation}
+\Phi = -\frac{1}{2}\sum_{i, j} \Gamma_{i, j} f'(\beta) \Big(b(x_i, x_j)a(x_i, x_j)^\top + a(x_i, x_j)b(x_i, x_j)^\top\Big)
+\end{equation}
+
+با توجه به تعریف 
+$\Psi$
+در معادله‌ی
+\eqref{eq:eig_decomp_2}
+به طور معادل می‌توان نوشت:
+\begin{equation}
+\Phi = \sum_{i, j} \Psi_{i, j}A_{i,j}
+\end{equation}
+\end{den}
+
+
+حال، الگوریتم زیر را در نظر بگیرید:
+
+\begin{latin}
+    \begin{algorithm}[H]
+    			\footnotesize
+    		\textbf{Input :} Data $X$, kernel, Subspace Dimension $q$\\ \textbf{Output :} Projected subspace $W$ \\
+    		\textbf{Initialization :} Initialize $\Phi_0$.\\ 
+    		Set $W_0$ to Dominant Eigenvectors of  of $\Phi_0$\\
+    		\textbf{While} $||\Lambda_i - \Lambda_{i-1}||_2/||\Lambda_i||_2 < \delta$ \\
+    			Compute $\Phi$ with $W_{k-1}$\\
+    			Set $W_k$ to Dominant Eigenvectors of $\Phi$\\
+    		\textbf{End}
+
+	\caption{ISM Algorithm}
+	\label{alg:ism}
+\end{algorithm}   
+\end{latin}
+
+با توجه به قضایای بالا، این الگوریتم، بسیار طبیعی است! در ابتدا، یک ماتریس 
+$\Phi$
+اولیه به نام 
+$\Phi_0$
+انتخاب کرده‌ایم. در ادامه در مورد انتخاب 
+$\Phi_0$
+توضیحاتی روشی ارائه خواهیم داد. سپس $q$
+بردار ویژه‌ی غالب 
+$\Phi_0$
+را به عنوان 
+$W_0$
+انتخاب می‌کنیم. حال به صورت تکرار شونده، در هر مرحله، به کمک 
+$W$
+مرحله‌ی قبل، 
+$\Phi$
+مربوط به کرنل انتخاب شده در ابتدای الگوریتم را ساخته و 
+$W$
+را برابر 
+$q$
+بردار ویژه‌ی بزرگ آن قرار می‌دهیم. دلیل این انتخاب، معادله‌ی
+\eqref{final}
+است.
+
+
+به طور خلاصه، تا کنون  در این فصل نشان داده‌ایم که مقاط ثابت الگوریتم
+\lr{ISM}
+با هر کرنل
+\lr{ISM}
+دلخواه، در شرایط لازم مرتبه‌ی اول و دوم مسئله‌ی بهینه‌سازی
+\lr{IKDR}
+صدق می‌کنند. حال نشان می‌دهیم که این الگوریتم همگراست.
+\begin{thm}
+ دنباله‌ی
+$\{W_kW_k^\top\}$
+تولید شده توسط الگوریتم 
+\lr{ISM}
+دارای یک زیردنباله‌ی همگراست.
+\end{thm}
+
+
+\section{
+ماتریس
+$\Phi_0$
+و شرایط اولیه‌ی الگوریتم
+}
+الگوریتم فوق، در قدم اول نیاز به یک ماتریس 
+$\Phi_0$
+به عنوان نقطه‌ی شروع دارد. در حالت کلی، برای یک کرنل 
+\lr{ISM}،
+ماتریس 
+$\Phi$
+می‌تواند تابعی از ماتریس 
+$W$
+باشد، بنابراین لازم است به دنبال‌ نقطه‌ی شروعی برای الگوریتم تکرارشونده‌ی 
+\lr{ISM}
+ باشیم که تابعی از 
+$W$
+نباشد و در تکرار اول قابل محاسبه باشد. برای کرنل‌هایی که در آن
+$\Phi$
+تابع 
+$W$
+نیست، جواب مسئله‌ی 
+\lr{IKDR}
+به وضوح دارای یک فرم بسته است که این فرم بسته، مشابه 
+\lr{PCA}
+ بزرگ‌ترین بردارهای ویژه‌ی 
+$\Phi$
+هستند. 
+
+از آن‌جایی که مسئله‌ی 
+\lr{IKDR}
+مسئله‌ای به شدت غیرمحدب است، انتخاب نقطه‌ی اولیه در آن از اهمیت بسیار بالایی برخوردار است.
+\begin{thm}
+\label{phi0}
+هر کرنل خانواده‌ی 
+\lr{ISM}
+را می‌توان به صورت زیر تقریب زد. این تقریب، مستقل از 
+$W$
+است.
+\begin{equation}
+\Phi \approx \mathrm{sign}\Big( (\nabla_\beta f(0))\Big) \sum_{i, j} \Gamma_{i, j} A_{i, j}
+\end{equation}
+که در آن
+$\mu = \nabla_\beta f(0)$.
+
+\begin{proof}
+ابتدا، تابع 
+$f(\beta(W))$
+مربوط به کرنل 
+\lr{ISM}
+را حول 
+$W = 0$
+بسط تیلور می‌دهیم. تا مرتبه‌ی دوم داریم:
+\begin{equation}
+f(\beta(W)) \approx f(0) + \frac{1}{2!} \tr (W^\top f''(0)W)
+\end{equation}
+
+در نتیجه، می‌توان لاگرانژی مسئله‌ی 
+\lr{IKDR}
+را به صورت زیر بازنویسی کرد:
+
+\begin{equation}
+\mathcal{L} = -\sum_{i, j} \Gamma_{i, j} \Big[f(0) + \frac{1}{2!} \tr \big(W^T f''(0)W\big)\Big] - \tr\Big[\Lambda(W^\top W - I)\Big]
+\end{equation}
+
+مشابه بخش
+\eqref{FONC}،
+شرط لازم مرتبه‌ی اول را برای این تقریب از مسئله‌‌ی بهینه‌سازی می‌نویسیم.  برای این کار باید هسین تابع
+$\beta(W)$
+را بنویسیم:
+$\beta(W) = a^TWW^Tb = \tr(W^Tba^TW)$.
+با دو بار مشتق‌گیری، به دست می‌آید:
+\begin{align}
+\nabla_{W,W} \beta(W) &= [ba^T+ab^T],\\
+\nabla_{W,W} \beta(W=0) &= [ba^T+ab^T].
+\end{align}
+
+حال می‌توانیم هسین و گرادیان 
+$f(\beta(W))$
+را محاسبه کنیم:
+\small
+ \begin{align}
+f(\beta(W)) &= f(a^TWW^Tb) = f(\tr(W^Tba^TW)),\\
+f'(\beta(W)) &= \nabla_{\beta} f(\beta(W))[ba^T+ab^T]W = 
+\nabla_{\beta} f(\beta(W)) \nabla_W \beta(W)\\
+f''(\beta(W) &= \nabla_{\beta,\beta} f(\beta(W))[ba^T+ab^T]W(...) + \nabla_{\beta} f(\beta(W))[ba^T+ab^T]\\
+f''(\beta(W=0)) &= 0 + \nabla_{\beta} f(\beta(W))\nabla_{W,W} \beta(W=0)\\
+f''(\beta(W=0)) &= \nabla_{\beta} f(\beta(W))\nabla_{W,W} \beta(W=0)\\
+f''(0) &= \mathrm{sign}\Big( (\nabla_\beta f(0))\Big) A_{i,j}.
+\end{align}
+\normalsize
+
+در نتیجه‌ گرادیان وهسین لاگرانژی به فرم زیر است:
+\begin{align}
+\nabla_{W} \mathcal{L} &\approx -\sum_{i,j} \Gamma_{i,j} f''(0) W - 2W\Lambda,\\
+\nabla_{W} \mathcal{L} &\approx -\mathrm{sign}\Big( (\nabla_\beta f(0))\Big) \sum_{i,j} \Gamma_{i,j} A_{i,j} W - 2W\Lambda.
+\end{align}
+با صفر قرار دادن گرادیان لاگرانژي، به معادله‌ی 
+\begin{align}
+\left[ -\mathrm{sign}\big( (\nabla_\beta f(0))\big) \sum_{i,j} \Gamma_{i,j} A_{i,j} \right] W = W\Lambda.
+\end{align}
+می‌رسیم. در نتیجه 
+\begin{equation}
+\Phi \approx \mathrm{sign}\Big( (\nabla_\beta f(0))\Big) \sum_{i, j} \Gamma_{i, j} A_{i, j}
+\end{equation}
+تقریب مرتبه دوم 
+$\Phi$
+است.
+\end{proof}
+\end{thm}
+ 
+در الگوریتم 
+\lr{ISM}
+از
+$\Phi_0$
+قضیه‌ی فوق  به عنوان شرط اولیه استفاده می‌شود. در بخش بعد ماتریس‌های
+$\Phi_0$
+کرنل‌های معروف 
+\lr{ISM}
+محاسبه شده‌اند.
+
+\section{برخی از اعضای معروف خانواده‌ی 
+\lr{ISM}}
+در این بخش، بعضی کرنل‌های معروف را در نظر می‌گیریم و نشان می‌دهیم تعریف کرنل
+\lr{ISM}
+درباره‌ی آن‌ها صدق می‌کند و توابع
+\lr{$a(\bx_i,\bx_j)$}،
+\lr{$b(\bx_i,\bx_j)$}
+و
+\lr{$f(\beta_{ij})$}
+را برای آن‌ها محاسبه می‌کنیم. 
+\subsection{\lr{Linear Kernel}}
+تابع
+\lr{$K(.,.)$}
+برای کرنل خطّی به این صورت است:
+\[K(\bx_i,\bx_j) = \langle\bx_i,\bx_j\rangle + c\]
+در نتیجه داریم:
+\[K(W^\top\bx_i,W^\top\bx_j) = \langle W^\top\bx_i,W^\top\bx_j\rangle + c\]
+در نتیجه کرنل خطّی، یک کرنل
+\lr{ISM}
+است و داریم:
+\[a(\bx_i,\bx_j) = \bx_i\qquad\qquad b(\bx_i,\bx_j) = \bx_j\]
+\[\beta_{ij} = \langle W^\top\bx_i,W^\top\bx_j\rangle \]
+\[f(\beta_{ij}) = \beta_{ij} + c\]
+\subsection{\lr{Polynomial Kernel}}
+تابع
+\lr{$K(.,.)$}
+برای کرنل چندجمله‌ای به این صورت است:
+\[K(\bx_i,\bx_j) = (\alpha\langle\bx_i,\bx_j\rangle + c)^p\]
+در نتیجه داریم:
+\[K(W^\top\bx_i,W^\top\bx_j) = (\alpha\langle W^\top\bx_i,W^\top\bx_j\rangle + c)^p\]
+در نتیجه کرنل چندجمله‌ای، یک کرنل
+\lr{ISM}
+است و داریم:
+\[a(\bx_i,\bx_j) = \bx_i\qquad\qquad b(\bx_i,\bx_j) = \bx_j\]
+\[\beta_{ij} = \langle W^\top\bx_i,W^\top\bx_j\rangle \]
+\[f(\beta_{ij}) = (\alpha\beta_{ij} + c)^p\]
+
+\subsection{\lr{Gaussian Kernel}}
+تابع
+\lr{$K(.,.)$}
+برای کرنل گاوسی به این صورت است:
+\[K(\bx_i,\bx_j) =\exp\left(-\frac{\norm{\bx_i-\bx_j}^2}{2\sigma^2}\right)\]
+در نتیجه داریم:
+\begin{align*}
+K(W^\top\bx_i,W^\top\bx_j) &= \exp\left(-\frac{\norm{W^\top(\bx_i-\bx_j)}^2}{2\sigma^2}\right) \\&= 
+\exp\left(-\frac{\langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle}{2\sigma^2}\right)
+\end{align*}
+
+در نتیجه کرنل گاوسی، یک کرنل
+\lr{ISM}
+است و داریم:
+\[a(\bx_i,\bx_j) = \bx_i-\bx_j\qquad\qquad b(\bx_i,\bx_j) = \bx_i-\bx_j\]
+\[\beta_{ij} = \langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle \]
+\[f(\beta_{ij}) = e^{-\frac{\beta_{ij}}{2\sigma^2}}\]
+\subsection{\lr{Squared Kernel}}
+تابع
+\lr{$K(.,.)$}
+برای کرنل مربّعی به این صورت است:
+\[K(\bx_i,\bx_j) = \norm{\bx_i - \bx_j}^2\]
+در نتیجه داریم:
+\begin{align*}
+K(W^\top\bx_i,W^\top\bx_j) &= \norm{W^\top(\bx_i - \bx_j)}^2\\
+&= \langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle
+\end{align*}
+
+در نتیجه کرنل مربّعی، یک کرنل
+\lr{ISM}
+است و داریم:
+\[a(\bx_i,\bx_j) = \bx_i - \bx_j\qquad\qquad b(\bx_i,\bx_j) = \bx_i - \bx_j\]
+\[\beta_{ij} = \langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle\]
+\[f(\beta_{ij}) = \beta_{ij}\]
+
+\subsection{\lr{Multiquadratic Kernel}}
+
+تابع
+\lr{$K(.,.)$}
+برای کرنل 
+\lr{multiquadratic}
+ به این صورت است:
+\[K(\bx_i,\bx_j) = \sqrt{\norm{\bx_i - \bx_j}^2 + c^2}\]
+در نتیجه داریم:
+\begin{align*}
+K(W^\top\bx_i,W^\top\bx_j) &= \sqrt{\norm{W^\top(\bx_i - \bx_j)}^2+c^2}\\
+&= \sqrt{\langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle+c^2}
+\end{align*}
+
+در نتیجه کرنل 
+\lr{multiquadratic}،
+یک کرنل
+\lr{ISM}
+است و داریم:
+\[a(\bx_i,\bx_j) = \bx_i - \bx_j\qquad\qquad b(\bx_i,\bx_j) = \bx_i - \bx_j\]
+\[\beta_{ij} = \langle W^\top(\bx_i-\bx_j),W^\top(\bx_i-\bx_j)\rangle\]
+\[f(\beta_{ij}) = \sqrt{\beta_{ij}+c^2}\]
+
+
+
+\section{محاسبه‌ی ماتریس‌های
+\lr{$\Phi$}
+\label{PhiZero}
+و
+\lr{$\Phi_0$}
+برای هر کرنل معروف خانواده‌ی
+\lr{ISM}}
+از تعریف ماتریس‌های
+\lr{$\Phi$}
+و
+\lr{$\Phi_0$}
+می‌دانیم:
+\begin{equation}
+\Phi = \sum_{i, j}\Psi_{i,j}A_{i,j} = \frac{1}{2}\sum_{i, j} \Gamma_{i, j} f'(\beta_{ij})(\mathbf{ba}^\top +\mathbf{ab}^\top)
+\end{equation}
+\begin{equation}
+\Phi_0 = \text{sign}(\mu) \sum_{i, j} \Gamma_{i, j} A_{i,j}
+\end{equation}
+در بخش قبل مشاهده کردیم که در کرنل‌های معروف خانواده‌ی
+\lr{ISM}،
+بردارهای
+\lr{$\mathbf{a}$}
+و
+\lr{$\mathbf{b}$}
+یا به صورت
+\[\mathbf{a} = a(\bx_i,\bx_j)=\bx_i,\qquad\qquad\mathbf{b} = b(\bx_i,\bx_j)=\bx_j\]
+هستند و یا به صورت
+\[\mathbf{a} = a(\bx_i,\bx_j)=\bx_i-\bx_j,\qquad\qquad\mathbf{b} = b(\bx_i,\bx_j)=\bx_i-\bx_j\].
+
+\lr{$A_{i,j}$}
+در حالت اوّل به صورت
+\lr{$A_{i,j} = \bx_i\bx_j^\top + \bx_j\bx_i^\top$}
+و در حالت دوم به صورت
+\lr{$A_{i,j} = 2(\bx_i-\bx_j)(\bx_i-\bx_j)^\top$}
+درمی‌آید.
+در این دو حالت می‌توانیم حاصل
+\lr{$\Phi = \sum_{i, j}\Psi_{i,j}A_{i,j}$}
+را مقداری ساده‌تر کنیم.
+
+
+\subsection{محاسبه‌ی
+\lr{$\Phi$}
+در حالتی که
+\lr{$A_{i,j} = \bx_i\bx_j^\top + \bx_j\bx_i^\top$}}
+در این حالت داریم:
+\[\Gamma= HK_YH\]
+\[\beta_{ij} = \langle W^\top\mathbf{a},W^\top\mathbf{b}\rangle = \langle W^\top\bx_i,W^\top\bx_j\rangle\]
+و چون
+\lr{$\Psi_{i,j} = \Gamma_{i,j} f'(\beta_{ij})$}،
+ماتریس
+\lr{$\Psi$}
+یک ماتریس متقارن است. در نتیجه با آنکه 
+\lr{$\bx_i \bx_j^T \ne \bx_j \bx_i^T$}،
+داریم:
+\begin{equation}
+\sum_{i,j} \Psi_{i,j} \bx_i \bx_j^T = 
+\sum_{i,j} \Psi_{i,j} \bx_j \bx_i^T.
+\end{equation}
+در نتیجه می‌توان نوشت:
+\[ \sum_{i, j} \Psi_{i, j} A_{i, j} = 2 \sum_{i, j} \Psi_{i, j} \bx_i \bx_j^T .
+\]
+حال مجموع را برای 
+\lr{$i=1$}
+بسط می‌دهیم:
+%\[ \begin{array}{lll}
+%{}\sum_{j} \Psi_{1, j} x_1 x_j^T = [ \Psi_{1, 1} x_1 x_1^T + \ldots + \Psi_{1, n} x_1 x_n^T] & = & x_1 [
+%\Psi_{1, 1} x_1^T + \ldots + \Psi_{1, n} x_n^T]\\
+%& = & x_1 \left[ \left[ \begin{array}{lll}
+%x_1 & \ldots & x_n
+%\end{array} \right] \left[ \begin{array}{l}
+%\Psi_{1, 1}\\
+%.\\
+%\Psi_{1, n}
+%\end{array} \right] \right]^T\\
+%& = & x_1 \left[ \left[ \begin{array}{lll}
+%\Psi_{1, 1} & \ldots & \Psi_{1, n}
+%\end{array} \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right] \right] .
+%\end{array} \]
+\begin{flalign*}
+\sum_{j=1}^{n} \Psi_{1, j} \bx_1 \bx_j^T &= [ \Psi_{1, 1} \bx_1 \bx_1^T + \ldots + \Psi_{1, n} \bx_1 \bx_n^T]\\
+ &=\bx_1 [ \Psi_{1, 1} \bx_1^T + \ldots + \Psi_{1, n} \bx_n^T]\\
+ &=\bx_1 \left[ \left[ \begin{array}{lll}
+ \bx_1 & \ldots & \bx_n
+ \end{array} \right] \left[ \begin{array}{l}
+ \Psi_{1, 1}\\
+ \vdots\\
+ \Psi_{1, n}
+ \end{array} \right] \right]^T\\
+ &= \bx_1 \left[ \left[ \begin{array}{lll}
+ \Psi_{1, 1} & \ldots & \Psi_{1, n}
+ \end{array} \right] \left[ \begin{array}{l}
+ \bx_1^T\\
+ \vdots\\
+ \bx_n^T
+ \end{array} \right] \right] .
+\end{flalign*}
+و حال روی همه‌ی
+\lr{$i$}ها
+جمع می‌زنیم:
+\small
+\begin{flalign*}
+\sum_{i, j}\Psi_{i, j} \bx_i \bx_j^T &= x_1 \left[ \left[ \begin{array}{lll}
+\Psi_{1, 1} & \ldots & \Psi_{1, n}
+\end{array} \right] \left[ \begin{array}{l}
+\bx_1^T\\
+\vdots\\
+\bx_n^T
+\end{array} \right] \right] + \ldots + \bx_n \left[ \left[
+\begin{array}{lll}
+\Psi_{n, 1} & \ldots & \Psi_{n, n}
+\end{array} \right] \left[ \begin{array}{l}
+\bx_1^T\\
+\vdots\\
+\bx_n^T
+\end{array} \right] \right]\\
+&= \left[ \bx_1 \left[ \begin{array}{lll}
+\Psi_{1, 1} & \ldots & \Psi_{1, n}
+\end{array} \right] + \ldots + \bx_n \left[ \begin{array}{lll}
+\Psi_{n, 1} & \ldots & \Psi_{n, n}
+\end{array} \right] \right] \left[ \begin{array}{l}
+\bx_1^T\\
+\vdots\\
+\bx_n^T
+\end{array} \right]\\
+&= \left[ \left[ \begin{array}{lll}
+\bx_1 & \ldots & \bx_n
+\end{array} \right] \left[ \begin{array}{l}
+\Psi_{1, 1}\\
+\vdots\\
+\Psi_{n, 1}
+\end{array} \right] + \ldots + \left[ \begin{array}{lll}
+\bx_1 & \ldots & \bx_n
+\end{array} \right] \left[ \begin{array}{l}
+\Psi_{1, n}\\
+\vdots\\
+\Psi_{n, n}
+\end{array} \right] \right] \left[ \begin{array}{l}
+\bx_1^T\\
+\vdots\\
+\bx_n^T
+\end{array} \right]\\
+&= \left[ \begin{array}{lll}
+\bx_1 & \ldots & \bx_n
+\end{array} \right] \left[ \begin{array}{lll}
+\left[ \begin{array}{l}
+\Psi_{1, 1}\\
+\vdots\\
+\Psi_{n, 1}
+\end{array} \right] & \ldots & \left[ \begin{array}{l}
+\Psi_{1, n}\\
+\vdots\\
+\Psi_{n, n}
+\end{array} \right]
+\end{array} \right] \left[ \begin{array}{l}
+\bx_1^T\\
+\vdots\\
+\bx_n^T
+\end{array} \right] .
+\end{flalign*}
+\normalsize
+%\[ \begin{array}{lll}
+%\Psi_{i, j} x_i x_j^T & = & x_1 \left[ \left[ \begin{array}{lll}
+%\Psi_{1, 1} & \ldots & \Psi_{1, n}
+%\end{array} \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right] \right] + \ldots + x_n \left[ \left[
+%\begin{array}{lll}
+%\Psi_{n, 1} & \ldots & \Psi_{n, n}
+%\end{array} \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right] \right],\\
+%& = & \left[ x_1 \left[ \begin{array}{lll}
+%\Psi_{1, 1} & \ldots & \Psi_{1, n}
+%\end{array} \right] + \ldots + x_n \left[ \begin{array}{lll}
+%\Psi_{n, 1} & \ldots & \Psi_{n, n}
+%\end{array} \right] \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right],\\
+%& = & \left[ \left[ \begin{array}{lll}
+%x_1 & \ldots & x_n
+%\end{array} \right] \left[ \begin{array}{l}
+%\Psi_{1, 1}\\
+%.\\
+%\Psi_{n, 1}
+%\end{array} \right] + \ldots + \left[ \begin{array}{lll}
+%x_1 & \ldots & x_n
+%\end{array} \right] \left[ \begin{array}{l}
+%\Psi_{1, n}\\
+%.\\
+%\Psi_{n, n}
+%\end{array} \right] \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right],\\
+%& = & \left[ \begin{array}{lll}
+%x_1 & \ldots & x_n
+%\end{array} \right] \left[ \begin{array}{lll}
+%\left[ \begin{array}{l}
+%\Psi_{1, 1}\\
+%.\\
+%\Psi_{n, 1}
+%\end{array} \right] & \ldots & \left[ \begin{array}{l}
+%\Psi_{1, n}\\
+%.\\
+%\Psi_{n, n}
+%\end{array} \right]
+%\end{array} \right] \left[ \begin{array}{l}
+%x_1^T\\
+%.\\
+%x_n^T
+%\end{array} \right] .
+%\end{array} \]
+و اگر تعریف کنیم
+\lr{$X = \left[ \begin{array}{lll}
+	\bx_1 & \ldots & \bx_n
+	\end{array} \right]^T$}، 
+داریم:
+\begin{equation}
+\sum_{i, j} \Psi_{i, j}A_{i,j} = 2 \sum_{i, j} \Psi_{i, j} \bx_i \bx_j^T = 2 X^T \Psi X.
+\label{app:xixj}
+\end{equation}
+
+\subsection{محاسبه‌ی
+\lr{$\Phi$}
+در حالتی که
+\lr{$A_{i,j} = 2(\bx_i-\bx_j)(\bx_i-\bx_j)^\top$}}
+در این حالت هم مشابه حالت قبلی، ماتریس
+\lr{$\Psi$}
+متقارن است و داریم:
+\begin{flalign*}
+\sum_{i, j} \Psi_{i, j} A_{i, j}  & = 2 \sum_{i, j} \Psi_{i, j} ( \bx_i -
+\bx_j) ( \bx_i - \bx_j)^T\\
+&= 2 \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T - \bx_j \bx_i^T - \bx_i \bx_j^T +
+\bx_j \bx_j^T)\\
+&= 4 \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T - \bx_j \bx_i^T)\\
+&= \left[ 4 \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T) \right] - \left[ 4
+\sum_{i, j} \Psi_{i, j} ( \bx_j \bx_i^T) \right] .
+\end{flalign*}
+اگر مجموع اوّل را در
+\lr{$i=1$}
+محاسبه کنیم، داریم:
+\[ \sum_{j}^n \Psi_{1, j} ( \bx_1 \bx_1^T) = \Psi_{1, 1} ( \bx_1 \bx_1^T) +
+\ldots + \Psi_{1, n} ( \bx_1 \bx_1^T) = \left[ \sum_{i = 1, j}^n \Psi_{1, j}
+\right] \bx_1 \bx_1^T . \]
+توجّه کنید که 
+\lr{$\left[ \sum_{i = 1, j}^n \Psi_{1, j}\right] $}
+به معنای جمع سطر اوّل ماتریس
+\lr{$\Psi$}
+است. اگر ماتریس
+\lr{$D_\Psi$}
+را اینگونه تعریف کنیم که جمع سطر
+\lr{$i$}ام
+ماتریس
+\lr{$\Psi$}
+را در درایه‌ی
+\lr{$i.i$}
+ماتریس
+\lr{$D_\Psi$}
+بگذاریم و بقیه‌ی درایه‌ها را با صفر پر کنیم، داریم:
+\[ \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T) = D_{\Psi1,1} \bx_1 \bx_1^T + \ldots + D_{\Psi n,n} \bx_n \bx_n^T. \]
+در نتیجه:
+\[ 4 \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T) = 4 X^T D_{\Psi} X. \]
+و داریم:
+\begin{flalign*}
+\sum_{i, j} \Psi_{i, j} A_{i, j}  &= 4 \sum_{i, j} \Psi_{i, j} ( \bx_i \bx_i^T) - 4 \sum_{i, j} \Psi_{i, j} ( \bx_j \bx_i^T)\\
+&= 4 X^T D_{\Psi} X - 4 X^T \Psi X\\
+& = 4 X^T [ D_{\Psi} - \Psi] X. 
+\end{flalign*}
+
+در نتیجه:
+\begin{equation}
+\sum_{i, j} \Psi_{i, j} A_{i, j} = 4 X^T [ D_{\Psi} - \Psi] X. 
+\label{app:xi-xj}
+\end{equation}
+
+\subsection{محاسبه‌ی 
+$\Phi_0$
+}
+
+بنا به تعریف 
+$\Phi_0$
+در 
+\eqref{phi0}
+داریم:
+\begin{equation}
+\label{minus}
+\Phi_0 = \text{sign}(\mu) \sum_{i, j} \Gamma_{i, j} A_{i,j}
+\end{equation}
+در نتیجه، کاملاً مشابه بخش قبل، می‌توان در دو حالت زیر، ماتریس 
+$\Phi_0$
+را محاسبه کرد:
+
+\begin{itemize}
+\item 
+$\mathbf{a}$
+و 
+$\mathbf{b}$
+هر کدام به صورت 
+$x_i - x_j$
+باشند:
+\begin{equation}
+\label{zoj}
+\Phi_0 = \mathrm{sign}(4\mu) X^\top (D_\Gamma - \Gamma)X
+\end{equation}
+
+\item 
+($\mathbf{a}$,
+$\mathbf{b}$)
+به صورت 
+$(x_i, x_j)$
+باشد:
+\begin{equation}
+\Phi_0 = \mathrm{sign}(2\mu) X^\top \Gamma X
+\end{equation}
+
+\end{itemize}
+
+
+\subsection{\lr{Linear Kernel}}
+در کرنل خطّی داریم 
+\lr{$(\mathbf{a},\mathbf{b}) = (\bx_i,\bx_j)$}
+و
+\lr{$f(\beta_{ij}) = \beta_{ij}+c$}،
+در نتیجه:
+\begin{equation}
+\Phi = \frac{1}{2}\sum_{i,j} \Gamma_{i,j}[\nabla_\beta f(\beta_{ij})] A_{i,j} 
+= \frac{1}{2}\sum_{i,j} \Gamma_{i,j} A_{i,j}.
+\end{equation}
+و اگر بخواهیم بردارهای ویژه‌ی ماتریس
+\lr{$\Phi$}
+را محاسبه کنیم، تنها علامت ضرایب مؤثّر است و نه مقدار آن‌ها. در نتیجه با توجّه به 
+(\ref{app:xixj})
+داریم:
+\begin{equation}
+\Phi = \text{sign}(2\frac{1}{2}) X^T\Gamma X = X^T\Gamma X.
+\end{equation}
+همچنین:
+
+\begin{equation}
+\mathrm{sign}(2 \nabla_\beta f(\beta)) = \mathrm{sign}(2) = 1.
+\end{equation}
+لذا بر طبق
+\eqref{zoj}:
+\begin{equation}
+\Phi_0 = X^T\Gamma X.
+\end{equation}
+
+
+\subsection{\lr{Polynomial Kernel}}
+در کرنل چندجمله‌ای داریم
+\lr{$(\mathbf{a},\mathbf{b}) = (\bx_i,\bx_j)$}
+و
+\lr{$f(\beta_{ij}) = (\alpha\beta_{ij}+c)^p$}،
+در نتیجه:
+ \begin{equation}
+\Phi = \frac{1}{2}\sum_{i,j} \Gamma_{i,j}[\nabla_\beta f(\beta_{ij})] A_{i,j} 
+= \frac{1}{2}\sum_{i,j} \Gamma_{i,j}[\alpha p(\alpha\beta_{ij}+c)^{p-1}] A_{i,j}.
+\end{equation}
+از آن‌جا که 
+\lr{$\alpha$}
+و
+\lr{$p$}
+ثابتند و 
+\lr{$K_{XW,p-1} = (\alpha\beta_{ij}+c)^{p-1}$}
+خود یک کرنل چندجمله‌ای با توان
+\lr{$p-1$}
+است، داریم:
+\begin{equation}
+\Psi = \Gamma \odot K_{XW,p-1}
+\end{equation}
+و از آن‌جا که معمولاً
+\lr{$\alpha$}
+و
+\lr{$p$}
+مثبت هستند، با توجّه به 
+(\ref{app:xixj})
+داریم:
+\begin{equation}
+\Phi = \text{sign}(\alpha p) X^T \Psi X = X^T \Psi X = X^T \Gamma \odot K_{XW,p-1} X
+\end{equation}
+همچنین داریم:
+    \begin{equation}
+\text{sign}(2 \nabla_\beta f(\beta)) = \text{sign}(2p(\beta+c)^{p-1}) = 1.
+\end{equation}
+بنابراین بر طبق
+\eqref{zoj}
+داریم:
+\begin{equation}
+\Phi_0 = X^T\Gamma X.
+\end{equation}
+
+\subsection{\lr{Gaussian Kernel}}
+در کرنل گاوسی داریم
+\lr{$(\mathbf{a},\mathbf{b}) = (\bx_i-\bx_j,\bx_i-\bx_j)$}
+و
+\lr{$f(\beta_{ij}) = \exp(\frac{-\beta_{ij}}{2\sigma^2})$}،
+در نتیجه:
+ \begin{flalign}
+\Phi = \frac{1}{2} \sum_{i,j} \Gamma_{i,j}[\nabla_\beta f(\beta_{ij})] A_{i,j} 
+&= \frac{1}{2} \sum_{i,j} \Gamma_{i,j}[-\frac{1}{2\sigma^2}e^{-\frac{\beta_{ij}}{2\sigma^2}}] A_{i,j}\notag\\
+&= -\frac{1}{4\sigma^2} \sum_{i,j} \Gamma_{i,j}[K_{XW}]_{i,j} A_{i,j}. 
+\end{flalign}
+در نتیجه داریم
+\begin{equation}
+\Psi=\Gamma \odot K_{XW}
+\end{equation}
+و با توجّه به 
+(\ref{app:xi-xj})
+داریم:
+\begin{equation}
+\Phi =  \text{sign}(-\frac{2}{4\sigma^2}) X^T(D_\Psi - \Psi)X = -X^T(D_\Psi - \Psi)X.
+\end{equation}
+همچنین داریم:
+    \begin{equation}
+\text{sign}(4 \nabla_\beta f(\beta)) = \text{sign}(-\frac{4}{2\sigma^2}e^{-\frac{\beta}{2\sigma^2}}) = -1.
+\end{equation}
+بنابراین بر طبق
+\eqref{zoj}
+داریم:
+\begin{equation}
+\Phi_0 =  -X^T(D_\Gamma - \Gamma)X.
+\end{equation}
+
+
+\subsection{\lr{Squared Kernel}}
+در کرنل مربّعی داریم
+\lr{$(\mathbf{a},\mathbf{b}) = (\bx_i-\bx_j,\bx_i-\bx_j)$}
+و
+\lr{$f(\beta_{ij}) = \beta_{ij}$}،
+در نتیجه:
+\begin{equation}
+\Phi = \frac{1}{2} \sum_{i,j} \Gamma_{i,j}[\nabla_\beta f(\beta_{ij})] A_{i,j} 
+= \frac{1}{2} \sum_{i,j} \Gamma_{i,j}A_{i,j}.    
+\end{equation}
+در نتیجه با توجّه به 
+(\ref{app:xi-xj})
+داریم:
+\begin{equation}
+\Phi = \text{sign}(1) X^T(D_\Gamma - \Gamma)X =  X^T(D_\Gamma - \Gamma)X.
+\end{equation}   
+
+   \begin{equation}
+\text{sign}(4 \nabla_\beta f(\beta)) = \text{sign}(\frac{4}{2}(\beta + c^2)^{-1/2}) = 1.
+\end{equation}
+بنابراین بر طبق
+\eqref{minus}
+داریم:
+\begin{equation}
+\Phi_0 =  X^T(D_\Gamma - \Gamma)X.
+\end{equation}   
+
+\subsection{\lr{Multiquadratic Kernel}}
+در کرنل
+\lr{multiquadratic}
+داریم 
+\lr{$(\mathbf{a},\mathbf{b}) = (\bx_i-\bx_j,\bx_i-\bx_j)$}
+و
+\lr{$f(\beta_{ij}) = \sqrt{\beta_{ij}+c^2}$}،
+در نتیجه:
+ \begin{flalign}
+\Phi = \frac{1}{2} \sum_{i,j} \Gamma_{i,j}[\nabla_\beta f(\beta_{ij})] A_{i,j} 
+&= \frac{1}{2} \sum_{i,j} \Gamma_{i,j}[\frac{1}{2}(\beta_{ij}+c^2)^{-1/2}] A_{i,j}\notag\\
+&= \frac{1}{4} \sum_{i,j} \Gamma_{i,j}[K_{XW}]_{i,j}^{(-1)} A_{i,j}. 
+\end{flalign}
+در نتیجه:
+\begin{equation}
+\Psi=\Gamma \odot K_{XW}^{(-1)}
+\end{equation}
+و با توجّه به 
+(\ref{app:xi-xj})
+داریم:
+\begin{equation}
+\Phi =  \text{sign}(\frac{1}{4}) X^T(D_\Psi - \Psi)X = X^T(D_\Psi - \Psi)X.
+\end{equation}   
+همچنین داریم:
+   \begin{equation}
+\text{sign}(4 \nabla_\beta f(\beta)) = \text{sign}(\frac{4}{2}(\beta + c^2)^{-1/2}) = 1.
+\end{equation}
+بنابراین بر طبق
+\eqref{minus}
+\begin{equation}
+\Phi_0 =  X^T(D_\Gamma - \Gamma)X.
+\end{equation}   
+
+
+\section{ترکیب‌ کرنل‌های 
+\lr{ISM}
+}
+
+\begin{pro}
+	ترکیب خطی کرنل‌های 
+	\lr{ISM}
+	با ضرایب مثبت، خود یک کرنل 
+	\lr{ISM}
+	است.
+\end{pro}
+
+\begin{proof}
+	مسئله‌ی بهینه‌سازی
+	\begin{equation}
+	\max_W \;\;  \tr(\Gamma K_{XW})\;\;\;\mathrm{s.t.}\;\;\;W^\top W=I
+	\end{equation}
+با کرنلی که ترکیب خطی 
+$m$
+کرنل است، به صورت زیر قابل بازنویسی است:
+
+	\begin{equation}
+\max_W -\tr(\Gamma\Big[ \mu_1 K_1 + \mu_2 K_2 + \dots \mu_m K_m)\Big]\;\;\;\mathrm{s.t.}\;\;\;W^\top W=I
+\end{equation}
+لاگرانژین این مسئله برابر است با:
+\begin{equation}
+\LL = - \tr(\mu_1 \Gamma K_1)- \tr(\mu_2 \Gamma K_2) - \tr(\mu_m \Gamma K_m) - m \tr(\Lambda [W^\top W - I])
+\end{equation}
+مشابه بخش 
+\eqref{FONC}
+می‌توان گرادیان لاگرانژین را محاسبه کرد:
+\begin{equation}
+\nabla_W\LL = [- \mu_1 \Phi_1 - \mu_2 \Phi_2 -\dots -\mu_m \Phi_m]W - mW\Lambda
+\end{equation}
+که در آن 
+$\Phi_i$
+ماتریس مربوط به کرنل 
+$i$
+ام است. با صفر قرار دادن این گرادیان، داریم:
+\begin{equation}
+\frac{1}{m} [-\mu_1 \Phi_1 -\mu_2 \Phi_2 -\dots -\mu_m \Phi_m]W = W\Lambda
+\end{equation}
+
+این بدین معناست که ترکیب خطی با ضرایب مثبت تعدادی کرنل
+\lr{ISM}
+کرنلی 
+\lr{ISM}
+است و ماتریس 
+$\Phi_S$
+مربوط به این کرنل، ترکیب خطی ماتریس‌های 
+$\Phi$
+مربوط به کرنل‌های جمع‌شده است:
+\begin{equation}
+\Phi_S = \mu_1 \Phi_1 + \mu_2 \Phi_2 + \dots + \mu_m \Phi_m
+\end{equation}
+\end{proof}
+
+\newpage
+\section{جمع‌بندی}
+نتایج این بخش را می‌توان به صورت خلاصه در دو جدول زیر مشاهده کرد.
+\vspace{1cm}
+
+جدول
+\eqref{table:kernels}
+شامل تعریف کرنل‌های معروف 
+\lr{ISM}
+و تابع
+$f$
+هر یک از آن‌هاست.
+\begin{table}[h!]   
+	\begin{center}
+		\begin{tabular}{l|c|c|c}
+			کرنل & $f(\beta)$ & $a(x_i,x_j)$ & $b(x_i, x_j)$\\ \hline
+			Linear & $\beta$ & $x_i$ & $x_j$ \\
+			Squared & $\beta$ & $x_i-x_j$ & $x_i-x_j$ \\
+			Polynomial & $(\beta + c)^p$ & $x_i$ & $x_j$ \\
+			Gaussian &  $e^\frac{-\beta}{2\sigma^2}$ & $x_i-x_j$ & $x_i-x_j$ \\
+			Multiquadratic & $\sqrt{\beta+c^2}$ & $x_i-x_j$ & $x_i-x_j$ \\
+			%Laplacian& $e^{-\alpha \sqrt{\beta}}$ & $x_i-x_j$ & $x_i-x_j$ \\
+		\end{tabular}
+		\caption {$f(\beta)$
+			مربوط به کرنل‌های معروف	
+		}
+		\label{table:kernels}
+	\end{center}
+\end{table}
+
+
+
+
+
+جدول 
+\eqref{table:phis}
+شامل ماتریس‌های
+$\Phi$
+هر یک از کرنل‌های معرفی شده است.
+\begin{table}[h!]
+	\centering
+	\begin{tabular}{c|l}
+		کرنل &ماتریس
+		$\Phi$
+		\\
+		\midrule
+		Linear
+		& $\Phi=X^T\Gamma X$ \\
+		Squared
+		& $\Phi=X^T \mathcal{L}_{\Gamma}X$ \\  
+		Polynomial
+		& $\Phi=X^T\Psi X$ 
+		\hspace{0.2cm}
+		,
+		\hspace{0.2cm}           	
+		$\Psi = \Gamma \odot K_{XW,p-1}$ \\ 
+		Gaussian
+		& $\Phi=-X^T\mathcal{L}_{\Psi} X$ 
+		,
+		$\Psi = \Gamma \odot K_{XW}$\\
+		Multiquadratic
+		& $\Phi=X^T\mathcal{L}_{\Psi} X$ 
+		,
+		$\Psi = \Gamma \odot K_{XW}^{(-1)}$\\ 
+		\bottomrule       
+	\end{tabular}
+	\caption{ ماتریس‌های 
+		$\Phi$	
+		برای کرنل‌های معروف
+	}
+	\label{table:phis}
+\end{table}
+
+
+
+
+
+جدول 
+\eqref{table:ISMkernelmatrix}
+شامل ماتریس‌های
+$\Phi_0$
+هرکدام از کرنل‌های معرفی شده‌ است.
+
+\begin{table}[h!] 
+	\centering 
+	\begin{tabular}{c|l}
+		کرنل & تقریب ماتریس 
+		$\Phi$
+		\\
+		\midrule
+		Linear
+		& $\Phi_0=X^T\Gamma X$ \\
+		Squared
+		& $\Phi_0=X^T \mathcal{L}_{\Gamma} X$ \\  
+		Polynomial
+		& $\Phi_0=X^T \Gamma X$\\
+		Gaussian
+		& $\Phi_0=-X^T \mathcal{L}_{\Gamma} X$\\
+		Multiquadratic
+		& $\Phi_0=X^T\mathcal{L}_{\Gamma} X$\\
+		\bottomrule       
+	\end{tabular}
+	\caption{ ماتریس‌های 
+		$\Phi_0$	
+		برای کرنل‌های معروف
+	}
+	\label{table:ISMkernelmatrix}
+\end{table}
+
+
+

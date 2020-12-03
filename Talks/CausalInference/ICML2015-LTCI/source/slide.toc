@@ -1,0 +1,4 @@
+\beamer@endinputifotherversion {3.36pt}
+\beamer@subsectionintoc {0}{1}{Idea}{4}{0}{0}
+\beamer@subsectionintoc {0}{2}{Main result and proof}{15}{0}{0}
+\beamer@subsectionintoc {0}{3}{Simulations}{23}{0}{0}

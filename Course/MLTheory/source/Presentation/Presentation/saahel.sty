@@ -1,0 +1,612 @@
+% !TEX TS-program = XeLaTeX
+% !TeX root = presentation.tex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is 'saahel.sty' the 'Saahel' Style for bidipresentation. v0.3
+%% By: S. Razi Alavizadeh <s.r.alavizadeh@gmail.com>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This is based on `sidebarbidipres.sty',
+%% by: AR Hashemi, <Nekoomehr@gmail.com>
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% 
+%% 
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{saahel}%
+[2012/12/21 Saahel Style with sidebar for using with bidipresentation class]
+\usepackage[RL]{flowfram}
+\usepackage{eso-pic}
+\usepackage{graphicx}
+\usepackage{zref-lastpage,zref-user}
+\geometry{paperwidth=225mm,paperheight=180mm,rmargin=40mm,top=10mm,bottom=10mm}
+
+% to have access to the total number of sections
+\usepackage{totcount}                       % http://ctan.org/pkg/totcount
+\regtotcounter{section}
+
+%% auxiliary lengths for the height of the frame and the width of each tab
+\newlength\frameheight
+\newlength\avgtabwidth
+
+% remove TOC's title
+\let\oldTOC\tableofcontents
+\renewcommand{\tableofcontents}{\renewcommand{\contentsname}{}\oldTOC}
+
+
+%% some definitions
+%% redefinition of titlepage environment %\thispagestyle{empty}
+\let\oldTitePage\titlepage
+\renewenvironment{titlepage}{\begin{oldTitePage}\begin{rawslide} \setcounter{page}{0}}%
+{\end{rawslide}\end{oldTitePage}}
+%رنگ ها برای استفاده
+\definecolor{magenta}{rgb}{1,0,.6}
+\definecolor{lightblue}{rgb}{0,.5,1}
+\definecolor{lightpurple}{rgb}{.6,.4,1}
+\definecolor{gold}{rgb}{.6,.5,0}
+\definecolor{orange}{rgb}{1,0.4,0}
+\definecolor{hotpink}{rgb}{1,0,0.5}
+\definecolor{newcolor2}{rgb}{.5,.3,.5}
+\definecolor{newcolor}{rgb}{0,.3,1}
+\definecolor{newcolor3}{rgb}{1,0,.35}
+\definecolor{darkgreen1}{rgb}{0, .35, 0}
+\definecolor{darkgreen}{rgb}{0, .6, 0}
+\definecolor{darkred}{rgb}{.75,0,0}
+\xdefinecolor{olive}{cmyk}{0.64,0,0.95,0.4}
+\xdefinecolor{purpleish}{cmyk}{0.75,0.75,0,0}
+% blocks
+\tikzstyle{tit} = [draw=orange!80, fill=orange!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blocktheorem} = [draw=orange!80, fill=orange!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitletheorem} =[fill=orange!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockhint} = [draw=newcolor!80, fill=newcolor2!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlehint} =[fill=newcolor2!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockcontract} = [draw=newcolor!80, fill=newcolor3!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlecontract} =[fill=newcolor3!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+
+\tikzstyle{blocklemma} = [draw=olive!80, fill=olive!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlelemma} =[fill=olive!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockpro} = [draw=purpleish!80, fill=purpleish!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlepro} =[fill=purpleish!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockcol} = [draw=hotpink!80, fill=hotpink!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlecol} =[fill=hotpink!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockdefinition} = [draw=themeColor!80, fill=themeColor!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitledefinition} =[fill=themeColor!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockexample} = [draw=purple!80, fill=purple!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitleexample} =[fill=purple!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blocknote} = [draw=brown!80, fill=brown!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitlenote} =[fill=brown!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+\tikzstyle{blockStyle} = [draw=themeColor!80, fill=themeColor!9, very thick,
+    rectangle, rounded corners=3mm, inner sep=30pt, inner ysep=15pt]
+\tikzstyle{blockTitleStyle} =[fill=themeColor!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+
+% \newcommand{\wblock}[3]{
+%\begin{tikzpicture}\node [blockStyle]  (box) {\setRTL\begin{minipage}{#1}
+%{\vspace{15pt}#3}
+%  \end{minipage}};\node[blockTitleStyle] at (box.north east) {\hboxR{{\Large{#2}}}};
+%\end{tikzpicture}
+%}
+% \newcommand{\block}[2]{
+%\wblock{0.95\textwidth}{#1}{#2}
+%}
+\newenvironment{ntblock}[2]{%
+  \def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockStyle] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    %\node[blockTitleStyle] at (box.north east) {\blockTitle};
+  \end{tikzpicture}%
+}
+
+\newenvironment{wblock}[2]{%
+  \def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockStyle] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitleStyle] at (box.north east) {\blockTitle};
+  \end{tikzpicture}%
+}
+\newenvironment{etheoremblock}[1]{%
+%\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blocktheorem] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitletheorem] at (box.north east) {قضیه};
+  \end{tikzpicture}%
+}
+
+\newenvironment{theoremblock}{%
+  \begin{etheoremblock}{160mm}%
+}{
+  \end{etheoremblock}%
+}
+
+\newenvironment{edefinitionblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockdefinition] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitledefinition] at (box.north east) {تعریف};
+  \end{tikzpicture}%
+}
+\newenvironment{definitionblock}{%
+  \begin{edefinitionblock}{160mm}%
+}{
+  \end{edefinitionblock}%
+}
+
+\newenvironment{eexampleblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockexample] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitleexample] at (box.north east) {مثال};
+  \end{tikzpicture}%
+}
+\newenvironment{exampleblock}{%
+  \begin{eexampleblock}{160mm}%
+}{
+  \end{eexampleblock}%
+}
+
+\newenvironment{block}[1]{%
+  \begin{wblock}{160mm}{#1}%
+}{
+  \end{wblock}%
+}
+
+\newenvironment{enoteblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blocknote] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlenote] at (box.north east) {نکته};
+  \end{tikzpicture}%
+}
+\newenvironment{noteblock}{%
+  \begin{enoteblock}{160mm}%
+}{
+  \end{enoteblock}%
+}
+
+\newenvironment{elemmablock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blocklemma] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlelemma] at (box.north east) {لم};
+  \end{tikzpicture}%
+}
+\newenvironment{lemmablock}{%
+  \begin{elemmablock}{160mm}%
+}{
+  \end{elemmablock}%
+}
+
+\newenvironment{eproblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockpro] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlepro] at (box.north east) {گزاره};
+  \end{tikzpicture}%
+}
+\newenvironment{problock}{%
+  \begin{eproblock}{160mm}%
+}{
+  \end{eproblock}%
+}
+
+\newenvironment{ecolblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockcol] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlecol] at (box.north east) {نتیجه};
+  \end{tikzpicture}%
+}
+\newenvironment{colblock}{%
+  \begin{ecolblock}{160mm}%
+}{
+  \end{ecolblock}%
+}
+
+\newenvironment{econtractblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockcontract] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlecontract] at (box.north east) {قرارداد};
+  \end{tikzpicture}%
+}
+\newenvironment{conblock}{%
+  \begin{econtractblock}{160mm}%
+}{
+  \end{econtractblock}%
+}
+
+\newenvironment{ehintblock}[1]{%
+  %\def\blockTitle{\hboxR{{\Large{#2}}}}%
+  \begin{tikzpicture}
+    \node [blockhint] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}%
+}{%
+    \endminipage%
+    \egroup;
+    \node[blockTitlehint] at (box.north east) {تذکر};
+  \end{tikzpicture}%
+}
+\newenvironment{hintblock}{%
+  \begin{ehintblock}{160mm}%
+}{
+  \end{ehintblock}%
+}
+\newenvironment{wpblock}[1]{%
+  \begin{tikzpicture}
+    \node [blockStyle] (box)
+    \bgroup\setRTL\minipage{#1}\vspace{15pt}\centering%
+}{%
+    \endminipage%
+    \egroup;
+  \end{tikzpicture}%
+}
+\newenvironment{pblock}{%
+  \begin{wblock}{160mm}{}%
+}{
+  \end{wblock}%
+}
+\newenvironment{tblock}{%
+  \begin{ntblock}{160mm}{}%
+}{
+  \end{ntblock}%
+}
+
+\tikzstyle{alertblock} = [draw=red!80, fill=red!12, very thick,
+    rectangle, rounded corners=3mm, inner sep=10pt, inner ysep=20pt]
+\tikzstyle{alertTitle} =[fill=red!80, rectangle, rounded corners=2mm, text=white
+, inner sep=10pt, inner ysep=7pt, left=10pt]
+% \newcommand{\alertblock}[2]{
+%\begin{tikzpicture}\node [alertblock] (box){\setRTL\begin{minipage}{0.95\textwidth}
+%{#2}
+%  \end{minipage}};\node[alertTitle, left=10pt] at (box.north east) {\hboxR{{\Large{#1}}}};
+%\end{tikzpicture} 
+%}
+\newenvironment{alertblock}[1]{%
+  \def\blockTitle{\hboxR{{\Large{#1}}}}%
+  \begin{tikzpicture}
+    \node [alertblock] (box)
+    \bgroup\setRTL\minipage{0.95\textwidth}\vspace{10pt}%
+}{
+    \endminipage%
+    \egroup;
+    \node[alertTitle] at (box.north east) {\blockTitle};
+  \end{tikzpicture}%
+}
+%%%%%%%%%%%%%%%%%%
+% Some tweaks about section's title
+% re-new section command %% I like bigger title
+\makeatletter
+\renewcommand\section{\@startsection {section}{1}{\z@}%
+    {-1ex \@plus -1ex \@minus -.2ex}%
+    {1ex \@plus.2ex}%
+    {\titr}}%
+\makeatother
+%
+\tikzstyle{titleStyle} = [draw=lightgray!15, fill=lightgray!40, very thick,
+    rectangle, rounded corners=10mm, inner sep=10pt, inner ysep=20pt]
+ \newcommand{\titlePage}[1]{
+\begin{tikzpicture}\node [titleStyle] (box) {\setRTL\begin{minipage}{0.75\textwidth}
+{\vspace{0.15\paperheight}%
+\begin{center}\Huge#1\end{center}%
+\vspace{0.15\paperheight}}%
+  \end{minipage}};\end{tikzpicture}
+}
+
+% section start's slide  
+\makeatletter
+\newcommand{\SecSlide}{\@dblarg\@SecSlide}
+\def\@SecSlide[#1]#2{
+\begin{plainslide}%
+	\begin{center}%
+	\markright{#1}
+	\titlePage{\section[#1]{#2}\label{sec:\thesection}}%
+	\end{center}%
+\end{plainslide}%
+}
+\makeatother
+%
+
+%%رنگ ها
+\def\setThemeColor#1#2{\definecolor{themeColor}{#1}{#2}
+\linktc{#1}{#2}
+\lbotbarc{#1}{#2}
+}
+
+\usepackage{etoolbox}
+
+\newcommand{\selectThemeColor}[1]{%
+\ifstrequal{#1}{blue}{\setThemeColor{RGB}{45, 47, 146}}%
+{%
+\ifstrequal{#1}{NavyBlue}{\setThemeColor{RGB}{0, 110, 184}}%
+{%
+\ifstrequal{#1}{golden}{\setThemeColor{RGB}{255, 223, 66}}%
+{%
+\ifstrequal{#1}{red}{\setThemeColor{RGB}{237, 27, 35}}%
+{%
+\ifstrequal{#1}{green}{\setThemeColor{RGB}{0, 166, 79}}%
+{%
+\ifstrequal{#1}{LimeGreen}{\setThemeColor{RGB}{141, 199, 62}}%
+{%
+\ifstrequal{#1}{purple}{\setThemeColor{RGB}{153, 71, 155}}%
+{%
+\ifstrequal{#1}{sepia}{\setThemeColor{RGB}{103, 24, 0}}%
+{%
+\ifstrequal{#1}{cyan}{\setThemeColor{RGB}{0, 174, 239}}%
+{%
+\ifstrequal{#1}{orange}{\setThemeColor{RGB}{245, 129, 55}}%
+{%
+\ifstrequal{#1}{gray}{\setThemeColor{RGB}{148,150,152}}%
+{%
+\ifstrequal{#1}{JungleGreen}{\setThemeColor{RGB}{0,169,154}}%
+{%
+\ifstrequal{#1}{Bittersweet}{\setThemeColor{RGB}{192, 79, 23}}%
+{%
+\ifstrequal{#1}{brown}{\setThemeColor{RGB}{121, 37,0}}%
+{}%%default %\setThemeColor{RGB}{0,0,1}
+}}}}}}}}}}}}}
+}
+
+%
+%\def\greenText{green}
+%\def\blueText{blue}
+%\def\redText{red}
+%\newcommand{\selectThemeColor}[1]{%
+%  \begingroup
+%    \def\tmp{#1}%
+%    \ifthenelse{\equal{\tmp}{\redText}}{\setThemeColor{rgb}{0,0.8,0}}{\setThemeColor{rgb}{0.7,0,0}}
+%%%    \ifx\tmp\infotext%
+%%%      ---%
+%%%    \else
+%%    \ifx\tmp\greenText%
+%%        \setThemeColor{rgb}{0,0.8,0}%
+%%      \else\ifx\tmp\redText%
+%%        \setThemeColor{rgb}{0.7,0,0}%
+%%    \else%
+%%        \setThemeColor{rgb}{1,0,0}%
+%%    \fi\fi
+%  \endgroup}
+\def\linktc#1#2{\definecolor{link-text}{#1}{#2}}
+\def\sidebartc#1#2{\definecolor{sidebar-text}{#1}{#2}}
+\def\rtopbarc#1#2{\definecolor{topbar1-color}{#1}{#2}}
+\def\ltopbarc#1#2{\definecolor{topbar2-color}{#1}{#2}}
+\def\ltopbartc#1#2{\definecolor{topbar2-text}{#1}{#2}}
+\def\rbotbarc#1#2{\definecolor{botbar1-color}{#1}{#2}}
+\def\lbotbarc#1#2{\definecolor{botbar2-color}{#1}{#2}}
+\def\lbotbartc#1#2{\definecolor{botbar2-text}{#1}{#2}}
+% default colors
+\selectThemeColor{NavyBlue}
+%\setThemeColor{RGB}{50,50,200}
+\sidebartc{cmyk}{0,0,0,1}
+\linktc{rgb}{0,0,1}
+\rtopbarc{cmyk}{0.94,0.54,0,0}
+\ltopbarc{cmyk}{0.15,0.15,0,0}
+\ltopbartc{cmyk}{0,0,0,1}
+\rbotbarc{cmyk}{0.15,0.15,0,0}
+%\lbotbarc{cmyk}{0.94,0.54,0,0}
+\lbotbarc{rgb}{0,0,1}
+\lbotbartc{cmyk}{0,0,0,0}
+
+
+\usepackage[urlcolor=link-text,colorlinks=true,linkcolor=link-text,setpagesize=false,pdfpagemode=FullScreen]{hyperref}%
+\hypersetup{
+    pdftitle={\theTitle},
+    pdfauthor={\theAuthor, \theAuthorUrl},
+}
+%\makeatletter
+%\renewcommand{\rotateframe}[2]{\if@ttb@rotate
+%\rotatebox{#1}{\if@RTL\beginL\fi#2\if@RTL\endL\fi}%
+%\else
+%#2\relax
+%\fi}
+%\makeatother
+
+\renewcommand{\sectionmark}[1]{\markright{#1}{}} %%استخراج عنوان خالص سكشن
+
+%%نوار بالا
+%\vtwotonetop{1cm}{0.6\paperwidth}{[cmyk]{0.65,0.13,0,0}}{topleft}%
+%{0.4\paperwidth}{[cmyk]{0.94,0.54,0,0}}{topright}
+\newdynamicframe[1,>1]{72mm}{1.1cm}{116mm}{160mm}[topbar1]
+\setdynamicframe*{topbar1}{valign=c,backcolor=botbar2-color,textcolor=botbar2-text}%topbar1-color}
+\newdynamicframe[1,>1]{125mm}{1.1cm}{-5mm}{160mm}[topbar2]
+\setdynamicframe*{topbar2}{valign=c,textcolor=topbar2-text,backcolor=topbar2-color}
+%\newstaticframe[2,>1]{66mm}{1.3cm}{123mm}{159mm}[topbar1]
+%\setstaticframe*{topbar1}{backcolor=topbar1-color}
+%\newdynamicframe[2,>1]{128mm}{1.1cm}{-5mm}{160mm}[topbar2]
+%\setdynamicframe*{topbar2}{valign=c,textcolor=topbar2-text,backcolor=topbar2-color}
+%%محتویات نواربالا
+
+
+%%نوار پایین
+%\newstaticframe[2,>1]{99mm}{9mm}{90mm}{-10mm}[botbar1]
+%\setstaticframe*{botbar1}{backcolor=botbar1-color}
+%\newdynamicframe[2,>1]{95mm}{9mm}{-5mm}{-10mm}[botbar2]
+%\setdynamicframe*{botbar2}{valign=c,textcolor=botbar2-text,backcolor=botbar2-color}
+\newdynamicframe[1,>1]{177.5mm}{9mm}{10.5mm}{-10mm}[botbar1]
+\setdynamicframe*{botbar1}{valign=c,backcolor=botbar1-color}
+\newdynamicframe[1,>1]{20.8mm}{9mm}{-5mm}{-10mm}[botbar2]
+\setdynamicframe*{botbar2}{valign=c,textcolor=botbar2-text,backcolor=botbar2-color}
+%%محتویات نوارپایین
+%
+
+
+%%عكس زمینه سایدبار
+%\AddToShipoutPicture{%
+%%\hspace{-60mm}
+%%\put(33,512){
+%\put(-137,512){
+%\reflectbox{
+%\includegraphics[keepaspectratio=false,height=-\paperheight ,width=31mm]{side.jpg}
+%}}}
+%%خودسایدبار
+%\newstaticframe[2,>2]{30mm}{\paperheight}{190mm}{-10mm}[sidebar]
+%\setstaticframe*{sidebar}{valign=b}%{backcolor=[cmyk]{0.15,0.15,0,0}}
+\newdynamicframe[1,>1]{30mm}{\paperheight}{188mm}{-10mm}[sidebar]
+\setdynamicframe*{sidebar}{valign=t}%{backcolor=[cmyk]{0.15,0.15,0,0}}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%محتویات سایدبار
+\begin{dynamiccontents*}{sidebar}
+\linespread{1}
+\AddToShipoutPicture*{%
+\tikz[remember picture, overlay]\shade[top color=themeColor!15, bottom color=themeColor!60] (current page.north east) rectangle +(-3.2,-18);
+}
+\vspace{1cm}
+{\hspace{1.5mm}
+\centering\noindent\includegraphics[width=2cm]{\Logo}}
+\vspace{.5cm}
+% style for the section tabs
+\tikzset{tab/.style={
+    text width=35mm,anchor=south,
+    draw=gray,thick,rectangle,rounded corners=12pt,%rotate=270,
+    align=center,text height=20pt,
+    text depth=25pt,inner sep=0pt,fill=gray!20,% yshift=-18pt,
+    font=\sffamily\LARGE}}
+% style for the current section tab
+\tikzset{selectedtab/.style={tab,color=white,fill=gray!90}}
+    % calculation of the width for each tab
+    \setlength\frameheight{\dimexpr\textheight+2cm\relax}
+    \ifnum\totvalue{section}>0
+        \setlength\avgtabwidth{30mm}%\dimexpr\frameheight/\totvalue{section}\relax}
+    \fi
+                    \tikzstyle{sec} = [draw=white, fill=white, very thick,
+                     rounded rectangle, rounded rectangle west arc=none,  inner xsep=-5pt, inner ysep=10pt]
+\begin{small}
+\ifnum\the\numexpr\totvalue{section}>0
+            \foreach \valsection in {0,...,\numexpr\totvalue{section}-1\relax} {\vspace{0.3cm}
+               \ifnum\thesection<\numexpr\valsection+1 
+\begin{center}
+\nameref{sec:\the\numexpr\valsection+1\relax}
+\end{center}
+               \relax
+                        \else \ifnum\thesection>\numexpr\valsection+1
+\begin{center}
+\nameref{sec:\the\numexpr\valsection+1\relax}
+\end{center}
+                         \relax
+                        \else
+                        
+\begin{tikzpicture}
+ \node [sec] {\setRTL
+             	       \begin{minipage}{30mm}{
+            		        \begin{center}
+\nameref{sec:\the\numexpr\valsection+1\relax}
+\end{center}}
+\end{minipage}};
+\end{tikzpicture}
+
+                        \fi\fi
+            }
+\fi % end of if the total sections > 0
+\end{small}
+\end{dynamiccontents*}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\setTextTR#1{
+\begin{dynamiccontents*}{topbar1}\linespread{1}\vspace{3mm}
+\hspace{-2mm}#1
+\end{dynamiccontents*}
+}
+%
+\setTextTR{{\footnotesize \centerline{\bfseries{\rightmark}}}}
+%%%
+\def\setTextTL#1{
+\begin{dynamiccontents*}{topbar2}\linespread{1}
+	\begin{center}
+		\begin{footnotesize}
+			#1
+		 \end{footnotesize}
+	\end{center}	
+\end{dynamiccontents*}
+}
+\def\setTextBR#1{
+\begin{dynamiccontents*}{botbar1}\linespread{1}
+{\color{sidebar-text}
+		\begin{footnotesize}
+\hspace{5mm}#1%\hspace{3mm}
+%		\rm\makeatletter\@author\makeatother
+		\end{footnotesize}
+	}
+\end{dynamiccontents*}
+}
+\def\setTextBL#1{
+\begin{dynamiccontents*}{botbar2}\linespread{1}
+	%\begin{flushleft}
+	%	\footnotesize{
+\begin{center}
+#1
+\end{center}	
+%	}
+	%\end{flushleft}
+\end{dynamiccontents*}
+}
+%
+\setTextBL{\bfseries{\thepage}
+از
+\zpageref{LastPage}%
+}
+
+%%
+%% End of file `saahel.sty'.

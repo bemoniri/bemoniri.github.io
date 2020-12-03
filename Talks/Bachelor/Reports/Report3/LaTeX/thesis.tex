@@ -1,0 +1,73 @@
+\documentclass[14pt,oneside]{extreport}
+\usepackage[a4paper,right=3cm,top=2.5cm,left=2.5cm,bottom=2.5cm]{geometry}
+
+\usepackage[pdfauthor={بهراد منیری},
+            pdftitle={جداسازی کور مخلوط‌های غیرخطی},
+            pdfsubject={گزارش پروژه‌ی کارشناسی یک},
+            colorlinks=false]{hyperref}
+
+\usepackage[nottoc]{tocbibind}
+\usepackage{listings, subcaption}
+\usepackage{amsmath, amsthm}
+\usepackage{longtable}
+\usepackage{graphicx}
+\usepackage{algorithm}
+%%%% Renewdefs and Envs.
+\graphicspath{{./Figures/}}
+\input{renewdefs.tex}
+
+%%%% HEADER
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\rhead{\leftmark}
+\lhead{\rightmark}
+\fancyfoot{}
+\cfoot{\thepage}
+
+%%%% BIB
+%\usepackage[authoryear]{natbib}
+\usepackage{amssymb}
+
+
+%%% FONTS and PERSIAN
+\usepackage[localise,extrafootnotefeatures]{xepersian}
+\settextfont[Scale=1.12]{IRNazli}
+\setdigitfont[Scale=1]{Yas}
+
+
+\شروع{نوشتار}
+\pagenumbering{alph}
+
+
+\title{جداسازی کور مخلوط‌های غیرخطی}
+\author{نام}
+\date{\today}
+
+%عنوان فارسی
+\input{title_FA}
+\input{abstract_FA}
+
+\tableofcontents  \listoffigures 
+\renewcommand{\bibname}{منابع}
+\pagebreak
+\pagenumbering{arabic}
+
+\input{introduction}
+\input{definition}
+\input{separability}
+\input{algorithms}
+\input{kenrel}
+\input{conclusion}
+
+
+\lhead{}
+%\begin{latin}
+\bibliography{bib, long}
+
+\bibliographystyle{ieeetr-fa}
+%\end{latin}
+
+\input{title_EN}
+
+\پایان{نوشتار}

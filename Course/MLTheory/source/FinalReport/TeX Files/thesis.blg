@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2016)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: thesis.aux
+White space in argument---line 166 of file thesis.aux
+ : \bibdata{reference,
+ :                     long}
+I'm skipping whatever remains of this command
+The style file: ieeetr-fa.bst
+Database file #1: reference.bib
+-- ieeetr-fa.bst version 0.9 (2015/05/09) 
+-- This is a BibTeX style for XePersian: http://www.parsilatex.com
+
+Done.
+You've used 25 entries,
+            2349 wiz_defined-function locations,
+            764 strings with 9470 characters,
+and the built_in function-call counts, 9100 in all, are:
+= -- 841
+> -- 287
+< -- 0
++ -- 105
+- -- 80
+* -- 581
+:= -- 1093
+add.period$ -- 29
+call.type$ -- 25
+change.case$ -- 23
+chr.to.int$ -- 0
+cite$ -- 25
+duplicate$ -- 437
+empty$ -- 783
+format.name$ -- 80
+if$ -- 2490
+int.to.chr$ -- 0
+int.to.str$ -- 25
+missing$ -- 258
+newline$ -- 185
+num.names$ -- 25
+pop$ -- 99
+preamble$ -- 1
+purify$ -- 0
+quote$ -- 0
+skip$ -- 315
+stack$ -- 0
+substring$ -- 668
+swap$ -- 195
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 4
+type$ -- 0
+warning$ -- 0
+while$ -- 86
+width$ -- 27
+write$ -- 333
+(There was 1 error message)

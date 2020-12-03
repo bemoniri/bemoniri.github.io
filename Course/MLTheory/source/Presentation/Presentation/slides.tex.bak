@@ -1,0 +1,94 @@
+% ‎!TEX TS-program = XeLaTeX‎
+% ‎!TeX root = presentation.tex‎
+‎\SecSlide{مقدمه}\label{Sec:Compare}‎
+\subsection[‏عنوان بخش یک]{جبروار لی}
+‎\begin{rawslide}\vspace*{.5cm}‎
+‎\begin{definitionblock}‎
+قالبی برای تعریف
+‎\end{definitionblock}‎
+‎\pause‎
+\vspace*{.5cm}
+\begin{tblock}
+کادر بدون  عنوان
+\end{tblock}
+‎\end{rawslide}‎
+
+‎%###############################################‎
+‎%###############################################‎
+‎%###############################################‎
+‎%###############################################‎
+‎\begin{rawslide}%‎
+‎\begin{exampleblock}‎
+جای ‏ مثال
+‎\end{exampleblock}\vspace*{1cm}‎
+‎\pause‎
+\‎begin{theoremblock}\vspace*{-.25cm}
+قضیه
+‎\end{theoremblock}‎
+‎\end{rawslide}‎
+‎%################################‎
+‎%#############################33‎
+‎%################################‎
+‎%#############################33‎‎
+‎%###############################################‎
+‎%##############################################‎
+\SecSlide{  ‎‎‏بخش دوم}
+\subsection[عنوان]{عنوان}
+‎\begin{rawslide}‎
+‎\begin{‎pro‎block}‎
+‏گزاره
+‎\end{problock}‎
+‎\end{rawslide}‎
+‎%#######################################‎
+‎%##############################‎
+‎\begin{rawslide}‎
+‎\begin{noteblock}‎‎‎
+‎
+\end{noteblock}‎
+\begin{lemmablock}‎
+‎
+\end{lemmablock}‎
+\begin{colblock}‎
+‎
+\end{colblock}‎
+\begin{hintblock}‎
+‎
+\end{hintblock}‎
+
+\end{rawslide}%###############################################‎
+‎%##############################################‎
+‎%###############################################‎
+‎%###########################################‎
+
+\subsection{‏زیر بخش}
+‎\begin{rawslide}‎
+‎
+‎\end{rawslide}‎
+‎%############################################‎
+‎%#########################################‎
+‎\‎%###########################################‎
+‎%#############################################‎
+‎%##############################################‎
+‎\SecSlide{مراجع}\begin{rawslide}‎
+
+‎\begin{thebibliography}{99}\vspace*{1.5cm}‎
+‎\begin{tblock}‎
+‎\begin{LTRbibitems}‎
+‎\resetlatinfont‎
+%مراجع لاتین‎👇‎
+
+‎%\begin{flushleft}‎
+‎\bibitem{MC}M‎. ‎Crainic‎, ‎R‎. ‎Fernandes‎, ‎Integrability of Lie brackets‎, ‎\emph{Ann‎. ‎of Math} \textbf{157} (2003) 575-620‎.
+
+‎\bibitem{FB}Gh‎. ‎Fasihi Ramandi‎, ‎N‎. ‎Boroojerdian‎, ‎Forces Unification in The Framework of Transitive‎
+‎Lie Algebroids‎,  ‎\emph{Int.J.Theor.Phys} \textbf{54} (2015) 1581-1593‎.
+
+‎\bibitem{CI}C‎. ‎Ida‎, ‎P‎. ‎Popescu‎, ‎On almost complex Lie algebroids‎, ‎\emph{Mediterr‎. ‎J‎. ‎Math} (2015) 1-22‎.
+
+‎\bibitem{RN} R‎. ‎Nest‎, ‎B‎. ‎Tsygan‎, ‎Deformations of symplectic Lie algebroids‎, ‎deformations of holomorphic symplectic structures‎, ‎and index theorems \emph{Asian J‎. ‎Math.}‎, ‎\textbf{5} (2001)‎, ‎599–635‎.
+
+‎%\end{flushleft}‎
+
+‎\end{LTRbibitems}\end{tblock}‎
+‎\end{thebibliography}\end{rawslide}‎
+

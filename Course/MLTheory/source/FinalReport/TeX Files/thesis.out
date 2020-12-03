@@ -1,0 +1,43 @@
+\BOOKMARK [0][-]{chapter.1}{مقدمه}{}% 1
+\BOOKMARK [0][-]{chapter.2}{فرمول‌بندی مسئله}{}% 2
+\BOOKMARK [1][-]{section.2.1}{معیار استقلال هیلبرت- اشمیت \(HSIC\) }{chapter.2}% 3
+\BOOKMARK [2][-]{subsection.2.1.1}{تخمین HSIC از روی داده }{section.2.1}% 4
+\BOOKMARK [1][-]{section.2.2}{فرمول‌بندی مسائل مختلف یادگیری}{chapter.2}% 5
+\BOOKMARK [2][-]{subsection.2.2.1}{کاهش بعد نظارت‌شده}{section.2.2}% 6
+\BOOKMARK [2][-]{subsection.2.2.2}{کاهش بعد بدون نظارت}{section.2.2}% 7
+\BOOKMARK [2][-]{subsection.2.2.3}{کاهش بعد با نظارت ناقص}{section.2.2}% 8
+\BOOKMARK [2][-]{subsection.2.2.4}{دسته‌بندی جایگزین}{section.2.2}% 9
+\BOOKMARK [0][-]{chapter.3}{الگوریتم ISM }{}% 10
+\BOOKMARK [1][-]{section.3.1}{کرنل‌های ISM}{chapter.3}% 11
+\BOOKMARK [1][-]{section.3.2}{شرایط لازم مرتبه‌ی اول و مرتبه‌ی دوم }{chapter.3}% 12
+\BOOKMARK [1][-]{section.3.3}{جواب مسئله‌ی IKDR برای کرنل‌های ISM }{chapter.3}% 13
+\BOOKMARK [2][-]{subsection.3.3.1}{شرایط لازم مرتبه‌ی اول}{section.3.3}% 14
+\BOOKMARK [2][-]{subsection.3.3.2}{شرایط لازم مرتبه‌ی دوم}{section.3.3}% 15
+\BOOKMARK [2][-]{subsection.3.3.3}{الگوریتم ISM }{section.3.3}% 16
+\BOOKMARK [1][-]{section.3.4}{ ماتریس 0 و شرایط اولیه‌ی الگوریتم }{chapter.3}% 17
+\BOOKMARK [1][-]{section.3.5}{برخی از اعضای معروف خانواده‌ی ISM}{chapter.3}% 18
+\BOOKMARK [2][-]{subsection.3.5.1}{Linear\040Kernel}{section.3.5}% 19
+\BOOKMARK [2][-]{subsection.3.5.2}{Polynomial\040Kernel}{section.3.5}% 20
+\BOOKMARK [2][-]{subsection.3.5.3}{Gaussian\040Kernel}{section.3.5}% 21
+\BOOKMARK [2][-]{subsection.3.5.4}{Squared\040Kernel}{section.3.5}% 22
+\BOOKMARK [2][-]{subsection.3.5.5}{Multiquadratic\040Kernel}{section.3.5}% 23
+\BOOKMARK [1][-]{section.3.6}{محاسبه‌ی ماتریس‌های   و 0 برای هر کرنل معروف خانواده‌ی ISM}{chapter.3}% 24
+\BOOKMARK [2][-]{subsection.3.6.1}{محاسبه‌ی  در حالتی که Ai,j = xixj+ xjxi}{section.3.6}% 25
+\BOOKMARK [2][-]{subsection.3.6.2}{محاسبه‌ی  در حالتی که Ai,j = 2\(xi-xj\)\(xi-xj\)}{section.3.6}% 26
+\BOOKMARK [2][-]{subsection.3.6.3}{محاسبه‌ی 0 }{section.3.6}% 27
+\BOOKMARK [2][-]{subsection.3.6.4}{Linear\040Kernel}{section.3.6}% 28
+\BOOKMARK [2][-]{subsection.3.6.5}{Polynomial\040Kernel}{section.3.6}% 29
+\BOOKMARK [2][-]{subsection.3.6.6}{Gaussian\040Kernel}{section.3.6}% 30
+\BOOKMARK [2][-]{subsection.3.6.7}{Squared\040Kernel}{section.3.6}% 31
+\BOOKMARK [2][-]{subsection.3.6.8}{Multiquadratic\040Kernel}{section.3.6}% 32
+\BOOKMARK [1][-]{section.3.7}{ترکیب‌ کرنل‌های ISM }{chapter.3}% 33
+\BOOKMARK [1][-]{section.3.8}{جمع‌بندی}{chapter.3}% 34
+\BOOKMARK [0][-]{chapter.4}{نتایج تجربی}{}% 35
+\BOOKMARK [1][-]{section.4.1}{بررسی توابع پیاده‌سازی شده}{chapter.4}% 36
+\BOOKMARK [1][-]{section.4.2}{نتایج تجربی}{chapter.4}% 37
+\BOOKMARK [2][-]{subsection.4.2.1}{توضیح اجمالی در مورد داده‌ها}{section.4.2}% 38
+\BOOKMARK [2][-]{subsection.4.2.2}{شرح آزمایش‌ها}{section.4.2}% 39
+\BOOKMARK [2][-]{subsection.4.2.3}{تنظیم پارامتر‌ها}{section.4.2}% 40
+\BOOKMARK [2][-]{subsection.4.2.4}{نتایج آزمایش‌ها}{section.4.2}% 41
+\BOOKMARK [0][-]{chapter.5}{پیشنهاد‌ها}{}% 42
+\BOOKMARK [0][-]{chapter*.17}{منابع}{}% 43

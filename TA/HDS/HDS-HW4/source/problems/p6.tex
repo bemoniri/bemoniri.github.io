@@ -1,0 +1,50 @@
+\section{تعمیمی از ضریب همدوسی}
+برای یک ماتریس 
+$A\in\mathbb{C}^{m\times n}$
+با ستون‌های نرمال توسط متر $l_{2}$، 
+$(\boldsymbol{a}_{1},\cdots,\boldsymbol{a}_{n})$
+و برای $s\in[n-1]$ تعریف کنید:
+\[
+\mu_{1}(s)\eqdef\max_{i\in[n]}\max\left\lbrace\sum_{j\in S}\big\lvert\langle \boldsymbol{a}_{i},\boldsymbol{a}_{j}\rangle\big\rvert,\,S\subseteq[n],|S|=s,i\notin S\right\rbrace
+\]
+
+\begin{itemize}
+\item 
+ برای هر بردار $s$-تنک
+$x\in\mathbb{C}^{n}$
+که $s\ge1$ نشان دهید
+\[
+(1-\mu_{1}(s-1))\|x\|_{2}^{2}\le\|Ax\|_{2}^{2}\le (1+\mu_{1}(s-1))\|x\|_{2}^{2}
+\]
+\item 
+اگر 
+$\mu_{1}(s)+\mu_{1}(s-1)<1$
+آنگاه نشان دهید برای هر 
+$S\subseteq[n]$
+که 
+$|S|\le2s$
+ماتریس 
+$A_{S}^{*}A_{S}$
+معکوس پذیر است.
+
+\item 
+ فرض کنید 
+$\epsilon<\frac{1}{2}$
+و 
+$\mu_{1}(s)\le\epsilon$
+ثابت کنید برای هر بردار $x\in\mathbb{C}^{n}$ و 
+$y=Ax+e$
+که 
+$\|e\|_{2}\le\eta$
+،
+$\hat{x}$
+جواب مساله‌ی بهینه‌سازی 
+\[
+\min_{z\in\mathbb{R}^{n}}\|z\|_{1}\quad s.t.\,\|Az-y\|_{2}\le\eta
+\] 
+بردار $x$ را به شکل زیر تخمین می‌زند
+\[
+\|x-\hat{x}\|_{1}\le C\sigma_{s}(x)_{1}+Ds\eta
+\]
+که ضرایب $C,D$ فقط به $\epsilon$ وابسته هستند.
+\end{itemize}

@@ -1,0 +1,256 @@
+\documentclass[a4paper]{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xepersian}
+
+\renewcommand{\refname}{\rl{{مراجع}\hfill}}
+\settextfont[Scale=1.1]{XB Niloofar}
+%\setlatintextfont{Serif}
+\setdigitfont[Scale=1.1]{Yas}
+\DefaultMathsDigits
+
+\topmargin=-0.15in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{
+	بهراد منیری
+	(۹۵۱۰۹۵۶۴)
+}
+\rhead{گزارش ابتدایی پروژه‌ی درس تئوری یادگیری ماشین}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\title{گزارش ابتدایی پروژه‌ی درس تئوری یادگیری ماشین}
+\author{
+	بهراد منیری\\
+	\texttt{bemoniri@ee.sharif.edu}\\
+	\normalsize{شماره‌ی دانشجویی: ۹۵۱۰۹۵۶۴}
+}
+
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+
+\newtheorem{den}{{\large\bf تعریف}}[section]
+\newtheorem{exa}{{\large\bf مثال}}[section]
+\newtheorem{lem}{{\large\bf لم}}[section]
+\newtheorem{pro}{{\large\bf گزاره}}[section]
+\newtheorem{cor}{{\large\bf نتیجه}}[section]
+\newtheorem{thm}{{\large\bf قضیه}}[section]
+\newtheorem{rem}{{\large\bf تذکر}}[section]
+\newtheorem{nnt}{{\large\bf توجه}}[section]
+\newtheorem{aaa}{{\large\bf}}[section]
+\date{}
+\begin{document}
+	\maketitle
+	\section{مقدمه}
+	در این پروژه به بررسی مقاله‌ی 
+	\cite{main}
+	می‌پردازیم. در این مقاله، مسئله کاهش بعد غیرخطی  تفسیر‌پذیر 
+	\lr{Interpretable Kernel Dimension Reduction (IKDR)}
+	بررسی شده است.  در این مسئله تلاش بر این است که بعد از کاهش‌ بعد، هر بعد ارتباط کاملاً مشخص و قابل تفسیری با ابعاد مسئله‌ی اصلی داشته باشند. بعد از معرفی فرمول‌بندی دقیق این مسئله، این مقاله تلاش می‌کند تا الگوریتم
+	\lr{Iterative Spectral Method (ISM)}
+	که در مقاله‌ی 
+	\cite{ISM}
+	برای حل مسئله‌ی
+	\lr{IKDR}
+	مطرح شده است را بهبود ببخشد و همچنین نتایج و گارانتی‌های تئوری موجود در آن را به خانواده‌های بسیار بزرگی از کرنل‌ها تعمیم دهد. مقاله‌ی \cite{ISM} نتایج و گارانتی‌های همگرایی الگوریتم  خود را تنها در صورتی که از کرنل گوسی استفاده شود ارائه کرده بود. در این گزارش ابتدایی، خلاصه‌ای از نتایج و ایده‌های اساسی بازگو خواهند شد.
+	
+	\section{معرفی اولیه و ایده‌ی اصلی}
+	برای کاهش بعد داده به صورت غیر‌خطی، اولین ایده‌ای که به ذهن می‌رسد این است که ابتدا داده‌ها را به یک فضای هیلبرت نگاشت دهیم (مثلاً به کمک یک کرنل) و سپس در آن فضای بعد بالا، با استفاده از روشی مثل 
+	\lr{PCA}
+	کاهش بعد را انجام دهیم. این روش دو ایراد عمده دارد. ایراد اول این است که برای کاهش بعد 
+	\lr{supervised}
+	قابل استفاده نیست. دومین مشکل، تفسیر‌ناپذیر بودن آن است. تفسیر ناپذیر بودن به آن معناست که بعد از اعمال 
+	\lr{PCA}
+	در فضای بعد بالا و نگه داشتن جهت‌های با واریانس بالا در آن، واضح نیست هر بعد باقی مانده دقیقاً به چه معناست و ارتباط هر کدام از آن ابعاد با ویژگی‌های اولیه بسیار پیچیده است. در روش مطرح شده، داده‌ها را به صورت 
+	$\Phi(X)W$
+	کاهش بعد می‌دهیم. یک راه دیگر این است که تلاش کنیم ماتریسی (در همان فضای بعد پایین) پیدا کنیم که بعد از اعمال آن بر دیتا، ماتریس
+	$\Phi(XW)$
+	اطلاعات زیادی از خود 
+	$\Phi(X)$
+	را در بر داشته باشد. در این حالت هر دو مشکل فوق بر طرف می‌شوند. هر ویژگی، بعد از کاهش بعد را می‌توان به صورت ترکیبی خطی از ویژگی‌های اولیه دید. همچنین می‌توان مسئله‌ی 
+	\lr{supervised}
+	را به صورت زیر فرمول‌بندی کرد:
+	$$\max_W\;\; \mathrm{DM} (XW, Y) \;\;\; \mathrm{s.t}. \;\;\; W^TW=I$$
+	در این فرمول بندی، 
+	$\mathrm{DM}$
+	یک متر وابستگی (مثلاً اطلاعات متقابل) است.
+	
+	
+	
+	\section{معرفی معیار 
+		\lr{HSIC}
+	}
+	\lr{HSIC}
+	معیاری برای سنجیدن استقلال دو متغیر تصادفی است. این معیار مشابه اطلاعات متقابل فاصله‌ای بین توزیع‌های
+	$P_{XY}$
+	و 
+	$P_XP_Y$
+	است. اطلاعات متقابل از فاصله‌ی 
+	\lr{KL Divergence}
+	استفاده می‌کند، در مقابل،
+	\lr{HSIC}
+	از متر 
+	\lr{Maximum Mean Discrepancy (MMD)}
+	بهره می‌برد. ایده‌ی اصلی این متر آن است که در ابتدا، نگاشتی بر مبنای یک کرنل از فضای توزیع‌های احتمال به یک 
+	\lr{RKHS}
+	به شکل زیر ساخته می‌شود:
+	$$
+	\begin{cases}
+	\mathcal{F}: \mathcal{P} \to \mathcal{H}\\
+	\mathcal{F}(P) = \mathbb{E}_{P}\Big[ k(., X)\Big]
+	\end{cases}
+	$$
+	در ادامه نیز از متر فضای هیلبرت ساخته شده توسط کرنل، به عنوان متر بین دو توزیع استفاده می‌کنند.
+	$$\mathrm{MMD}(P, Q) = \Big|\Big|\mathbb{E}_{P}\Big[ k(., X)\Big] - \mathbb{E}_{Q}\Big[ k(., X)\Big]\Big|\Big|_\mathcal{H}$$
+	اگر نگاشت بین فضای توزیع‌ها و فضای هیلبرت، نگاشتی یک به یک باشد، در این نگاشت هیچ اطلاعاتی از توزیع از بین نمی‌رود و به راحتی می‌توان نشان داد که عبارت فوق، تمام خواص یک متر را دارا می‌باشد. به کرنل‌هایی که در آن‌ها نگاشت مذکور یک به یک است، کرنل مشخصه می‌گویند. کرنل گوسی مشهور‌ترین کرنل مشخصه است. تعریف می‌کنیم:
+	$$\mathrm{HSIC}(X, Y) = \mathrm{MMD}(P_XP_Y, P_{XY})$$
+	\subsection{تخمین 
+		\lr{HSIC}
+		از روی داده
+	}
+	حال فرض کنید مجموعه‌ی 
+	$\{(x_1, y_1), (x_2, y_2), \dots, (x_m, y_m)\}$
+	با توزیع مشترک
+	$P_{XY}$
+	داده شده است و قصد داریم بررسی کنیم که آیا $X$ و $Y$ مستقل هستند یا خیر. فرض کنید 
+	$X \in \mathbb{R}^{n\times d}$
+	و 
+	$Y \in \mathbb{R}^{n\times c}$
+	بردارهای مشاهدات باشند. ماتریس‌های گرام مربوط به $X$ و $Y$ را 
+	$K_X \in \mathbb{R}^{N\times N}$
+	و 
+	$K_Y \in \mathbb{R}^{N\times N}$
+	می‌نامیم. ماتریس $H$ را نیز ماتریس 
+	\lr{centering}
+	بگیرید،
+	$H = I_n - \frac{1}{n} \mathbf{1}_n\mathbf{1}_n^T$.
+	در این صورت تخمین‌گیر زیر، یک تخمین‌گر نا اریب از 
+	\lr{HSIC}
+	است:
+	$$\mathrm{HSIC}(X, Y) = \frac{1}{(n-1)^2} \mathrm{Tr}(K_X H K_Y H)$$
+	\section{تعریف مسئله‌ی 
+		\lr{IKDR}
+	}
+	فرض کنید دیتاست 
+	$X \in \mathbb{R}^{n\times d}$
+	با $k$ فیچر و $n$ نمونه باشد و 
+	$X \in \mathbb{R}^{n\times k}$
+	لیبل‌های این نمونه‌ها باشد ($k$ تعداد کلاس‌ها است). با استفاده از دو کرنل $k_x$ و $k_y$ داده‌شده، دو ماتریس گرام $K_X$ و $K_Y$ ساخته شده است
+	($\mathbb{R}^{n\times n}$). 
+	در مسئله‌ی 
+	\lr{IKDR}
+	قصد داریم ماتریس 
+	$W \in \mathbb{R}^{d\times q}$
+	را به نحوی بسازیم که 
+	$\mathrm{HSIC}(XW, Y)$
+	کمینه شود (توجه داریم که 
+	$q<d$
+	و فرض کنید 
+	$W^TW = I$).
+	مسئله‌ی فوق را می‌توان به فرم مسئله‌ی بهینه‌سازی زیر نوشت:
+	$$\max_W \mathrm{Tr}(\Gamma K_{XW})\;\;\;\mathrm{s.t.}\;\;\;W^TW=I$$
+	به عنوان مثال، با کرنل گوسی مسئله به فرم زیر در می‌آید:
+	$$\max_W \;\;\; \Gamma_{ij} \exp\Big(-\frac{(W^Tx_i - W^Tx_j)^2}{2\sigma^2}\Big) \;\;\;  \mathrm{s.t.}  \;\;\;W^TW=I$$
+	این مسئله در حالت کلی، مسئله‌ای شدیداً غیر محدب است. این مقاله الگوریتمی برای حل این مسئله ارائه کرده و گارانتی‌هایی برای همگرایی الگوریتم ارائه می‌دهد.
+	\section{الگوریتم 
+		\lr{ISM}
+	}
+	ایده‌ی اصلی الگوریتم این است که مشابه 
+	\lr{PCA}
+	یک ماتریس «کوواریانس» معادل برای هر کرنل معرفی کرده و ماتریس $W$ را برابر بردار‌های ویژه‌ی غالب آن قرار دهد.
+	
+	\begin{table}[h]   
+		\begin{center}
+			\begin{tabular}{c|l}
+				کرنل& ماتریس کواریانس
+				
+				\\\hline
+				%			\midrule
+				Linear
+				& $\Phi=X^T\Gamma X$ \\
+				Squared
+				& $\Phi=X^T \mathcal{L}_{\Gamma}X$ \\  
+				Polynomial
+				& $\Phi=X^T\Psi X$ 
+				\hspace{0.2cm}
+				,
+				\hspace{0.2cm}           	
+				$\Psi = \Gamma \odot K_{XW,p-1}$ \\ 
+				Gaussian
+				& $\Phi=-X^T\mathcal{L}_{\Psi} X$ 
+				,
+				$\Psi = \Gamma \odot K_{XW}$\\
+				Multiquadratic
+				& $\Phi=X^T\mathcal{L}_{\Psi} X$ 
+				,
+				$\Psi = \Gamma \odot K_{XW}^{(-1)}$\\ 
+				%			\bottomrule       
+			\end{tabular}
+		\end{center}
+		\caption{ماتریس کواریانس معادل برای کرنل‌های معروف}
+		\label{table:phis}
+	\end{table}
+	
+	مشاهده می‌شود که در جدول فوق، برخی از ماتریس‌های کوواریانس تابع $W$ هستند. برای این دسته از ماتریس‌ها، ایده‌‌ی ‌مقاله این است که در ابتدا تقریب تیلور درجه‌ی دوم را در نظر می‌گیرد و $W$ بهینه را می‌یابد. به کمک آن $W$، ماتریس 
+	$\Phi$
+	را می‌سازد و این روند را تا همگرایی ادامه می‌دهد.
+	
+	
+	\section{صورت قضایای اصلی تئوریک}
+	در ابتدا، این  مقاله ثابت می‌کند که بردار‌های ویژه‌ی غالب 
+	$\Phi$
+	شرایط لازم مرتبه اول (\lr{KKT})
+	و شرایط لازم مرتبه دوم (شرط لاگرانژین) را ارضا می‌کنند. سپس اثبات می‌کند که الگوریتم 
+	\lr{ISM}
+	نیز به همان بردار‌های ویژه‌
+	$\Phi$
+	همگراست. این اثبات‌ها برای دسته‌ای بزرگ از کرنل‌ها به نام کرنل‌های 
+	\lr{ISM} 
+	انجام شده‌‌اند، این پیشرفتی بزرگ است که این مقاله به نسبت کارهای قبل داشته است.  این مقاله نشان می‌دهد که هر 
+	\lr{Conic Combination}
+	از کرنل‌های 
+	\lr{ISM} 
+	یک کرنل 
+	\lr{ISM} 
+	است و ماتریس کوواریانس مربوط به این \lr{Conic Combination} نیز 
+	\lr{Conic Combination}
+	ماتریس‌های کوواریانس کرنل‌های اصلی است.
+	
+		\begin{latin}
+		\bibliographystyle{acm}
+		\bibliography{bib}
+	\end{latin}
+	
+	
+	\pagebreak
+	
+	
+\end{document}

@@ -1,0 +1,219 @@
+\documentclass{article}
+
+\usepackage{fancyhdr}
+\usepackage{extramarks}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{tikz}
+\usepackage[plain]{algorithm}
+\usepackage{algpseudocode}
+\usepackage{xepersian}
+\renewcommand{\refname}{\rl{{مراجع}\hfill}}
+\settextfont[Scale=1]{XB Niloofar}
+%\setlatintextfont{Serif}
+\setdigitfont[Scale=1]{Yas}
+\DefaultMathsDigits
+
+
+\usetikzlibrary{automata,positioning}
+
+%
+% Basic Document Settings
+%
+
+\topmargin=-0.8in
+\evensidemargin=0in
+\oddsidemargin=0in
+\textwidth=6.5in
+\textheight=9.0in
+\headsep=0.25in
+
+\linespread{1.1}
+
+\pagestyle{fancy}
+\lhead{بهراد منیری}
+\rhead{جداسازی کور ترکیب‌های غیرخطی فرآیند‌های تصادفی}
+\lfoot{\lastxmark}
+\cfoot{\thepage}
+
+\renewcommand\headrulewidth{0.4pt}
+%\renewcommand\footrulewidth{0.4pt}
+
+\setlength\parindent{0pt}
+
+\title{{\large
+گزارش پیشرفت کار}\\
+جداسازی کور ترکیب‌های غیرخطی فرآیند‌های تصادفی
+}
+\author{
+	بهراد منیری\\
+	\texttt{bemoniri@ee.sharif.edu}\\
+	\normalsize{دانشکده‌ی مهندسی برق، دانشگاه صنعتی شریف، آزادی، تهران، ایران}
+	\vspace{0.5cm}\\
+	استاد راهنما:
+	دکتر مسعود بابائی‌زاده
+}
+\date{}
+
+\renewcommand{\part}[1]{\textbf{\large Part \Alph{partCounter}}\stepcounter{partCounter}\\}
+
+%
+% Various Helper Commands
+%
+
+% Useful for algorithms
+\newcommand{\alg}[1]{\textsc{\bfseries \footnotesize #1}}
+
+
+\newtheorem{den}{{\large\bf تعریف}}[section]
+\newtheorem{exa}{{\large\bf مثال}}[section]
+\newtheorem{lem}{{\large\bf لم}}[section]
+\newtheorem{pro}{{\large\bf گزاره}}[section]
+\newtheorem{cor}{{\large\bf نتیجه}}[section]
+\newtheorem{thm}{{\large\bf قضیه}}[section]
+\newtheorem{rem}{{\large\bf تذکر}}[section]
+\newtheorem{nnt}{{\large\bf توجه}}[section]
+\newtheorem{aaa}{{\large\bf}}[section]
+
+\begin{document}
+		\twocolumn
+	\maketitle
+
+در این گزارش، به بیان پیشرفت‌های پروژه خواهیم پر‌داخت. تمرکز ما در این گزارش بر خطی‌سازی مخلوط‌های غیرخطی فرآیند‌های تصادفی گوسی و استفاده از این عملیات بر جداسازی کور منابع است. بردار 
+$\mathbf{s}(t) = [s_1(t), s_2(t), \dots, s_n(t)]^\top$
+را در نظر بگیرید که در آن به ازای هر 
+$i = 1,2, \dots, n$،
+سیگنال
+$s_i(t)$
+یک  فرآیند‌های تصافی گوسی باشد. این فرآیند‌های تصادفی، به صورت لحظه‌ای با تابع 
+$\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^n$
+مخلوط می‌شوند
+$$\mathbf{x}(t) = \mathbf{f}\big(\mathbf{s}(t)\big).$$
+سعی می‌کنیم برای کلاس‌های مختلف توابع 
+$\mathbf{f}$
+به معرفی الگوریتمی برای جداسازی بپردازیم. ایده‌ی این الگوریتم‌های جداسازی نیز این است که بعد از خطی‌سازی مخلوط، از روش‌های کلاسیک جداسازی مخلوط‌های خطی با بهره‌گیری از روابط زمانی استفاده نماییم. برای مشاهده‌ی نمونه‌ای از این الگوریتم‌ها برای انجام مرحله‌ی دوم جداسازی بعد از خطی‌سازی، می‌توانید به 
+\cite{newHyva, TCL, PCL,ICAbook,comon2010handbook,shahram,harmeling2003kernel}
+مراجعه نمایید.
+\section{مخلوط‌های چندجمله‌ای}
+
+در ابتدا، نشان می‌دهیم که هیچ تابع چند‌جمله‌ای برداری، یعنی تابعی برداری که هر بعد آن یک تابع چند‌جمله‌ای درایه‌های ورودی است، وجود ندارد که یک بردار گوسی را به یک بردار گوسی تبدیل کند.
+\begin{thm}
+فرض کنید $n$متغیر تصادفی 
+$s_1, s_2, \dots, s_n$
+متغیرهای تصادفی مشترکاً گوسی باشند و 
+$\mathbf{p}: \mathbb{R}^n\to\mathbb{R}^n$
+نیز یک نگاشت چند‌جمله‌ای دلخواه باشد و داشته باشیم
+$\mathbf{y} = \mathbf{p}(\mathbf{s}) $.
+متغیرهای تصادفی 
+$y_1, y_2, \dots, y_n$،
+مشترکاً گوسی هستند اگر و تنها اگر
+$$\mathbf{p}(\mathbf{s}) = \mathbf{A}\mathbf{s} + \mathbf{b}$$
+که در آن 
+$\mathbf{A} \in \mathbb{R}^{n\times n}$
+و 
+$\mathbf{b} \in \mathbb{R}^n$
+هستند.
+\end{thm}
+
+با توجه به این قضیه‌، می‌توان به  نتیجه‌ی کاربردی زیر رسید.
+
+\begin{cor}
+فرض کنید 
+$\mathbf{s}(t) = [s_1(t), s_2(t), \dots, s_n(t)]^\top$
+و
+$\mathbf{x}(t)= [x_1(t), x_2(t), \dots, x_n(t)]^\top$
+دو بردار تصادفی $n$ بعدی منابع و مشاهدات بوده و هر یک از
+$s_i(t)$
+ها نیز یک فرآیند تصادفی گوسی باشد. منابع با تابع
+$$\mathbf{x}(t) = \mathbf{f}(\mathbf{s}(t))$$
+مخلوط‌شده‌اند که در آن
+$\mathbf{f}$
+یک تابع مجهول چندجمله‌ای است. اگر چندجمله‌ای 
+$\mathbf{g}$
+پیدا شود به نحوی که 
+$\mathbf{y}(t) = \mathbf{g}(\mathbf{x}(t))$
+نیز برداری از $n$ فرآیند تصافی گوسی باشد، آنگاه 
+$\mathbf{h} = \mathbf{g}\circ \mathbf{f} $
+تابعی خطی است.
+\end{cor}
+
+این نتیجه را می‌توان به فرمی کلی‌تر نیز نوشت، فرض کنید بدانیم 
+$\mathbf{f} \in \mathcal{F}$
+بوده که 
+$\mathcal{F}$
+مجموعه‌ای مشخص از توابع است. فرض کنید  مجموعه‌ای از توابع مانند 
+$\mathcal{G}$
+در اختیار داشته‌باشیم به این نحوه  که ترکیب هر عضو 
+$\mathcal{F}$
+و
+$\mathcal{G}$
+تابعی چند‌جمله‌ای باشد. اگر بتوان
+$\mathbf{g} \in \mathcal{G}$
+یافت شود که فرآيند‌های تصادفی گوسی را به فرآیند‌های تصادفی گوسی تبدیل کند، آنگاه
+$\mathbf{f} \circ \mathbf{g}$
+تابعی خطی است. در نتیجه‌ی فوق، هر دو مجموعه‌ی توابع، چندجمله‌ای فرض‌ شده‌اند.
+
+
+به کمک نتیجه‌ی ۱.۱، می‌توان الگوریتمی برای خطی‌سازی مخلوط‌های غیرخطی ارائه داد. این الگوریتم، مدلی پارامتری برای چندجمله‌ای جداسازی در نظر گرفته و پارامترهای آن را به نحوی مشخص می‌کند که معیاری از گوسی بودن متغیر‌های خروجی بیشینه شود. در مدل زیر، ماتریس 
+$\boldsymbol{\Theta}$
+ماتریس ضرایب چند‌جمله‌ای جداسازی است و 
+$\mathbf{k}$
+بردار تک‌جمله‌ای ها از درجه‌ی مطلوب است.
+
+\begin{equation*}
+\label{E_Parametrizing}
+{\bf g}({\bf x})=
+\begin{bmatrix}
+g_1({\bf x}) \\
+g_2({\bf x}) \\
+\vdots \\
+g_n({\bf x})
+\end{bmatrix}=
+\begin{bmatrix}
+\boldsymbol{\theta_1}\top \\
+\boldsymbol{\theta_2}\top\\
+\vdots \\
+\boldsymbol{\theta_n}\top
+\end{bmatrix}{\bf k}({\bf x})=
+\boldsymbol{\Theta}{\bf k}({\bf x})
+\end{equation*}
+
+معیارهای بسیار مختلفی از گوسی بودن وجود دارند، آنتروپی‌منفی و کومولان‌های مرتبه‌ی چهارم مثال‌هایی از این معیار‌ها هستند. فرض کنید 
+$\mathcal{J}(\mathbf{X})$
+معیار از گوسی بودن بردار تصادفی 
+$\mathcal{J}(\mathbf{X})$
+باشد که به کمک نمونه‌هایی از این بردار تخمین‌زده شده‌است. الگوریتم جداسازی مناسب، 
+\begin{equation*}
+\underset{\boldsymbol{\Theta}}{\min} \ \| \boldsymbol{\mathcal{J}}(\boldsymbol{\Theta}{\bf k}({\bf x})) \|_2^2
+\end{equation*}
+است.
+\section{توابع یکنوا}
+
+می‌توان گزاره‌ی زیر را نیز برای توابع یک‌بعدی یکنوا اثبات کرد.
+\begin{thm}
+هیچ تابع یکنوای غیرخطی
+$f: \mathbb{R} \to \mathbb{R}$
+وجود ندارد که متغیر تصادفی‌ گوسی را به متغیر تصادفی گوسی تبدیل کند.
+\end{thm}
+
+تعمیم این قضیه‌ به بعد بالا واضح نیست. به نظر ما می‌توان این قضیه‌ را به توابعی که هر درایه‌ی خروجی آن‌ها به این صورت است که به نسبت هر ورودی یکنواست تعمیم داد ولی تا کنون نتوانسته‌ایم این گزاره را اثبات نماییم.
+\section{نگاشت‌های جبری}
+
+تعمیم قضیه‌ی ۱.۱ به توابع جبری، یعنی توابعی به صورت ریشه‌های یک معادله‌ی جبری
+$$a_0(x) + a_1(x) y + \dots + a_n(x)y^n = 0 $$
+امکان‌پذیر نیست و مثال‌های نقضی برای این تعمیم وجود دارند. ولی حدسی توسط ریاضیدان بزرگ روس،
+\lr{V. L. Eidlin}
+مطرح شده است که توابع جبری که گوسی بودن را حفظ می‌کنند، نرم بردار‌ها را نیز حفظ می‌نمایند. ظاهراً اثبات این قضیه به سادگی امکان‌پذیر نیست
+\cite{kagan1973characterization, linnik1968remark}.
+
+	
+	\begin{latin}
+		\bibliographystyle{acm}
+		\bibliography{bib}
+	\end{latin}
+	
+	\pagebreak
+	
+	
+\end{document}

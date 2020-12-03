@@ -1,0 +1,50 @@
+\contentsline {chapter}{\numberline {1}مقدمه}{2}{chapter.1}
+\contentsline {chapter}{\numberline {2}فرمول‌بندی مسئله}{5}{chapter.2}
+\contentsline {section}{\numberline {2‏.‏1}معیار استقلال هیلبرت- اشمیت \lr {($\mathrm {HSIC}$)} }{5}{section.2.1}
+\contentsline {subsection}{\numberline {2‏.‏1‏.‏1}تخمین \lr {HSIC} از روی داده }{6}{subsection.2.1.1}
+\contentsline {section}{\numberline {2‏.‏2}فرمول‌بندی مسائل مختلف یادگیری}{7}{section.2.2}
+\contentsline {subsection}{\numberline {2‏.‏2‏.‏1}کاهش بعد نظارت‌شده}{7}{subsection.2.2.1}
+\contentsline {subsection}{\numberline {2‏.‏2‏.‏2}کاهش بعد بدون نظارت}{7}{subsection.2.2.2}
+\contentsline {subsection}{\numberline {2‏.‏2‏.‏3}کاهش بعد با نظارت ناقص}{7}{subsection.2.2.3}
+\contentsline {subsection}{\numberline {2‏.‏2‏.‏4}دسته‌بندی جایگزین}{8}{subsection.2.2.4}
+\contentsline {chapter}{\numberline {3}الگوریتم \lr {ISM} }{9}{chapter.3}
+\contentsline {section}{\numberline {3‏.‏1}کرنل‌های \lr {ISM}}{9}{section.3.1}
+\contentsline {section}{\numberline {3‏.‏2}شرایط لازم مرتبه‌ی اول و مرتبه‌ی دوم }{10}{section.3.2}
+\contentsline {section}{\numberline {3‏.‏3}جواب مسئله‌ی \lr {IKDR} برای کرنل‌های \lr {ISM} }{10}{section.3.3}
+\contentsline {subsection}{\numberline {3‏.‏3‏.‏1}شرایط لازم مرتبه‌ی اول}{10}{subsection.3.3.1}
+\contentsline {subsection}{\numberline {3‏.‏3‏.‏2}شرایط لازم مرتبه‌ی دوم}{11}{subsection.3.3.2}
+\contentsline {subsection}{\numberline {3‏.‏3‏.‏3}الگوریتم \lr {ISM} }{14}{subsection.3.3.3}
+\contentsline {section}{\numberline {3‏.‏4} ماتریس $\Phi _0$ و شرایط اولیه‌ی الگوریتم }{15}{section.3.4}
+\contentsline {section}{\numberline {3‏.‏5}برخی از اعضای معروف خانواده‌ی \lr {ISM}}{17}{section.3.5}
+\contentsline {subsection}{\numberline {3‏.‏5‏.‏1}\lr {Linear Kernel}}{17}{subsection.3.5.1}
+\contentsline {subsection}{\numberline {3‏.‏5‏.‏2}\lr {Polynomial Kernel}}{18}{subsection.3.5.2}
+\contentsline {subsection}{\numberline {3‏.‏5‏.‏3}\lr {Gaussian Kernel}}{18}{subsection.3.5.3}
+\contentsline {subsection}{\numberline {3‏.‏5‏.‏4}\lr {Squared Kernel}}{19}{subsection.3.5.4}
+\contentsline {subsection}{\numberline {3‏.‏5‏.‏5}\lr {Multiquadratic Kernel}}{19}{subsection.3.5.5}
+\contentsline {section}{\numberline {3‏.‏6}محاسبه‌ی ماتریس‌های \lr {$\Phi $} و \lr {$\Phi _0$} برای هر کرنل معروف خانواده‌ی \lr {ISM}}{20}{section.3.6}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏1}محاسبه‌ی \lr {$\Phi $} در حالتی که \lr {$A_{i,j} = \mathbf {x}_i\mathbf {x}_j^\top + \mathbf {x}_j\mathbf {x}_i^\top $}}{20}{subsection.3.6.1}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏2}محاسبه‌ی \lr {$\Phi $} در حالتی که \lr {$A_{i,j} = 2(\mathbf {x}_i-\mathbf {x}_j)(\mathbf {x}_i-\mathbf {x}_j)^\top $}}{22}{subsection.3.6.2}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏3}محاسبه‌ی $\Phi _0$ }{23}{subsection.3.6.3}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏4}\lr {Linear Kernel}}{23}{subsection.3.6.4}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏5}\lr {Polynomial Kernel}}{24}{subsection.3.6.5}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏6}\lr {Gaussian Kernel}}{24}{subsection.3.6.6}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏7}\lr {Squared Kernel}}{25}{subsection.3.6.7}
+\contentsline {subsection}{\numberline {3‏.‏6‏.‏8}\lr {Multiquadratic Kernel}}{25}{subsection.3.6.8}
+\contentsline {section}{\numberline {3‏.‏7}ترکیب‌ کرنل‌های \lr {ISM} }{26}{section.3.7}
+\contentsline {section}{\numberline {3‏.‏8}جمع‌بندی}{27}{section.3.8}
+\contentsline {chapter}{\numberline {4}نتایج تجربی}{28}{chapter.4}
+\contentsline {section}{\numberline {4‏.‏1}بررسی توابع پیاده‌سازی شده}{28}{section.4.1}
+\contentsline {section}{\numberline {4‏.‏2}نتایج تجربی}{28}{section.4.2}
+\contentsline {subsection}{\numberline {4‏.‏2‏.‏1}توضیح اجمالی در مورد داده‌ها}{28}{subsection.4.2.1}
+\contentsline {subsection}{\numberline {4‏.‏2‏.‏2}شرح آزمایش‌ها}{29}{subsection.4.2.2}
+\contentsline {subsubsection}{کاهش بعد نظارت‌شده}{29}{section*.6}
+\contentsline {subsubsection}{کاهش‌بعد نظارت‌نشده}{29}{section*.7}
+\contentsline {subsubsection}{ دسته‌بندی جایگزین \lr {(Alternative Clustering)} }{29}{section*.8}
+\contentsline {subsection}{\numberline {4‏.‏2‏.‏3}تنظیم پارامتر‌ها}{29}{subsection.4.2.3}
+\contentsline {subsection}{\numberline {4‏.‏2‏.‏4}نتایج آزمایش‌ها}{29}{subsection.4.2.4}
+\contentsline {subsubsection}{کاهش‌ بعد نظارت‌شده}{29}{section*.9}
+\contentsline {subsubsection}{کاهش بعد نظارت‌نشده}{30}{section*.10}
+\contentsline {subsubsection}{دسته‌بندی جایگزین}{32}{section*.12}
+\contentsline {subsubsection}{بررسی زمان اجرا}{32}{section*.15}
+\contentsline {chapter}{\numberline {5}پیشنهاد‌ها}{33}{chapter.5}
+\contentsline {chapter}{منابع}{35}{chapter*.17}

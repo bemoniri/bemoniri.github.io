@@ -1,0 +1,190 @@
+\فصل{جداسازی مبتنی بر اطلاعات متقابل}
+\label{algs}
+در این فصل، الگوریتمی مبتنی بر کمنیه‌سازی اطلاعات متقابل، برای جداسازی برای مخلوط‌های غیرخطی را معرفی کرده و عملکرد آن‌ را بررسی می‌کنیم.
+
+\section{تعاریف و مقدمات}
+
+در ابتدا به بیان تعاریف و مقدمات لازم برای معرفی الگوریتم جداسازی می‌پردازیم. منبع ما در این قسمت، 
+\cite{mbzadehthesis}
+است.
+\begin{definition}
+اطلاعات متقابل متغیر‌های تصادفی
+$x_1, x_2, \dots, x_N$
+را به صورت زیر تعریف می‌کنیم:
+\begin{equation}
+I(\x) = \mathrm{KL}\Big(P_\x(\x) || \prod_{i = 1}^{N} p_{x_i}(x_i)\Big) = \sum_{i = 1}^{N} H(x_i) - H(\x)
+\end{equation}
+\end{definition}
+
+از خواص فاصله‌ی 
+\lr{KL}
+بین دو توزیع، می دانیم که اطلاعات متقابل صفر است، اگر و تنها اگر داشته باشیم:
+\begin{equation}
+p_\x(\x) = \prod_{i = 1}^{N} p_{x_i}(x_i)
+\end{equation}
+
+\begin{definition}
+\textbf{تابع امتیاز}
+تابع امتیاز یک متغیر تصادفی 
+$x$
+با 
+\lr{pdf}
+$p_x(x)$
+را به صورت زیر تعریف می‌کنیم:
+\begin{equation}
+\psi_x(x) \triangleq -\frac{d}{dx} \ln p_x(x) = -\frac{p_x'(x)}{p_x(x)}
+\end{equation}
+\end{definition}
+
+\newpage
+\begin{definition}
+	برای یک بردار تصادفی 
+$\x$، 
+سه کمیت زیر را تعریف می‌کنیم:
+\begin{itemize}
+\item
+\textbf{\lr{Marginal Score Function (MSF)}}
+\begin{equation}
+\mathbf{\psi}(\x) = (\psi_1(x_1), \psi_2(x_2),\dots, \psi_n(x_n))^\top
+\end{equation}
+که در آن
+\begin{equation}
+\psi_i(x_i) = - \frac{p'_{x_i}(x_i)}{p_{x_i}(x_i)}
+\end{equation}
+\item 
+\textbf{\lr{Joint Score Function (JSF)}}
+\begin{equation}
+\mathbf{\varphi}(\x) = \Big(\varphi_1(x_1), \varphi_2(x_2),\dots, \varphi_n(x_n)\Big)^\top
+\end{equation}
+که در آن
+\begin{equation}
+\varphi_i(\x) = -\frac{\frac{\partial}{\partial x_i}p_\x(\x)}{p_\x(\x)}
+\end{equation}
+
+\item
+\textbf{\lr{Score Function Difference (SFD)} }	
+\begin{equation}
+\mathbf{\beta}_\x (\x) \triangleq \mathbf{\psi}_\x(\x) - \varphi_\x(\x)
+\end{equation}
+
+\end{itemize}
+\end{definition}
+
+این کمیت‌ها ویژگی‌های بسیار جالبی دارند که در ادامه به آن‌ها اشاره خواهد شد:
+\begin{theorem}
+درایه‌‌های بردار تصادفی 
+$\x$
+مستقل هستند، اگر و تنها اگر 
+$\mathbf{\beta}_\x = 0$
+باشد.
+\end{theorem}
+\begin{proof}
+	ساده است.
+\end{proof}	
+
+\begin{theorem}
+اگر 
+$\x$
+یک بردار تصادفی با چگالی 
+$p_\x$
+و 
+\lr{JSF}
+برابر 
+$\mathbf{\varphi_\x}$
+بوده و تابع
+$f(\x)$
+تابعی با مشتقات جزئی مرتبه‌ی اول پیوسته باشد، اگر برای هر 
+$i$
+داشته باشیم:
+
+\begin{equation}
+\lim_{x_i \to \pm\infty} \int_{x_1, \dots, x_{i-1}, x_{i+1}, \dots, x_N} f(\x)p_\x(\x) dx_1 \dots dx_{i-1}dx_{i+1}\dots dx_N = 0
+\end{equation}
+آن‌گاه داریم:
+\begin{equation}
+\E\{f(\x)\phi_i(\x)\} = \E\Big\{\frac{\partial f}{\partial x_i}(\x)\Big\}
+\end{equation}
+\end{theorem}
+\begin{proof}
+	به سادگی با انتگرال‌گیری جزء به جزء به دست می‌آید.
+\end{proof}
+
+\begin{theorem}
+	فرض کنید 
+$\x$
+یک بردار تصادفی کران‌دار باشد و 
+$\Delta$
+نیز یک بردار تصادفی کوچک. در این صورت:
+\begin{equation}
+I(\x + \Delta) - I(\x) = \E\{\Delta^\top \mathbf{\beta}_\x(\x)\} + o(\Delta)
+\end{equation}
+\label{grad}
+\end{theorem}
+
+\begin{proof}
+اثبات این قضیه، در پیوست B 
+\cite{mbzadehthesis}
+آمده است.
+\end{proof}
+
+\section{طراحی الگوریتم}
+ قضیه
+ \eqref{grad}‌، پیشنهاد طراحی الگوریتمی برای یافتن تابعی هموار است که با گذر دو فرآیند تصادفی داده‌شده از آن، اطلاعات متقابل آن کمینه ‌شود.
+ 
+ شهوداً، قضیه‌ی 
+ \eqref{grad}
+ بیان می‌کند که 
+ \lr{SFD}
+ یک گرادیان «تصادفی» برای اطلاعات متقابل است و می‌توان از آن برای طراحی یک الگوریتم
+ \lr{Steepest-Descent}
+ بهره جست.  الگوریتم ما، تعمیمی از الگوریتم مطرح‌شده در
+\cite{mbzadehthesis}
+برای فرآیند‌های تصادفی است.  در 
+\cite{mbzadehthesis}
+ الگوریتم زیر ارائه شده است که در هر مرحله، منابع خروجی را در جهت «گرادیان» اطلاعات متقابل، به‌روز می‌کند.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{alg.png}
+\end{figure}
+
+این الگوریتم قابل تعمیم به فرآیند‌های تصادفی نیز هست. برای این کار، کافی است در هر مرحله، شیفتی تصادفی از یکی از فرآیند‌های تصادفی در نظر گرفت و الگوریتم فوق را بر روی این ورژن شیفت یافته انجام داد.
+\newpage
+\section{شبیه‌سازی عملکرد الگوریتم}
+در این شبیه‌سازی، منابع دو فرآیند تصادفی
+\lr{ARIMA}
+مستقل
+با 
+
+
+\lr{
+\texttt{model = arima('Constant',0.3,'AR',0.7,'MA',0.4,...\\
+	'Distribution',tdist,'Variance',0.15)}}
+
+
+ساخته و با تابع غیرخطی: 
+\begin{equation}
+\begin{cases}
+x_1(t) = s_1(t) + 0.5s_2(t) + 0.5s_1(t)s_2(t)\\
+x_2(t) = 0.6s_2(t) + 2s_2(t) + 0.3s_1(t)s_2(t)
+\end{cases}
+\end{equation}
+مخلوط  می‌کنیم. الگوریتم را بر مخلوط‌ها اعمال کرده و مقدار
+\lr{SNR}
+جداسازی را بر حسب تعداد تکرار الگوریتم رسم می‌کنیم.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.8]{snr.png}
+\caption{
+\lr{SNR}
+جداسازی مخلوط غیرخطی با کمینه‌کردن اطلاعات متقابل
+}
+\end{figure}
+
+این الگوریتم، قادر به رسیدن به 
+\lr{SNR}
+ای برابر با 
+$15.5 dB$
+و 
+$18.0 dB$
+است. در پروژه‌‌ی کارشناسی دو، عملکرد این الگوریتم با معدود الگوریتم‌های موجود برای جداسازی مخلوط‌های غیرخطی مقایسه خواهد شد. همچنین کیفیت عملکرد آن بر روی مسئله‌ی واقعی نیز بررسی خواهد گشت.
+ 

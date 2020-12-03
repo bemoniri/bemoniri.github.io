@@ -1,0 +1,20 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 2‏.‏1}{\ignorespaces مثالی از ورودی و خروجی یک سیستم مخلوط کننده‌ی خطی دو بعدی}}{4}{figure.2.1}
+\contentsline {figure}{\numberline {\relax 2‏.‏2}{\ignorespaces مدل مسئله‌ی جداسازی کور منابع غیرخطی}}{5}{figure.2.2}
+\contentsline {figure}{\numberline {\relax 2‏.‏3}{\ignorespaces نتایج تجربی آزمایش تجربی الگوریتم \lr {kTDSEP} }}{7}{figure.2.3}
+\contentsline {figure}{\numberline {\relax 2‏.‏4}{\ignorespaces مدل \lr {Post-Nonlinear} }}{7}{figure.2.4}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 4‏.‏1}{\ignorespaces شمای کلی روش تمایز بین زمان‌ها (TCL) }}{14}{figure.4.1}
+\contentsline {figure}{\numberline {\relax 4‏.‏2}{\ignorespaces بهره‌بردن از مشتق برای جداسازی مخلوط‌های غیرخطی}}{20}{figure.4.2}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 5‏.‏1}{\ignorespaces \lr {SNR} جداسازی مخلوط غیرخطی با کمینه‌کردن اطلاعات متقابل }}{24}{figure.5.1}
+\addvspace {10\p@ }
+\contentsline {figure}{\numberline {\relax 6‏.‏1}{\ignorespaces CDF تخمين ‌زده‌شده و CDF واقعی برای توزیع یکنواخت در بازه‌ی $[0, 1]$. }}{30}{figure.6.1}
+\contentsline {figure}{\numberline {\relax 6‏.‏2}{\ignorespaces مقدار تابع هزینه‌ی الکوریتم بهینه‌سازی حول نقطه‌ی بهینه. دو بعد تغییر داده‌شده‌اند و مابقی ابعاد بر روی مقدار بهینه ثابت مانده‌اند.}}{31}{figure.6.2}
+\contentsline {figure}{\numberline {\relax 6‏.‏3}{\ignorespaces تغییرات مقدار تابع هزینه‌ی الگوریتم مبتنی با فاصله‌ی کلموگروف، با تغییر یکی از ضرایب و ثابت نگه‌داشتم مابقی ضرایب در نقطه‌ی بهینه‌ی آن‌ها. }}{32}{figure.6.3}
+\contentsline {figure}{\numberline {\relax 6‏.‏4}{\ignorespaces تغییرات مقدار تابع هزینه‌ی الگوریتم مبتنی با فاصله‌ی کرتسیس، با تغییر یکی از ضرایب و ثابت نگه‌داشتم مابقی ضرایب در نقطه‌ی بهینه‌ی آن‌ها. }}{32}{figure.6.4}
+\contentsline {figure}{\numberline {\relax 6‏.‏5}{\ignorespaces تغییرات مقدار تابع هزینه‌ی الگوریتم مبتنی با فاصله‌ی آنتروپی منفی، با تغییر یکی از ضرایب و ثابت نگه‌داشتم مابقی ضرایب در نقطه‌ی بهینه‌ی آن‌ها. }}{33}{figure.6.5}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

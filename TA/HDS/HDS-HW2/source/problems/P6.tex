@@ -1,0 +1,43 @@
+\section[]{بی‌نام}
+متغیرهای تصادفی 
+$X_{1},\cdots,X_{n}$
+را درنظر بگیرید که از هم مستقل هستند و روی 
+$\mathbb{R}^{d}$
+ مقدار می‌گیرند و همچنین فرض‌کنید که برای همه‌ی متغیرهای فوق،  توزیع $-X$ و $X$ یکسان است، یا به عبارتی متقارن هستند. بگیرید: 
+\begin{equation*}
+\begin{cases}
+S_{n}\triangleq\sum_{i=1}^{n}X_{i}\\
+\Sigma^{2}\triangleq \mathbb{E}\max_{j=1,\cdots,d}\sum_{i=1}^{n}X_{i,j}^{2}\\
+
+\end{cases}
+\end{equation*}
+ 
+  تعریف کنید:
+  \[
+  C(n,d)\triangleq\sup\frac{\mathbb{E}\|S_{n}\|_{\infty}^{2}}{\Sigma^{2}}
+  \]
+   که سوپریمم روی تمام توزیع‌های مستقل و متقارن متغیر تصادفی‌های 
+   $X_{1},\cdots,X_{n}$
+   ‌با $\Sigma^{2}$ متناهی گرفته‌شده‌است. ثابت کنید 
+   $C(n,d)$
+   یک تابع غیر نزولی برحسب $n,d$ است و 
+   \[
+   C(n,d)\le2(1+\log(2d)).
+   \]
+   همچنین تعریف کنید:
+   \[
+   C(\infty,d)=\lim_{n\to\infty}C(n,d).
+   \]
+   ثابت کنید برای $d\ge2$،
+   \[
+    C(\infty,d)\ge \left(\Phi^{-1}\left(1-\frac{1}{2(d+1)}\right)\right)^{2}
+   \]
+    و 
+    \[
+    \lim_{d\to\infty} \frac{C(\infty,d)}{2\log(d)}=1
+    \]
+    
+    \textbf{    توجه: }
+    $\Phi(x):=\mathbb{P}(Z\le x)$
+    که 
+    $Z\sim\mathcal{N}(0,1)$

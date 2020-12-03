@@ -1,0 +1,53 @@
+\section{ضریب همدوسی}
+ضریب همدوسی متقابل برای دو ماتریس متعامد و یکّه‌ی
+$U_{m\times m}$
+و
+$V_{m\times m}$
+$\big(U^HU=V^HV=I_{m\times m}\big)$
+به صورت زیر تعریف می‌شود:
+\begin{equation}
+\nonumber
+\mu(U,V)\eqdef \max_{1\leq i,j\leq m}\big\lvert\langle u_i,v_j\rangle\big\rvert
+\end{equation}
+
+که در آن 
+$u_i$
+و
+$v_j$
+، به ترتیب نمایشگر ستون
+$i$
+و
+$j$
+از ماتریس‌های
+$U$
+و
+$V$
+است.
+
+\begin{itemize}
+\item
+  ثابت کنید:
+\begin{align}
+\nonumber\frac{{1}}{\sqrt{m}}\leq \mu(U,V)\leq {1}
+\end{align}
+\item
+ اکنون فرض‌کنید درایه‌های این دو ماتریس دارای توزیع 
+$i.i.d$
+برنولی به صورت زیر  باشند:
+
+\[
+u_{ij},v_{ij} = 
+\begin{cases} 
+{1/\sqrt{m}} &\quad \frac{1}{2} \text{با احتمال }\\
+-{1/\sqrt{m}} &\quad \frac{1}{2} \text{با احتمال }
+\end{cases}
+\] 
+
+در این صورت نشان دهید که با احتمال حداقل 
+$1-\epsilon^{2}$
+برای ضریب همدوسی متقابل خواهیم داشت:
+\begin{equation}
+\nonumber
+\mu(U,V)\leq {2\sqrt{\frac{\ln{(\sqrt{2}m/\epsilon)}}{m}}}
+\end{equation}
+\end{itemize}

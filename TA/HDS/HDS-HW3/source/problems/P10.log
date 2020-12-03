@@ -1,0 +1,367 @@
+This is XeTeX, Version 3.14159265-2.6-0.99996 (TeX Live 2016) (preloaded format=xelatex 2018.11.11)  12 MAY 2020 14:36
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**P10.tex
+(./P10.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+! Undefined control sequence.
+l.1 \section
+            {تخمین ماتریس کواریانس گوسی}
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+! LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.1 \section{ت
+               خمین ماتریس کواریانس گوسی}
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+Missing character: There is no ت in font nullfont!
+Missing character: There is no خ in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no گ in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ف in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ض in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ی in font nullfont!
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 3.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 3.
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ع in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ع in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no گ in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ص in font nullfont!
+Missing character: There is no ف in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ِ in font nullfont!
+Missing character: There is no ق in font nullfont!
+Missing character: There is no ط in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no آ in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ش in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ص in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no خ in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no خ in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ص in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no : in font nullfont!
+
+Overfull \hbox (20.0pt too wide) in paragraph at lines 1--10
+[]
+ []
+
+
+Overfull \hbox (5.20486pt too wide) in paragraph at lines 1--10
+\OML/cmm/m/it/10 d$
+ []
+
+
+Overfull \hbox (32.49892pt too wide) in paragraph at lines 1--10
+\OMS/cmsy/m/n/10 f\OML/cmm/m/it/10 x[]\OMS/cmsy/m/n/10 g[]$
+ []
+
+
+Overfull \hbox (7.22223pt too wide) in paragraph at lines 1--10
+\OT1/cmr/m/n/10 ^^F$
+ []
+
+! Undefined control sequence.
+l.10 $$\hat{\Sigma}= \text
+                          {\lr{diag}}( \sum_{i=1}^n x_i^T x_i)$$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+! Undefined control sequence.
+l.10 $$\hat{\Sigma}= \text{\lr
+                              {diag}}( \sum_{i=1}^n x_i^T x_i)$$
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (84.56818pt too wide) detected at line 10
+[] \OT1/cmr/m/n/10 = []([] \OML/cmm/m/it/10 x[]x[]\OT1/cmr/m/n/10 )
+ []
+
+Missing character: There is no ف in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ض in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ز in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no گ in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ح in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ث in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no پ in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ش in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no . in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ص in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no ش in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no : in font nullfont!
+
+Overfull \hbox (9.04456pt too wide) in paragraph at lines 10--19
+   $\OML/cmm/m/it/10 x[]$
+ []
+
+
+Overfull \hbox (6.0729pt too wide) in paragraph at lines 10--19
+\OML/cmm/m/it/10 ^^[$
+ []
+
+! Undefined control sequence.
+l.19 $$\mathbb
+              {P}[\frac{||\hat{\Sigma}- \Sigma||_2}{\sigma^2} \geq c_0 \sqrt...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+Overfull \hbox (240.22585pt too wide) detected at line 19
+\OML/cmm/m/it/10 P\OT1/cmr/m/n/10 [[] \OMS/cmsy/m/n/10 ^^U \OML/cmm/m/it/10 c[]
+[] \OT1/cmr/m/n/10 + \OML/cmm/m/it/10 ^^N\OT1/cmr/m/n/10 ] \OMS/cmsy/m/n/10 ^^T
+ \OML/cmm/m/it/10 c[] [] []
+ []
+
+Missing character: There is no ک in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no ر in font nullfont!
+Missing character: There is no آ in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ث in font nullfont!
+Missing character: There is no و in font nullfont!
+Missing character: There is no ا in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ی in font nullfont!
+Missing character: There is no م in font nullfont!
+Missing character: There is no ث in font nullfont!
+Missing character: There is no ب in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ه in font nullfont!
+Missing character: There is no س in font nullfont!
+Missing character: There is no ت in font nullfont!
+Missing character: There is no ن in font nullfont!
+Missing character: There is no د in font nullfont!
+Missing character: There is no . in font nullfont!
+)
+! Emergency stop.
+<*> P10.tex
+           
+*** (job aborted, no legal \end found)
+
+ 
+Here is how much of TeX's memory you used:
+ 6 strings out of 493591
+ 54 string characters out of 6143545
+ 54754 words of memory out of 5000000
+ 3515 multiletter control sequences out of 15000+600000
+ 3640 words of font info for 14 fonts, out of 8000000 for 9000
+ 1347 hyphenation exceptions out of 8191
+ 18i,3n,12p,160b,56s stack positions out of 5000i,500n,10000p,200000b,80000s
+No pages of output.

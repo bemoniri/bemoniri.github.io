@@ -1,0 +1,198 @@
+% ‎!TeX document-id = {1355464a-022d-4c4a-bd72-ace863f75138}‎
+% ‎!TEX TS-program = XeLaTeX‎ 
+% ‎Commands for running this example‎:
+% ‎xelatex presentation‎
+% ‎xelatex presentation‎
+% ‎End of Commands‎
+% ‎S‎. ‎Razi Alavizadeh‎, ‎s.r.alavizadeh@gmail.com‎, ‎http://pozh.org‎
+% برای دیدن نتیجه نهایی سه بار اجرا کنید.
+‎\documentclass[12pt,oneside]{bidipresentation}‎
+‎%\usepackage[utf8]{inputenc}‎
+‎%\usepackage[english]{babel}‎
+‎\usepackage{geometry}‎
+‎\usepackage[all]{xy}‎
+‎\usepackage{amsmath‎, ‎amsthm‎, ‎amssymb‎, ‎amsfonts}‎
+‎\usepackage{pgf,pgfarrows,pgfnodes,pgfautomata,pgfheaps,pgfshade}‎
+‎\usepackage{tikz}\usetikzlibrary{shapes,snakes,positioning,shapes.misc}‎
+‎\usepackage{pstricks}‎
+‎%\usepackage{enumerate}‎
+‎\usepackage{listings}‎
+‎\usepackage{xcolor}‎
+‎\usepackage{ifthen}‎
+‎\usepackage{graphics}‎
+‎%\usepackage{MnSymbol}‎
+%% چون این تعاریف در استایل ‎saahel (ساحل)‎ که به عنوان بسته فراخوانی می‌شود،
+%%  به کار می‌روند در نتیجه قبل از فراخوانی بسته این تعریف‌ها به انجام رسیده‌اند
+\def\theTitle{‏عنوان}
+‎%‎
+\def\theAuthor{نام نویسنده }
+\def\theSuper{نام استاد راهنما}
+‎\def\theSuperr{‎ نام استاد مشاور}
+‎\def\theAuthorUrl{http://profs.hsu.ac.ir/mamintoosi}‎
+‎\def\theCompany{‎‎
+‏نام دانشگاه
+}
+‎\def\theCompanyUrl{http://www.parsilatex.com}‎
+‎\def\theDate{‎ شهریور ‎1395}‎
+‎\def\Logo{logo}‎
+%% 
+‎\usepackage{saahel}‎
+‎%\usepackage{parnia}‎
+‎\usepackage{texpause}‎
+‎\usepackage{xepersian}‎
+
+‎\title{\theTitle}‎
+‎%\super{\theSuper}‎
+‎\author{\href{\theAuthorUrl}{\theAuthor}}‎
+‎\date{\theDate}‎
+
+%%%%%% انتخاب رنگ استایل %%%%%%%%%%%%%%%%%%%%
+%% شما می‌توانید از یکی از رنگهای زیر استفاده کنید، رنگ پیش فرض ‎NavyBlue‎ است:
+%%blue, ‎NavyBlue‎, ‎golden‎, ‎red‎, ‎green‎, ‎LimeGreen‎, ‎purple‎,
+%% ‎sepia‎, ‎cyan‎, ‎orange‎, ‎gray,JungleGreen‎ ,‎Bittersweet‎ , ‎brown‎
+‎\selectThemeColor{NavyBlue}‎
+%% و یا می‌توانید رنگ مورد نظر خودتان را تنظیم نمایید:
+%\setThemeColor{RGB}{111, ‎179‎, ‎62}‎
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+‎\linespread{2}‎
+‎\pagestyle{pres}‎
+
+%%رنگ​ها
+‎%\sidebartc{cmyk}{0,0,0,1}‎
+‎%\linktc{rgb}{0,0,1}‎
+‎%\rtopbarc{cmyk}{0.94,0.54,0,0}‎
+‎%\ltopbarc{cmyk}{0.15,0.15,0,0}‎
+‎%\ltopbartc{cmyk}{0,0,0,1}‎
+‎%\rbotbarc{cmyk}{0.15,0.15,0,0}‎
+‎%\lbotbarc{rgb}{0,0,1}‎
+‎%\lbotbartc{cmyk}{0,0,0,0}‎
+‎%%other colors‎
+‎%\definecolor{Red}{rgb}{1,0,0}‎
+‎%\definecolor{Blue}{rgb}{0,0,1}‎
+‎%\definecolor{Green}{rgb}{0,1,0}‎
+‎%\definecolor{magenta}{rgb}{1,0,.6}‎
+‎%\definecolor{lightblue}{rgb}{0,.5,1}‎
+‎%\definecolor{lightpurple}{rgb}{.6,.4,1}‎
+‎%\definecolor{gold}{rgb}{.6,.5,0}‎
+‎%\definecolor{orange}{rgb}{1,0.4,0}‎
+‎%\definecolor{hotpink}{rgb}{1,0,0.5}‎
+‎%\definecolor{newcolor2}{rgb}{.5,.3,.5}‎
+‎%\definecolor{newcolor}{rgb}{0,.3,1}‎
+‎%\definecolor{newcolor3}{rgb}{1,0,.35}‎
+%\definecolor{darkgreen1}{rgb}{0, .35, ‎0}‎
+%\definecolor{darkgreen}{rgb}{0, .6, ‎0}‎
+‎%\definecolor{darkred}{rgb}{.75,0,0}‎
+‎%\xdefinecolor{olive}{cmyk}{0.64,0,0.95,0.4}‎
+‎%\xdefinecolor{purpleish}{cmyk}{0.75,0.75,0,0}‎
+‎\def\alert#1{\textcolor{red}{#1}}‎
+
+
+
+
+‎\settextfont[Scale=1.6]{B Yas}‎
+‎%\setdigitfont[Scale=2]{B Yas}%{HM XNiloofar}‎
+‎\setlatintextfont[Scale=1.5]{Times New Roman}‎
+%
+‎%\defpersianfont\titr[Scale=1.1]{Persian Modern}%{HM XTitr}‎
+‎\DeclareMathSizes{12}{14}{10}{8}‎
+‎\def\titr{}‎
+‎\def\parsitext#1{\rl{#1}}‎
+
+‎%\lstset{% general command to set parameter(s)‎ 
+%basicstyle=\small, % ‎print whole listing small‎
+%keywordstyle=\color{blue}\bfseries,
+%% ‎underlined bold black keywords‎
+%identifierstyle=, % ‎nothing happens‎
+%stringstyle=\ttfamily\color{red},
+%commentstyle=\color{LimeGreen}, % ‎white comments‎
+%stringstyle=\ttfamily\color{red}, % ‎typewriter type for strings‎
+‎%showstringspaces=false} % no special string spaces‎
+
+‎\lstloadlanguages{tex}‎
+‎\lstset{language=[latex]tex‎,
+                ‎basicstyle=\ttfamily‎,
+                ‎keywordstyle=\color{blue}\ttfamily‎,
+                ‎stringstyle=\color{red}\ttfamily‎,
+                ‎commentstyle=\color{green}\ttfamily‎,
+                ‎morecomment=[l][\color{magenta}]{\#}‎
+}
+‎\tikzstyle{vertex}=[circle‎, ‎draw‎, ‎inner sep=1pt]‎ 
+‎\newcommand{\vertex}{\node[vertex]}‎
+
+‎\tikzstyle{vertexs}=[circle,draw‎, ‎inner sep=1pt‎, ‎minimum size=8pt]‎
+‎\newcommand{\vertexs}{\node[vertexs]}‎
+
+‎\tikzstyle{vertexss}=[]‎
+‎\newcommand{\vertexss}{\node[vertexss]}‎
+‎\newcommand{\A}{\mathcal{A}}‎
+‎\newcommand{\mo}{\mathcal{O}}‎
+‎\newcounter{bar}‎
+‎\newcommand{\foo}{%‎
+        ‎%\stepcounter{bar}%‎
+        ‎\thebar}‎ 
+‎\begin{document}‎
+%% انتخاب متن نمایش داده شده در بالا سمت چپ
+‎\setTextTL{\bfseries\vspace{3mm}\theTitle}‎
+%% انتخاب متن نمایش داده شده در بالا پایین سمت راست
+‎\setTextBR{‎ ارایه: ‎\href{\theAuthorUrl}{\theAuthor}}‎
+%\setTextBR{گروه پارسی‌لاتک ‎\hfill \lr{$\qquad$ www.parsilatex.com}‎ }
+%% همچنین می‌توانید از دستورهای زیر استفاده کنید:
+%% که البته بصورت پیش فرض برای شماره صفحه و عنوان بخش استفاده شده‌اند.
+%\setTextTR{بالا راست} % پیشفرض عنوان بخش
+%\setTextBL{پایین چپ} % پیشفرض شماره صفحه
+‎\begin{titlepage}‎
+‎\tikz[remember picture,overlay] \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{‎begin‎}};‎
+‎\end{titlepage}‎
+‎\begin{titlepage}‎
+‎\AddToShipoutPicture*{%‎
+‎\begin{tikzpicture}[remember picture,overlay]%‎
+‎\shade[color=red‎, ‎top color=themeColor!80‎, ‎bottom color=themeColor!15] (current page.north west) rectangle (current page.south east);‎
+‎\end{tikzpicture}%‎
+}
+‎%\distance{1}‎
+
+‎\centering‎
+‎\hspace{-40mm}‎
+‎\color{white}{\Huge {\makeatletter\theTitle\makeatother}}‎
+‎\distance{2}\\‎
+‎\color{black}{\hspace{-40mm}\rm\large‎
+ارایه دهنده‎:\\‎
+‎\vspace{-0.4cm}\hspace{-40mm}\Large\makeatletter\@author\makeatother\\ \vspace*{1cm}‎
+‎\color{black}{\hspace{-40mm}\rm\large‎
+استاد راهنما‎:}\\‎
+‎\color{themeColor}\vspace{-0.4cm}{\hspace{-41mm}\rm\large‎
+‎\Large\makeatletter\theSuper\makeatother}\\ \vspace*{1cm}‎
+‎%\color{black}{\hspace{-40mm}\rm\large‎
+%استاد مشاور‎:}\\‎
+‎%\color{themeColor}{\vspace{-0.4cm}\hspace{-41mm}\rm\large‎
+‎%\Large\makeatletter\theSuperr\makeatother}\\‎
+% دکتر عباس حیدری‎\\‎
+‎\hspace{-40mm}‎
+‎\href{\theCompanyUrl}{\theCompany}\\‎
+‎\hspace{-40mm}\\‎
+%گروه پارسی‌لاتک‎\\‎
+‎\hspace{-35mm}\vspace{-20mm}\large\theDate}‎
+‎%\today‎
+‎\distance{2}‎
+‎\end{titlepage}‎
+
+‎\setcounter{tocdepth}{1}‎
+‎\begin{plainslide}‎
+‎	\setTextTR{\centerline{فهرست}}‎
+‎\begin{block}{چشم‌انداز}‎
+‎\vspace{-1em}‎
+‎\pause‎
+‎\tableofcontents%‎
+‎\end{block}‎
+‎\end{plainslide}‎
+‎\setcounter{tocdepth}{2}‎
+% ‎presetation's slides‎
+‎\setTextTR{{\footnotesize \centerline{\bfseries{\rightmark}}}}‎
+‎\include{slides}‎
+‎\setcounter{bar}{\thepage}‎
+
+‎\begin{titlepage}‎
+‎\tikz[remember picture,overlay] \node[inner sep=0pt] at (current page.center) {\includegraphics[width=\paperwidth,height=\paperheight]{end}};‎
+‎\end{titlepage}\setcounter{page}{\foo}‎
+‎\end{document}

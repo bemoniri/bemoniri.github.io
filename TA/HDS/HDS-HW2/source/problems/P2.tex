@@ -1,0 +1,28 @@
+\section
+[لم مازارت]
+{لِم مازارت}
+فرض کنید که
+$A \subseteq \mathbb{R}^m$
+ یک مجموعه با کاردینال محدود باشد. همچنین تعریف کنید 
+ $r \triangleq \max_{\mathbf{x}\in A} ||\mathbf{x}||_2$.
+ در این شرایط، نشان دهید:
+ 
+ $$\mathbb{E}_\mathbf{\sigma}\Big[\frac{1}{m}\sup_{\mathbf{x}\in A}\sum_{i = 1}^{m}\sigma_i x_i\Big] \leq \frac{r\sqrt{2\log(|A|)}}{m}$$
+ که در آن 
+ $\mathbf{\sigma} = [\sigma_i]_{i = 1}^m$
+ متغیرهای تصادفی 
+ $\sigma_i$،
+ متغیرهای مستقل راداماخر هستند و
+$x_1, x_2,\dots, x_m$
+مولفه‌های بردار 
+$\mathbf{x}$
+هستند.
+
+\vspace{0.5cm}
+\textbf{راهنمایی:}
+سعی کنید کرانی برای 
+$$\exp\Big(t\mathbb{E}_\mathbf{\sigma}\Big[\frac{1}{m}\sup_{\mathbf{x}\in A}\sum_{i = 1}^{m}\sigma_i x_i\Big]\Big)$$
+ارائه دهید و  برای این کار از نامساوی 
+\lr{Jensen}
+و لم هوفدینگ استفاده کنید.
+

@@ -1,0 +1,807 @@
+% !TEX TS-program = XeLaTeX
+% !TeX root = presentation.tex
+\SecSlide{مقدمه}\label{Sec:Intro}
+\subsection[تاریخچه تِک]{تاریخچه‌ی سیستم حروف‌چینی تِک}
+%\begin{plainslide}
+%\block{در پیش رو}{
+%\tableofcontents[section=1]
+%}
+%\end{plainslide}
+\begin{plainslide}[تِک \lr{(\TeX)} چیست؟]
+
+یک سیستم حروف‌چینی است که توسط دونالد کنوث در دانشگاه استنفورد، برای حروف‌چینی مستندات زیبا، به ویژه مستنداتی که داری مقدار زیادی ریاضیات هستند، طراحی شده است. تک یک نرم‌افزار آزاد است و حق کپی آن متعلق به انجمن ریاضی آمریکا است.
+\distance{2}
+%\begin{minipage}[t]{.45\textwidth}{#3}\end{minipage}%
+%%second column
+%\begin{minipage}[t]{#2}{#4}\end{minipage}%
+%\multicol2{.45\textwidth}{.45\textwidth}
+
+\begin{block}{پایه‌گذار تِک: پروفسور دونالد کنوث}
+\begin{minipage}[t]{.6\textwidth}{%
+{\small
+\vspace{-2cm}
+\begin{itemize}
+\item  متخصص برجسته علوم كامپیوتر و استاد بازنشسته دانشگاه استنفورد
+\item  تألیف كتاب هنر برنامه‌نویسی كامپیوتر
+%\item  شاخه تحلیل دقیق الگوریتم‌ها 
+\item  سیستم حروفچینی تِك
+\item  سیستم طراحی فونت متافونت
+%\item عضویت در محافل آکادمیک و جوایز متعدد
+\end{itemize}}}\end{minipage}%
+\begin{minipage}{.3\textwidth}{%
+\vspace{-.4cm}\hspace{6cm}
+\begin{center}\includegraphics[width=.7\textwidth]{resources/knuth.png}
+\end{center}}\end{minipage}%
+\end{block}
+\end{plainslide}
+
+\begin{plainslide}[\centering\lr{\TeX,\LaTeX,pdf\TeX,...?!}]
+\begin{block}{گونه‌های مختلف تِک}
+\begin{latin}
+\begin{itemize}
+\item \LaTeX
+\item pdf\TeX
+\item pdf\LaTeX
+\item Xe\TeX
+\item Xe\LaTeX
+\item Lua\TeX
+\item Lua\LaTeX
+\end{itemize}
+\end{latin}
+\end{block}
+\end{plainslide}
+
+
+\begin{plainslide}[لاتک چیست؟]
+پردازنده ماکروهای تک که توسط لِسلی لامپورت طراحی شده است و یک زبان نشانه‌گذاری را پیاده‌سازی می‌کند.  کارکرد لاتک مبتنی بر این اندیشه است که نویسندگان باید قادر باشند بر نوشتن در درون ساختار منطقی متن‌شان تمرکز کنند، نه اینکه وقت خود را برای کارکردن بر روی جزئیات شکل‌دهی صرف کنند.
+\distance{2}
+\begin{block}{\lr{\LaTeX} طراحی شده توسط: لِسلی لامپورت}
+\begin{minipage}[t]{.6\textwidth}{%
+{\small
+\vspace{-2cm}
+\begin{itemize}
+\item قالب‌های متن مختلف 
+\item  امكانات فراوان برای ایجاد فصل‌ها، بخش‌ها
+\item  فهرست مطالب، فهرست راهنما 
+\item فهرست منابع
+\item ایجاد پیوندهای مورد نیاز 
+\end{itemize}}}\end{minipage}%
+\begin{minipage}{.3\textwidth}{%
+\begin{center}
+\vspace{-.4cm}\hspace{6cm}
+\includegraphics[width=.7\textwidth]{resources/lamport.png}
+\end{center}}\end{minipage}%
+\end{block}
+\end{plainslide}
+
+\begin{plainslide}[چارچوب کلی یک سند لاتک]
+
+\begin{block}{ساختار سندهای \lr{\LaTeX{}}}
+\begin{latin}
+$\backslash$documentclass\{article\}\\
+\textit{preamble}\\
+$\backslash$begin\{document\}\\
+\textit{body}\\
+$\backslash$end\{document\}\\
+\end{latin}
+\end{block}
+\end{plainslide}
+%
+\begin{plainslide}[مثال اول]
+\begin{latin}
+\begin{minipage}{.3\textwidth}{
+
+\begin{latin}
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+Hello World!
+\end{document}
+\end{lstlisting}
+\end{latin}
+
+\vspace*{-0.7em}%تغيير فاصله رنگ پس زمنه
+%\vspace*{27mm}
+}\end{minipage}
+\end{latin}
+\end{plainslide}
+%
+\begin{plainslide}[مثال اول]
+\begin{latin}
+\begin{minipage}{.3\textwidth}{
+%\vspace*{15mm}
+
+%\vskip-1em%تغيير اندازه بالاي  زمينه ستون  سمت چپي
+\begin{latin}
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+Hello World!
+\end{document}
+\end{lstlisting}
+\end{latin}
+
+%\includegraphics[width=.9\linewidth]{resources/code02.png}
+\vspace*{-0.7em}%تغيير فاصله رنگ پس زمنه
+%\vspace*{27mm}
+}\end{minipage}
+\hspace{2cm}
+%\vspace*{57mm}%تعيين محل پيكان سبز رنگ
+\begin{minipage}{.6\textwidth}{
+%\lr{Hello World.!}
+\hfill{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{resources/second-en.png}}}%
+%%\uncover<4|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-de}}}}%
+}\end{minipage}
+\end{latin}
+{\tikz[remember picture,overlay]\node[single arrow,fill=green,font=\ttfamily\bfseries,xshift=-4.5cm] at (current page.center){latex};}
+\end{plainslide}
+%
+%
+\begin{plainslide}[مثال دوم]
+\begin{latin}
+\begin{minipage}{.4\textwidth}{
+%\vspace*{15mm}
+
+%\vskip-1em%تغيير اندازه بالاي  زمينه ستون  سمت چپي
+
+\includegraphics[width=.9\linewidth]{resources/code01.png}
+\vspace*{-0.7em}%تغيير فاصله رنگ پس زمنه
+%\vspace*{27mm}
+}\end{minipage}
+\hspace{2cm}
+%\vspace*{57mm}%تعيين محل پيكان سبز رنگ
+\begin{minipage}{.55\textwidth}{
+%\lr{Hello World.!}
+%\hfill{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{resources/first-en}}}%
+%%\uncover<4|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-de}}}}%
+}\end{minipage}
+\end{latin}
+%{\tikz[remember picture,overlay]\node[single arrow,fill=green,font=\ttfamily\bfseries,xshift=-4.5cm] at (current page.center){latex};}
+\end{plainslide}
+%
+\begin{plainslide}[مثال دوم]
+\begin{latin}
+\begin{minipage}{.4\textwidth}{
+%\vspace*{15mm}
+
+%\vskip-1em%تغيير اندازه بالاي  زمينه ستون  سمت چپي
+
+\includegraphics[width=.9\linewidth]{resources/code01.png}
+\vspace*{-0.7em}%تغيير فاصله رنگ پس زمنه
+%\vspace*{27mm}
+}\end{minipage}
+\hspace{1cm}
+%\vspace*{57mm}%تعيين محل پيكان سبز رنگ
+\begin{minipage}{.55\textwidth}{
+%\lr{Hello World.!}
+\hfill{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{resources/first-en}}}%
+%%\uncover<4|trans:0|handout:0>{\llap{\fcolorbox{black}{white}{\includegraphics[width=.95\linewidth]{examples/first-de}}}}%
+}\end{minipage}
+\end{latin}
+{\tikz[remember picture,overlay]\node[single arrow,fill=green,font=\ttfamily\bfseries,xshift=-4.5cm] at (current page.center){latex};}
+\end{plainslide}
+
+\begin{plainslide}[مزایای لاتک]
+\begin{itemize}
+\item
+وجود چندین سبک حرفه‌ای برای حروف‌چینی انواع اسناد با کیفیت عالی حروف‌چینی 
+%\pause
+\item
+تنها نیاز به  تعداد کمی از دستورات برای تعریف ساختار متن  و نه نیاز به دانش  حروف‌چینی 
+%\pause
+\item
+کیفیت بسیار بالا در حروف‌چینی ریاضی
+
+%\pause
+\item
+نوشتارهای پیچیده علمی بصورت کاملاً خودکار به وجود می‌آیند:
+\begin{itemize}
+%\pause
+\item
+مراجع
+%\pause
+\item نمایه
+%\pause
+
+\item ارجاعات
+%\pause
+
+\item 
+فهرست مطالب، فهرست اشکال، فهرست جداول و غیره.
+%\pause
+\item\ldots
+\end{itemize}
+%\pause
+\item
+مستقل از سیستم عامل 
+%\pause
+\item
+ذخیره‌سازی درازمدت اسناد: متنی به جای دودویی
+%\pause
+\item
+نرم‌افزار بصورت آزاد  و به همراه کد منبع موجود است
+\end{itemize}
+\end{plainslide}
+%
+\begin{plainslide}[معایب لاتک]
+\begin{itemize}
+\item
+یادگیری لاتک کمی زحمت دارد.
+%\pause
+\item
+اگر بخواهید تغییرات عمده در سبک نوشتار خود بدهید، باید سبک/طبقه‌نوشتار لاتک را تغییر بدهید (که در بسیاری از موارد برای کاربران مبتدی آسان نیست).
+%\pause
+\item
+هنگامی که به حروف‌چینی عالی لاتک عادت کنید، دیگر حروف‌چینی با نرم‌افزارهای مشابه را نمی‌پسندید: در حقیقت معتاد لاتک می‌شوید.
+\end{itemize}
+\end{plainslide}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{plainslide}[مثال زی‌پرشین]
+
+
+\begin{latin}
+\begin{minipage}{.4\textwidth}{
+%\vspace*{15mm}
+
+%\vskip-1em%تغيير اندازه بالاي  زمينه ستون  سمت چپي
+
+\begin{latin}
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+\usepackage{xepersian}
+\end{lstlisting}
+\end{latin}
+\hfill\rl{سلام، دنیا!}
+\begin{latin}
+\begin{lstlisting}
+\end{document}
+\end{lstlisting}
+\end{latin}
+
+}\end{minipage}
+\end{latin}
+\end{plainslide}
+%
+\begin{plainslide}[مثال زی‌پرشین]
+\begin{latin}
+\begin{minipage}{.4\textwidth}{
+\begin{latin}
+\begin{lstlisting}
+\documentclass{article}
+\begin{document}
+\usepackage{xepersian}
+\end{lstlisting}
+\end{latin}
+\hfill\rl{سلام، دنیا!}
+\begin{latin}
+\begin{lstlisting}
+\end{document}
+\end{lstlisting}
+\end{latin}
+\vspace*{-0.3em}%تغيير فاصله رنگ پس زمنه
+}\end{minipage}
+\hspace{1cm}
+\begin{minipage}{.5\textwidth}{
+\hfill\rl{سلام، دنیا!}
+}\end{minipage}
+\end{latin}
+{\tikz[remember picture,overlay]\node[single arrow,fill=green,font=\ttfamily\bfseries,xshift=-3.5cm] at (current page.center){xelatex};}
+\end{plainslide}
+%
+\SecSlide{مقایسه}\label{Sec:Compare}
+%
+\begin{plainslide}[فارسی نویسی در لاتک]
+\begin{block}{تکِ‌پارسی}
+تکِ‌پارسی در سال \lr{۱۳۷۰} توسط شرکت داده‌کاوی
+\end{block}
+
+\begin{block}{فارسی‌تک}
+فارسی‌تک در سال \lr{۱۳۷۲} توسط تیم دکتر قدسی در دانشگاه صنعتی شریف
+\end{block}
+
+
+\begin{block}{زی‌پرشین \lr{(XePersian)}}
+زی‌پرشین یک بسته مخصوص تک است که با همت آقای وفا خلیقی، ( از ایرانیان مقیم استرالیا، دکترای ریاضی) آماده شده و با استفاده از آن می‌توانید از بسیاری از قابلیت‌های سیستم تک برای حروف‌چینی مستندات فارسی خود استفاده کنید. 
+\end{block}
+
+\end{plainslide}
+%
+%
+\subsection{مقایسه با فارسی‌تک}
+\begin{plainslide}[ضمن ارج نهادن به کار ارزشمند فارسی‌تک]
+\begin{itemize}%[<+-| alert@+>] \item<+>\alert
+\item{کیفیت خروجی پایین}
+\item{ویرایشگر با امکانات کم}
+\item{عدم امکان جستجو در خروجی}
+\item{توانایی پایین در درج انواع تصاویر}
+\item{موجود نبودن در توزیع‌های معروف تِک}
+\item{عدم امکان برگشت به سورس از خروجی}
+\item{مشکل استفاده در سیستم‌عامل‌های مختلف}
+\item{عدم امکان استفاده از ویرایشگرهای مختلف}
+\item{قدیمی بودن و نداشتن بروزرسانی و پشتیبانی}
+\item{عدم امکان استفاده از فونت‌های روی سیستم.}
+\item{عدم امکان کپی و انتقال متن بین سایر نرم‌افزارهای معمول}
+
+\end{itemize}
+\end{plainslide}
+%
+\subsection{مقایسه با میکروسافت ورد }
+\begin{plainslide}%[مقایسه با میکروسافت ورد]
+\begin{enumerate}
+  \item\alert{به هم ریختن صفحه‌آرایی در انتقال.}
+    \begin{itemize}
+    \item  بین نسخه‌های مختلف
+    \item بین دستگاههای مختلف
+    \end{itemize}
+  \item\alert{فرمولها}
+    \begin{itemize}
+    \item لزوم استفاده از ماوس
+    \item عدم امکان تعویض متن
+    \item ظاهر نازیبا
+    \end{itemize}
+\end{enumerate}
+\end{plainslide}
+% ادامه
+\begin{plainslide}[مقایسه با میکروسافت ورد]
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item\alert{تصاویر}
+    \begin{itemize}
+    \item محل قرار گرفتن تصاویر
+    \item عدم توانایی در قرار دادن آدرس تصویر
+    \item عدم توانایی در تغییر سراسری مقیاس و اندازه تصاویر
+    \end{itemize}
+\item\alert{سایرموارد}
+    \begin{itemize}
+    \item مراجع
+    \item الگوریتم
+    \item ارجاعات
+    \end{itemize}
+\item\alert{\Large در ورد کدنویسی ندارید!}
+\end{enumerate}
+\end{plainslide}
+%
+\begin{plainslide}[مقایسه با میکروسافت ورد]
+%\begin{center}
+\begin{block}{تفاوت ورد با لاتک}
+\Large
+به بیان دیگر،\\
+تفاوت ورد با لاتک:\\
+تفاوت دوربین اتوماتیک با دوربین حرفه‌ایست
+\end{block}
+\begin{center}
+\includegraphics[width=.9\textwidth]{resources/professional-camera_vs_consumer-camera.png}
+\end{center}
+\end{plainslide}
+%
+\SecSlide{زی‌پرشین}\label{Sec:Xepersian}
+\begin{plainslide}[زی‌پرشین]
+\centering
+\includegraphics[width=0.5\textwidth]{resources/xepersian-logo}\\
+\end{plainslide}
+
+\begin{plainslide}[نمونه سند زی‌پرشین]
+\begin{block}{مثال}
+\begin{latin}
+$\backslash$documentclass\{article\}\\
+%\textcolor{darkred}
+{$\backslash$usepackage\{xepersian\}}\\
+%\textcolor{darkred}{$\backslash$settextfont\{Homa\}}\\
+$\backslash$begin\{document\}\\
+\hfill\parsitext{سلام. این یک مثال با زی‌پرشین است.}\\
+$\backslash$end\{document\}\\
+\end{latin}
+\end{block}
+\end{plainslide}
+
+
+\subsection{بسته‌های پشتیبانی شده}
+\begin{plainslide}%[بسته‌ها و طبقه‌های پشتیبانی شده]
+\begin{block}{بسته‌های پشتیبانی شده}
+\begin{latin}
+%{\hfill\rl{گونه‌های مختلف تِک}}
+\begin{itemize}
+\item algorithm, algorithmic
+\item amsart, amsbook
+\item article, book, report
+\item enumerate,footnote
+\item hyperref
+\item listings
+\item multicol
+\item ...
+\end{itemize}
+\end{latin}
+\end{block}
+\end{plainslide}
+
+\subsection{دستورات لاتک}
+\begin{plainslide}
+\begin{block}{توجه}
+اگر از بسته‌ی زی‌پرشین استفاده کنید  در آن صورت، دستورهای پایه‌ای لاتک در اسناد پارسی‌تان قابل استفاده خواهند بود.
+\end{block}
+\distance{1}
+راهنماهای لاتک:
+\begin{latin}
+\href{resources/lshort-english.pdf}{The Not So Short Introduction to {\LaTeXe}}%\junicode
+\end{latin}
+\href{resources/lshort-persian.pdf}{مقدمه‌ای نه چندان کوتاه بر \lr{\LaTeXe}  (ترجمه‌ی دکتر مهدی امیدعلی)}
+
+%موارد فوق راهنمای زی‌پرشین نیستند!\\
+%
+راهنمای زی‌پرشین:
+\begin{latin}
+\href{resources/xepersian.pdf}{The \XePersian{} Package (Vafa Khalighi)}
+\end{latin}
+
+\end{plainslide}
+
+\SecSlide{مثال‌ها}\label{Sec:Samples}
+\begin{plainslide}[مثال‌ها]
+\begin{alertblock}{قابل توجه}
+\Large
+اسلایدی را که ملاحظه می‌کنید خود با استفاده از لاتک و کلاس \lr{bidipresentation} که بخشی از توانایی‌های بسته‌های \lr{bidi} و \lr{xepersian} می‌باشد ساخته شده است.\\
+فایل \lr{tex} و  \lr{pdf} این مثال در داخل دی‌وی‌دی در دسترس است.
+\end{alertblock}
+\end{plainslide}
+\subsection{نمونه مثال‌های گرافیک}
+\begin{plainslide}
+\begin{center}
+\includegraphics[height=.7\paperheight]{resources/boxes-with-text-and-math-crop.pdf}
+\end{center}
+\end{plainslide}
+\begin{plainslide}[نمونه مثال‌های گرافیک]
+\begin{center}
+\includegraphics[width=.95\textwidth]{resources/computer-science-mindmap-fa-crop.pdf}
+\end{center}
+\end{plainslide}
+\begin{plainslide}[نمونه مثال‌های گرافیک]
+\begin{center}
+\includegraphics[height=.75\paperheight]{resources/dodecahedron-crop.pdf}
+\end{center}
+\end{plainslide}
+\begin{plainslide}[نمونه مثال‌های گرافیک]
+\begin{center}
+\includegraphics[height=.7\paperheight]{resources/parabola-plot-crop.pdf}
+\end{center}
+\end{plainslide}
+\begin{plainslide}[نمونه مثال‌های گرافیک]
+\begin{center}
+\includegraphics[height=.7\paperheight]{resources/pgfplotsexample-crop.pdf}
+\end{center}
+\end{plainslide}
+\begin{plainslide}[نمونه مثال‌های گرافیک]
+\begin{center}
+\includegraphics[height=.7\paperheight]{resources/pgfplotsexample-crop2.pdf}
+\end{center}
+%\pgfimage<1>[height=.8\paperheight]{resources/}
+\end{plainslide}
+
+\subsection[مثال جدول و نمودار]{نمونه مثالهای جدول و نمودار} 
+\begin{plainslide}%[نمونه مثالهای جدول و نمودار]
+\pgfimage[width=.8\paperwidth]{resources/graph1.pdf}
+\end{plainslide}
+
+
+\SecSlide{دستورها}{دستورهای خاص زی‌پرشین}\label{Sec:Xepersiancommands}
+\subsection{دستورهای تعریف قلم}
+\begin{plainslide}%[دستورهای تعریف قلم  در زی‌پرشین]
+\begin{block}{\hfill \parsitext{دستورهای تعیین قلم }}
+\begin{latin}
+\begin{enumerate}%[<+-| alert@+>]
+    \item \alert{$\backslash$settextfont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم فارسی متن:}}}\\ 
+	{\textcolor{blue}{$\backslash$seftextfont[Scale=1]\{Lotus\}}\hfill\textcolor{black}{\parsitext{مثال:}}}
+    \item\alert{$\backslash$setlatintextfont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم لاتین متن:}}}\\  
+    \item\alert{$\backslash$setdigitfont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم ارقام در فرمولها:}}}\\
+\end{enumerate}
+\end{latin}
+\end{block}
+\end{plainslide}
+%\pause 
+\begin{plainslide}[دستورهای تعریف قلم  در زی‌پرشین]
+\begin{block}{\hfill\parsitext{دستورهای تعریف قلم }}
+\begin{latin}
+\begin{itemize}%[<+-| alert@+>]
+    \item \alert{$\backslash$defpersianfont$\backslash$CS$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعریف قلم فارسی:}}}\\
+{\textcolor{blue}{$\backslash$defpersianfont$\backslash$Nastaliq[Scale=1]\{IranNastaliq\}}\hfill\textcolor{black}{\parsitext{مثال:}}}
+    \item \alert{$\backslash$deflatinfont$\backslash$CS$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعریف قلم لاتین:}}}\\
+%	\only<.>{\textcolor{black}{\small{Borman04thesis}}}
+\end{itemize}
+\end{latin}
+\end{block}
+
+\end{plainslide}
+
+\begin{plainslide}[سایر دستورهای تعریف قلم  در زی‌پرشین]
+\begin{itemize}
+\begin{latin}
+%    \item {$\backslash$setmathsfdigitfont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم ریاضی:} (SF) }}\\ 
+    \item {$\backslash$setmathttdigitfont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم ریاضی:}}}\\  
+    \item {$\backslash$setpersianmonofont$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعیین قلم فارسی:}}}\\
+    \item {$\backslash$setiranicfont$\backslash$CS$\left[\rm Options\right]$\{\parsitext{نام قلم}\}\hfill\textcolor{black}{\parsitext{تعریف قلم ایرانیک فارسی:}}}\\
+	{%
+%\hfill
+\begin{flushright}
+\textcolor{black}{\parsitext{مثال:}}
+\end{flushright}
+\textcolor{blue}{$\backslash$setiranicfont[Scale=1]\{XB Zar Oblique\}}
+\begin{flushright}
+\hfill\textcolor{black}{\parsitext{نحوه استفاده:}}
+\end{flushright}
+\textcolor{blue}{\{$\backslash$iranicfamily \parsitext{متن} \}}
+\begin{flushright}
+\hfill\textcolor{black}{\parsitext{یا:}}
+\end{flushright}
+\textcolor{blue}{$\backslash$textiranic\{\parsitext{متن}\}}
+}
+\end{latin}
+\end{itemize}
+\end{plainslide}
+
+\subsection[تایپ لاتین]{دستورهای و محیطهای تایپ لاتین}
+\begin{plainslide}[ درج متن لاتین در بین متن فارسی و بالعکس]
+\begin{block}{متن‌های کوچک}
+\begin{latin}
+%\begin{itemize}
+    %\item \alert<.>
+{$\backslash$lr\{Latin Text\}\hfill\textcolor{black}{\parsitext{درج متن لاتین در بین متن فارسی:}}}\\
+%    \item \alert<.>
+{$\backslash$rl\{\parsitext{متن فارسی}\}\hfill\textcolor{black}{\parsitext{درج متن فارسی در بین متن لاتین:}}}\\
+%\end{itemize}
+\end{latin}
+\end{block}
+%\end{latin}
+%\pause
+\begin{block}{متن‌های طولانی}
+\begin{minipage}{.45\textwidth}
+%\block
+\textcolor{black}{درج متن لاتین در بین متن فارسی:}\\
+{
+\begin{latin}
+$\backslash$begin\{latin\}\\
+$\qquad${\it Latin Text}\\
+$\backslash$end\{latin\}
+\end{latin}
+}
+\end{minipage}
+\hspace{.05\textwidth}
+\begin{minipage}{.45\textwidth}
+\textcolor{black}{درج متن فارسی در بین متن لاتین:}\\
+{
+\begin{latin}
+$\backslash$begin\{persian\}\\ $\qquad${\it\parsitext{متن فارسی}}\\$\backslash$end\{persian\}
+\end{latin}}
+\end{minipage}
+\end{block}
+\end{plainslide}
+
+\subsection{دستورات متفرقه}
+\begin{plainslide}
+\begin{block}{زیرنویس}
+\textcolor{black}{زیرنویس فارسی:}\footnote{این یک زیرنویس فارسی است.}
+\begin{latin}
+$\backslash$footnote\{\parsitext{\iranicfamily زیر‌نویس فارسی}\}\\
+\end{latin}
+%\pause
+\textcolor{black}{زیرنویس لاتین:}\LTRfootnote{This is a Latin footnote.}
+\begin{latin}
+$\backslash$LTRfootnote\{ {\it Latin Footnote} \}\\
+\end{latin}
+\end{block}
+%\pause
+\end{plainslide}
+%
+\begin{plainslide}[دستورات متفرقه]
+\begin{block}{تاریخ}
+\textcolor{black}{تاریخ شمسی:}
+\begin{latin}
+$\backslash$today\\
+\rl{\today}
+\end{latin}
+
+\textcolor{black}{تاریخ میلادی:}
+\begin{latin}
+$\backslash$latintoday\\
+\latintoday
+\end{latin}
+\end{block}
+
+\end{plainslide}
+
+%\subsection{قلم ارقام در محیطهای ریاضی}
+
+\subsection{شمارنده‌ها}
+
+\begin{plainslide}%[شمارنده‌ها]
+%\renewcommand{\theenumi}{\harfi{enumi}}
+%\begin{enumerate}
+%\item مورد
+%\item  دوم
+%\end{enumerate}
+%
+زی‌پرشین  شمارنده‌های جدیدی برای محیطهای قابل شماره‌گذاری همچون \lr{enumerate} یا شماره صفحه ارائه کرده است:
+\begin{latin}
+\begin{itemize}
+\item \lr{harfi}: \parsitext{آ، ب، پ و ...}
+\item \lr{adadi}: \parsitext{ یک، دو، سه و...}
+\item \lr{tartibi}: \parsitext{ اول، دوم، سوم و...}
+\end{itemize}
+\end{latin}
+
+%\pause
+\end{plainslide}
+\begin{plainslide}[شمارنده‌ها]
+%%\begin{columns}
+%%\begin{column}
+% \wblock{name}{position}{width}{title}{content}
+%\begin{minipage}{.25\textwidth}
+\begin{block}{پیش فرض}
+\begin{enumerate}%[ا]
+\item ریاضی
+\item کامپیوتر
+\end{enumerate}
+\end{block}
+%\end{minipage}
+%\hspace{.05\textwidth}
+%\begin{minipage}{.45\textwidth}
+%%%\pause
+\begin{block}{حرفی}
+\begin{enumerate}[ا]
+\item ریاضی
+\item کامپیوتر
+\end{enumerate}
+\end{block}
+%\end{minipage}
+%\distance{3}\\
+%\newpage
+%\begin{minipage}{.45\textwidth}
+\begin{block}{عددی}
+\begin{enumerate}[ی]
+\item ریاضی
+\item کامپیوتر
+\end{enumerate}
+\end{block}
+%\end{minipage}
+%\hspace{.05\textwidth}
+%\begin{minipage}{.45\textwidth}
+%\begin{block}{ترتیبی}
+%\begin{enumerate}[ت]
+%\item ریاضی
+%\item کامپیوتر
+%\end{enumerate}
+%\end{block}
+%\end{minipage}
+%%\end{column}
+%%\end{columns}
+
+\end{plainslide}
+
+
+%\subsection{گزینه‌ها}
+%Kashida,quickindex,localise
+
+\subsection{نکات}
+% آخرین بسته، زیتک، بی دی
+\begin{plainslide}
+\begin{alertblock}{توجه}
+زی‌پرشین باید آخرین بسته‌ای باشد که فراخوانی می‌شود!
+\end{alertblock}
+%\pause 
+\distance{2}
+\begin{block}{زی‌پرشین و \lr{BiDi}}
+زی‌پرشین به صورت خودکار بسته‌ی \lr{bidi} را فراخوانی می‌کند.\\
+%\pause
+ \lr{SepMark, LTRitems, LTRbibiems,...}\\
+پشتیبانی از حدود \lr{۷۰} بسته، محیطی برای تایپ شعر، رزومه و ...
+
+\end{block}
+
+
+\end{plainslide}
+%
+
+\SecSlide{سایر موارد}\label{Sec:Others}
+\subsection{مراجع}
+\begin{plainslide}[ارجاع به مراجع]
+زی‌پرشین از دستور \lr{cite} برای ارجاع به مراجع پشتیبانی می‌کند. \\
+%\pause
+برای ذکر شماره مرجع به صورت لاتین دستور \lr{Latincite} در زی‌پرشین معرفی شده است.
+
+%\pause
+استفاده از استیلهای معمول برای قالب‌دهی به مراجع فارسی و لاتین، با بسته‌ی \lr{Persian-bib}
+\end{plainslide}
+
+\begin{plainslide}[\lr{Persian-bib}]
+\begin{block}{استیلهای فعلی بسته‌ی \lr{Persian-bib}}
+\small
+\begin{description}
+\item [\lr{unsrt-fa.bst}] این سبک متناظر با \lr{unsrt.bst} می‌باشد. مراجع به ترتیب ارجاع در متن ظاهر می‌شوند.
+\item [\lr{plain-fa.bst}] این سبک متناظر با \lr{plain.bst} می‌باشد. مراجع بر اساس نام‌خانوادگی نویسندگان، به ترتیب صعودی مرتب می‌شوند.
+ همچنین ابتدا مراجع فارسی و سپس مراجع انگلیسی خواهند آمد.
+\item [\lr{acm-fa.bst}] این سبک متناظر با \lr{acm.bst} می‌باشد. مراجع مرتب می‌شوند.
+\item [\lr{ieeetr-fa.bst}] این سبک متناظر با \lr{ieeetr.bst} می‌باشد. مراجع مرتب نمی‌شوند.
+%\item [persia-unsorted.bst] این سبک  شبیه \lr{ieeetr-fa.bst} می‌باشد با این تفاوت که برخی نامها با حروف توپر نوشته شده‌اند.
+\item [\lr{plainnat-fa.bst}] این سبک متناظر با \lr{plainnat.bst} می‌باشد. نیاز به بستهٔ \lr{natbib} دارد. مراجع مرتب می‌شوند.
+\item [\lr{chicago-fa.bst}] این سبک متناظر با \lr{chicago.bst} می‌باشد. نیاز به بستهٔ \lr{natbib} دارد. مراجع مرتب می‌شوند.
+\item [\lr{asa-fa.bst}] این سبک متناظر با \lr{asa.bst} می‌باشد. نیاز به بستهٔ \lr{natbib} دارد. مراجع مرتب می‌شوند.
+\end{description}
+\end{block}
+
+\end{plainslide}
+
+\begin{plainslide}[\lr{Persian-bib}]
+\vspace{-4.5cm}
+\centering
+\pgfimage[height=1.2\paperheight]{resources/acm-fa-output.pdf}
+\end{plainslide}
+\begin{plainslide}[\lr{Persian-bib}]
+\vspace{-4.5cm}
+\centering
+\pgfimage[height=1.2\paperheight]{resources/asa-fa-output.pdf}
+\end{plainslide}
+
+\subsection{ویرایشگرها}
+\begin{plainslide}%[ویرایشگرها]
+زی‌پرشین مستقل از ویرایشگر است.
+%\pause
+\distance{1}
+\begin{block}{\hfill\parsitext{چند ویرایشگر متنی }}
+\begin{latin}
+\pgfimage[width=.8\textwidth]{resources/editors.pdf}
+\end{latin}
+\end{block}
+\end{plainslide}
+
+
+%\begin{plainslide}
+%\end{plainslide}
+
+%\subsection{نمایه‌سازی}
+%\subsection{سؤالات چندگزینه‌ای}
+
+
+\subsection{نصب}
+\begin{plainslide}%[نصب]
+{\small%
+بسته‌های زی‌پرشین، \lr{bidi}، \lr{persian-bib} جزیی از شبکه آرشیو جامع تِک (\lr{CTAN}) هستند.}
+\begin{center}
+{\Huge%
+کافیست تک‌لایو را نصب کرده و حروف‌چینی سندهای پارسی خود را شروع کنید!}
+\end{center}
+%\pause
+%\block{\textbf{ مجموعه پارسی‌لاتک} \lr{۱۳۹۰}}{
+%استفاده از یک نرم‌افزار درایو مجازی )مانند \lr{Virtual Clone Drive}( و اجرای \lr{Autorun}. \\
+%توضیحات بیشتر: راهنمای موجود در دی‌وی‌دی )فایل \lr{User\_Guide.pdf}(.
+%} % end of block
+\end{plainslide}
+
+%\SecSlide{نصب و استفاده}\label{Sec:Others}
+%\subsection{نصب}
+%\begin{plainslide}%[قدردانی]
+%\begin{center}
+%{
+% از \\
+%\Large
+% جناب آقای وفا خلیقی\\
+% .}
+%\end{center}
+%\end{plainslide}
+
+\subsection{قدردانی}
+\begin{plainslide}%[قدردانی]
+\begin{center}
+{
+ از \\
+\Large
+ جناب آقای وفا خلیقی\\
+\large
+  و همه افرادی که در توسعه و گسترش زی‌پرشین زحمت کشیدند،\\
+به ویژه: مصطفی واحدی، مهدی امیدعلی، وحید دامن‌افشان،  سیدرضی علوی‌زاده، هادی صفی‌اقدم، فرشاد ترابی، سیداحمد موسوی، ابوالفضل دیانت، امیرمسعود پورموسی و  همه دیگر دوستان گروه پارسی‌لاتک\\
+ تشکر می‌کنم
+% ،\\
+% قدردانی ویژه از آقای محمود امین طوسی بخاطر اسلایدهای قبلی که در اختیارم گذاشتند، اسلاید حاضر تقریبا برگردان اسلاید ساخته شده توسط ایشان به \lr{bidipresentation} است و همچنین از آقای هادی صفی‌اقدم که با وجود درگیری دی‌وی‌دی به روز شده را در اولین فرصت برایم فرستادند
+.}
+\end{center}
+\end{plainslide}

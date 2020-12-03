@@ -1,0 +1,102 @@
+\documentclass[14pt,oneside]{extreport}
+\usepackage[a4paper,right=3cm,top=2.5cm,left=2.5cm,bottom=2.5cm]{geometry}
+
+\include{use}
+%%%% Renewdefs and Envs.
+\graphicspath{{./Figures/}}
+\input{renewdefs.tex}
+
+
+%%%% HEADER
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\rhead{\leftmark}
+%\lhead{\rightmark}
+\fancyfoot{}
+\cfoot{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+
+\geometry{
+	a4paper,
+	total={170mm,257mm},
+	left=25mm,
+	right=25mm,
+	top=25mm,
+	bottom=25mm
+}
+
+
+
+\renewcommand{\labelitemi}{$\circ$}
+\renewcommand{\bibname}{مراجع}
+\newtheorem{den}{{\large\bf تعریف}}[section]
+\newtheorem{exa}{{\large\bf مثال}}[section]
+\newtheorem{lem}{{\large\bf لم}}[section]
+\newtheorem{pro}{{\large\bf گزاره}}[section]
+\newtheorem{cor}{{\large\bf نتیجه}}[section]
+\newtheorem{thm}{{\large\bf قضیه}}[section]
+\newtheorem{rem}{{\large\bf تذکر}}[section]
+\newtheorem{nnt}{{\large\bf توجه}}[section]
+
+\newcommand\symbolsname[2]{#1\dotfill\lr{#2}\\}
+
+\title{
+	حل مسئله‌‌ی کاهش‌ بُعد غیرخطی تفسیر‌پذیر\\
+	\vspace{0.5cm}
+	\large{گزارش پروژه‌ی درس تئوری یادگیری ماشین}
+}
+\author{
+	بهراد منیری
+	\and
+	محمّدرضا رحمانی
+}
+\date{
+	\normalsize{
+		دانشکده‌ی مهندسی برق\\
+		دانشگاه صنعتی شریف}
+}
+
+
+
+%%% FONTS and PERSIAN
+\usepackage[localise,extrafootnotefeatures]{xepersian}
+\settextfont[Scale=1]{HM FElmi}
+\setdigitfont[Scale=1]{HM FElmi}
+\DefaultMathsDigits
+
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\tr}{\mathrm{tr}}
+\newcommand{\LL}{\mathcal{L}}
+\newcommand{\bigCI}{\mathrel{\text{\scalebox{1.07}{$\perp\mkern-10mu\perp$}}}}
+
+\شروع{نوشتار}
+\pagenumbering{alph}
+
+%عنوان فارسی
+\input{title_FA}
+
+\tableofcontents  
+\renewcommand{\bibname}{منابع}
+\pagebreak
+\pagenumbering{arabic}
+
+\input{notations}
+\input{introduction}
+\input{definition}
+\input{ISM}
+\input{simulations}
+\input{future}
+
+
+\lhead{}
+%\begin{latin}
+\bibliography{reference, long}
+
+\bibliographystyle{ieeetr-fa}
+%\end{latin}
+
+%\input{title_EN}
+
+\پایان{نوشتار}

@@ -1,0 +1,23 @@
+\section{اشتراک دو کلاس}
+فرض کنید که 
+$\mathcal{H}_1, \ \mathcal{H}_2$
+دو کلاس از توابع  از 
+$\mathcal{X}$
+به 
+$\{0, \ 1\}$
+باشند.
+کلاس توابعِ
+$\mathcal{H}= \{h_1 h_2: h_1 \in \mathcal{H}_1, h_2 \in \mathcal{H}_2 \}$
+را در نظر بگیرید. نشان دهید که پیچیدگی راداماخر تجربی هر مجموعه از داده‌ها در کران‌های زیر صدق می‌کند:
+$$\mathcal{R}(\mathcal{H}(x_1^n)/n) \leq \mathcal{R}(\mathcal{H}_1(x_1^n)/n) + \mathcal{R}(\mathcal{H}_2(x_1^n)/n)$$ 
+
+\textbf{راهنمایی:}
+ نامساوی 
+\lr{Talagrand} 
+برای هر کلاس توابع $\mathcal{H}$
+و هر تابع $\Phi$ 
+که 
+\lr{L-Lipschitz}
+است بیان می‌کند که:
+
+$$\mathbb{E}_\epsilon \Big[\sup_{h \in \mathcal{H}}|\frac{1}{n} \sum_{i=1}^n \epsilon_i \ \Phi  \big(h(x_i)\big)|\Big] \leq \text{\lr{L}} \mathbb{E}_\epsilon \Big[\sup_{h \in \mathcal{H}}|\frac{1}{n} \sum_{i=1}^n \epsilon_i h(x_i)| \Big]$$
