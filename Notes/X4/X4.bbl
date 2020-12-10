@@ -1,0 +1,15 @@
+\begin{thebibliography}{Ver18}
+
+\bibitem[Kam]{gautam}
+Gautam Kamath.
+\newblock Bounds on the expectation of the maximum of samples from a gaussian.
+\newblock \url{http://www.gautamkamath.com/writings/gaussian_max.pdf}.
+
+\bibitem[Ver18]{vershynin}
+Roman Vershynin.
+\newblock {\em High-Dimensional Probability: An Introduction with Applications
+  in Data Science}.
+\newblock Cambridge Series in Statistical and Probabilistic Mathematics.
+  Cambridge University Press, 2018.
+
+\end{thebibliography}

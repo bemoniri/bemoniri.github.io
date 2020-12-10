@@ -1,0 +1,168 @@
+\documentclass[]{article}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=20mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+
+
+
+
+%\renewcommand{\baselinestretch}{1.15}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bv}{\mathbf{v}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cH}{\mathcal{H}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\h}{\mathbf{h}}
+\newcommand{\KL}{\mathrm{D}_{KL}}
+\newcommand{\thetab}{\mathbf{\theta}}
+
+
+\title{Lower Bounds for Stochastic Bandits}
+\author{Behrad Moniri\\{\small Department of Electrical Engineering}\\{\small Sharif University of Technology}}
+\date{}
+
+\usepackage{sectsty} \sectionfont{\fontsize{15}{15}\selectfont}
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+In this short report, I will review lower bounds on stochastic multi-armed bandits. Minimax, instance dependent, and high probability lower bounds are reviewed.
+\end{abstract}
+
+Bretagnolle-Huber inequality is the backbone of most lower bounds for stochastic bandits. First, we will state and prove this inequality. This inequality connects KL divergence and the hardness of hypothesis testing.
+
+
+\begin{theorem}
+\textbf{(Bretagnolle-Huber)} Let $P$ and $Q$ be probability measures on measurable space $(\Omega, \mathcal{F})$ and let $A \in \mathcal{F}$ be an event. We have
+\begin{equation}
+P(A) + Q(A^c) \geq \frac{1}{2} \exp(-\KL(P,Q)).
+\end{equation}
+\end{theorem}
+
+\begin{proof}
+The result is trivial if $\KL(P, Q) = \infty$, so assume that $\KL(P, Q) < \infty$ which implies $P\ll Q$. Let $\nu = P + Q$, then $P$ and $Q$ are continous with respect to $\nu$ and based on Radon-Nikodym theorem, the derivatives $p = \frac{dP}{d\nu}$ and  $q = \frac{dQ}{d\nu}$ exist. Based on chain rule, the KL divergence of $P$ and $Q$ equals $\KL(P, Q) = \int p \log(\frac{p}{q}) d\nu$. We can write
+\begin{align}
+P(A) + Q(A^c) &= \int_A p \; d\nu + \int_{A^c} q \; d\nu\\
+&\geq \int_A \min(p, q) \; d\nu + \int_{A^c} \min(p, q) \; d\nu\\
+&= \int \min(p, q) \; d\nu.\\
+&\geq \frac{1}{2} \Big[2 - \int \min(p, q) \; d\nu\Big] \int \min(p, q) \; d\nu\\
+&= \frac{1}{2} \int \max(p, q) \; d\nu \int \min(p, q) \; d\nu\\
+&\geq  \frac{1}{2} \Big(\int \sqrt{\max(p, q)\min(p, q)} \; d\nu\Big)^2\\
+&= \frac{1}{2}\int \sqrt{pq} \; d\nu = \frac{1}{2}\exp\Big(2\log \int \sqrt{pq} \; d\nu\Big)\\
+&=\frac{1}{2}\exp\Big(2\log\int\big(p\sqrt{q/p}\big) \; d\nu\Big) \geq \frac{1}{2}\exp\Big(2\log \int p \sqrt{\frac{q}{p}} \; d\nu\Big)\\
+&= \frac{1}{2}\exp(-\KL(P, Q)).
+\end{align}
+In the last inequality, we have used Jensen's inequality.
+\end{proof}
+
+The application of Bretagnolle-Huber is in bounding the error of hypothesis testing. Assume that given $n$ i.i.d. samples, we intend to test whether these samples come from the distribution $P$ or $Q$. Let $A$ be the event in which our favorite hypothesis testing algorithm chooses $Q$, i.e. rejects the null hypothesis. We can write
+\begin{align}
+	Err1 + Err_2 = P(A) + Q(A^c) \geq \frac{1}{2}\exp(-\KL(P, Q)),
+\end{align}
+in which $Err_1$ is the probability of error under $P$ and $Err_2$ is the probability of error under $Q$.
+
+
+\newpage
+
+I graduated from Iran's most prestigious undergraduate program in Engineering and Mathematics with the highest distinctions and have developed a profound interest in the theory of machine learning through various projects and courses in learning theory, high dimensional probability, information theory, machine learning, signal processing, control and systems theory, and optimization.
+
+
+In this statement, I will present three problems in machine learning theory,  employing kernel methods:  a nonlinear version of the online bandit optimization problem,  a variant of the interpretable kernel dimension reduction, and distances between probability distributions and their applications in generative models. Finally, I will elaborate on my reasons for applying to the Gatsby Computational Neuroscience Unit.
+
+
+\section{Adversarial Kernel Bandit Optimization}
+Online learning in the bandit setting has a lot of application for automated sequential decision-making problems, such as online pricing \cite{onlinepricing}, online ranking \cite{onlineranking}, and bandit principal component analysis \cite{onlinepca}. Recently, I have been focused on the problem of online learning and bandit algorithms. These problems have been studied rather extensively for linear (or convex) loss functions. However, not much is known about the regret of these algorithms in more general settings. 
+
+Kernel methods have been very successful in extending algorithms such as SVMs to define nonlinear decision boundaries \cite{mohri}. Recently, these methods are becoming more and more popular in the online learning community \cite{JMLR:v17:14-148, Pacchiano2019}. Kernels can be employed to propose new kernelized algorithms that can go beyond the linear (or convex) loss setting. An example of such problems is online bandit optimization with nonlinear (and non-convex) cost functions.
+
+
+Suppose that $k(., .): \R^d \to \R$ is a positive semi-definite kernel and has an associated separable reproducing kernel Hilbert space (RKHS) $\cH$ with inner product $\langle ., .\rangle_\cH$. Let $\Phi: \R^d \to \cH$ denote the feature map such that for each $\mathbf{x}, \mathbf{y} \in \R^d$, we have
+$K(\mathbf{x}, \mathbf{y}) = \langle \Phi(\mathbf{x}), \Phi(\mathbf{y}) \rangle_\cH $.
+
+
+The problem of Adversarial Kernel Bandit Optimization can be described as the following sequential game: at each time step $t \in \{1, \dots, T\}$, the learner chooses an action $\ba_t \in \cA \subset \R^d$. The adversary, then plays a vector $\bw_t \in \cW \subset \cH$ with the knowledge of $\ba_1, \ba_2, \dots, \ba_{t-1}$. We assume that the adversary is not aware of the outcome of randomness in choosing $\ba_t$. The learner, then suffers loss $\langle \Phi(\ba_t), \bw\rangle_\cH$.  The success of the learner, is measured by the expected regret, which is defined as the expected difference of the cumulative loss suffered by the learner, and the cumulative loss of the best fixed policy $\mathbf{u}$ that the learner could have chose, had she known the sequence  $\{\bw_i\}_{1}^{T}$ in advance. Formally, 
+
+$$\mathrm{Regret}_T = \mathbb{E}\Big[\sum_{t = 1}^{T}\langle \Phi(\ba_t), \bw_t\rangle_\cH - \sum_{t = 1}^{T}\langle \Phi(\mathbf{u}), \bw_t\rangle_\cH\Big],$$
+in which $\mathbf{u} = \arg\min_{\s\in\cA} \Big[\sum_{t = 1}^{T}\langle \Phi(\s), \bw_t\rangle_\cH\Big]$ and the expectation is with respect to the randomness of the learning algorithm. Our goal is to design learning algorithms with sub-linear ($o(T)$) regret. The online linear optimization is an special case of the problem defined above with $\Phi(\ba) = \ba, \; \forall \ba \in \cA$. Also note that the loss function $\langle \Phi(\s), \bw_t\rangle_\cH$ is not necessarily convex.
+
+
+We can consider a bandit version of the above problem: suppose that the learner does not have full access to $\bw_t$ and can only observe $\langle \Phi(\ba_t), \bw_t\rangle_\cH$. The learner then needs an unbiased estimate of $\bw_t$ in order to be able to use the full-feedback online optimization algorithms. An example of such estimation methods, is the ``one-shot gradient estimate", discussed in section 4.3.1 of \cite{shalev} for convex losses. Given $c>0$, let $f_t(\ba) = \langle \Phi(\ba), \bw_t\rangle_\cH$ and 
+$\widehat f_t(\ba) = \mathbb{E}_{\boldsymbol{\delta}}\big[ f_t(\ba + c\boldsymbol{\delta})\big] =  \mathbb{E}_{\boldsymbol{\delta}}\big[\langle \Phi(\ba + c\boldsymbol{\delta}), \bw_t\rangle_\cH\big] $
+be a smooth version of $f_t$, in which $\boldsymbol{\delta}$ comes from a uniform distribution on the unit ball in $\mathbb{R}^d$. One can show that $\widehat{f}$ is differentiable with gradient
+$\nabla \widehat f_t (\ba) = \mathbb{E}_{\boldsymbol{\delta}}\big[\frac{d}{c}f_t(\ba+c\boldsymbol{\delta})\boldsymbol{\delta}\big]$. With this estimate in hand, one can use online gradient descent  using $\frac{d}{c}f_t(\ba+c\boldsymbol{\delta})\boldsymbol{\delta}$ as an unbiased estimate of $\nabla \widehat f_t (\ba)$. However, several problem remain open: 
+
+\begin{itemize}
+\item How does the regret with respect to the sequence $\widehat f_t$ relate to the regret with respect to $f_t$ in the kernel based loss setting? The answer clearly depends on the properties of the kernel $k$. 
+\item Is the gradient estimate good enough? Is it possible to propose a more effective method of estimating the gradient? 
+\item Does the algorithm enjoy a sub-linear regret bound? How does this regret bound depend on the kernel $k$? How does the regret bound compared to the regret of the algorithm presented in \cite{Pacchiano2019}?
+
+\item Online Mirror Descent algorithms have parameters that need to be tuned according to the geometry of $\cA$ and $\cH$. This makes them ineffective in scenarios in which limited information is available for these quantities. Are there any parameter-free algorithms that can achieve optimal regret bounds without having to tune the learning rates? This problem has been studied extensively in the linear, and convex setting \cite{parameter2016}. However, it still remains open, despite its substantial practical importance.
+
+
+\end{itemize}
+
+I believe that there any many directions to be explored in the field on online learning with kernels, and I think my background in theoretical machine learning, kernel methods and online learning puts me in a unique position to be able to explore these problems in detail. 
+\section{Interpretable Kernel Dimension Reduction}
+
+I worked on Interpretable Kernel Dimension Reduction as my final project in the Theory of Machine Learning course at Sharif. My main focus was on the IKDR algorithm presented in \cite{wu2019solving}. I believe that a lot can be done based on the idea presented in this paper. For example, we can consider a ``transfer learning" version of the same problem:  given samples of $(X_1, Y_1)\sim \mathbb{P}_1$, can we propose a kernel dimension reduction algorithm for two other random variables $X_2, Y_2\sim \mathbb{P}_2$? Formally, It might be interesting to consider the problem
+\begin{equation*}
+\max_W \; \mathrm{HSIC}(X_2W, Y_2|X_1, Y_1) \;\; \mathrm{s.t.} \;\; W^\top W = I,
+\end{equation*}
+instead of the optimization problem $\max_W\; \mathrm{HSIC}(XW, Y), \; \mathrm{s.t.} \; W^\top W = I$ which is studied in \cite{wu2019solving}.
+
+
+
+\section{Distances Between Probability Distributions}
+
+As a student of Electrical Engineering, I was first introduced to distances between probability distributions in information theory. I went on to explore Integral Probability metrics and $f$-divergences in more detail. In particular, currently, I am very interested in Maximum Mean Discrepancy and its applications in Causal Inference, Two-Sample Tests, and Generative Adversarial Networks. There are several problems in this area that I find quite fascinating:
+
+Learning deep kernels for two sample tests has receive much attention lately. It is known that the power of MMD in two-sample tests is limited when we restrict ourselves to simple kernels. To increase the power of tests, deep kernel model $k(\bx, \textbf{y}) = [(1-\epsilon)k(\phi_\bw(\bx), \phi_\bw(\mathbf{y}) + \epsilon]q(x, y)$ is proposed, in which $k(.,.)$ is a Radial Basis Function and $\phi_\bw$ is a neural network with parameters $\bw$ \cite{liu2020learning}.  The parameters $\bw$ are set to maximize the test power. However, the choice of kernel, seems to be ad-hoc and there is a lot more to be explored here. 
+
+
+The theory of generative adversarial networks (GANs) is another topic of my interest. I am very interested in the study of the performance of GANs, when the critic uses different distances between probability measures. In particular, I am interested in exploring new probability measures and/or regularization techniques that might be able to prevent specific issues in GANs, such as mode collapse. 
+
+The expected Wasserstein distance between the empirical measure $\hat{\mathbb{P}}$ of $n$ i.i.d. samples $X_1, X_2, \dots, X_n$ with distribution $ \mathbb{P}$ can be bounded using Dudley Integrals and Covering  arguments as 
+$\mathbb{E}[W_1(\hat{\mathbb{P}}, \mathbb{P})] \leq Cn^{-1/3}$, see \cite{van2014probability}. Deriving similar results for other distances on probability distribution, e.g. Maximum Mean Discrepancy, even for a restricted class of distributions would be of huge practical importance. To this end, sharp bounds on the covering number of RKHS ball should be proposed.
+
+
+\section{Gatsby Unit}
+
+I am applying to the Gatsby unit Ph.D. Program as I believe that the program offers a unique approach to research in theoretical machine learning and the mathematics of data science. I have considered several labs and found out that the research carried out by  Prof. Gretton and Prof. Orbanz is very close to my research interests.
+
+Given the caliber of the research carried out at the Gatsby Unit, I am aware that the admission is highly competitive. However, I believe that my serious intention for research, strong academic background in various areas in applied probability, optimization, and machine learning will be beneficial for my graduate studies and that my skills and interests are well aligned with the type of research carried out in Gatsby. 
+
+\bibliography{bib}
+\bibliographystyle{ieeetr}
+
+%$l_t:\Omega \to [0,1]$. The value $l_t(\bx_t)$ is the loss of the learner at time $t$. The goal of the learner is to minimize "regret", which is defined as the difference between the cumulative loss of the learner and the cumulative loss of the best fixed policy $\uu\in\Omega$. Formally, the regret at time $T$ is defined as
+
+%$$R_T = \sum_{t = 1}^{T}l_t(\bx_t) - \min_{\uu\in\Omega}\sum_{t = 1}^{T}l_t(\uu). $$
+
+
+%The sub-gradient descent algorithm can 
+
+%In the bandit version of this problem, the learner does not have full information of the function $l_t$ played by the adversary, e.g. the learner has only observed the value of the function $l_t$ at point $\bx_t$. 
+\end{document}
