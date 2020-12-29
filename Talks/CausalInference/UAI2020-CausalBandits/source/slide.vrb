@@ -1,0 +1,6 @@
+\frametitle{Time Series : TiMINo}
+\begin{figure}
+	\includegraphics[scale=0.2]{timinoalg.png}
+\end{figure}
+TiMINo causality has to be provided with a fitting method.
+e.g. VAR fitting,  generalized additive models (gam) and  GP regression.

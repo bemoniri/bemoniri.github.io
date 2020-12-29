@@ -1,0 +1,489 @@
+
+
+\documentclass{beamer}
+\usetheme{CambridgeUS}           % Use metropolis theme
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cF}{\mathcal{F}}
+
+
+\title[Non-Parametric Least Squares]{Non-Parametric Least Squares} 
+\subtitle{Based on Chapter 13 of \textit{High Dimensional Statistics}\\ by Martin Wainwright}
+\author[Behrad Moniri (EE @ Sharif)]{Behrad Moniri}
+\institute[]{
+	Department of Electrical Engineering\\
+	Sharif University of Technology\\
+	\vspace{2cm}
+	
+	Statistics Reading Group\\ Tehran Institute for Advanced Studies (TeIAS)
+}
+\date{}
+\newtheorem{prop}{Proposition}
+
+
+
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}
+		\tableofcontents
+	\end{frame}
+	
+	\section{Introduction}
+	\frame{\sectionpage}
+		
+	\begin{frame}
+		\frametitle{Non-Parametric Least Squares}
+		\begin{itemize}
+			\item \textbf{MMSE Estimation}:
+			\begin{equation*}
+			\bar\cL_f = \E_{X, Y} [(Y - f\,(X))^2] \implies f\,^\star(x) = \E[Y\,|X=x\,]
+			\end{equation*}
+			
+			\item In practice  we are given a collection of samples $\{(\bx_i, y_i)\}_{i = 1}^n$, which can be used to compute an empirical analog of the MSE:			
+			\begin{equation*}
+				\widehat\cL_f = \frac{1}{n} \sum_{i = 1}^{n} \big(y_i - f\,(x_i\,)\big)^2
+			\end{equation*}
+			
+			\item \textbf{Non-Parametric Least Squares}: Minimizing this  criterion over some suitably controlled function class.			
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Different Measures of Quality}
+		\begin{itemize}
+			\item \textbf{Excess Risk}:
+			\begin{equation*}
+				||f-f\,^\star||_{L^2(\Prob)}= \E_{X\sim \Prob}\Big[\big(f\,(X\,) - f\,^\star(X\,)\big)^2\Big]
+			\end{equation*}
+			where $\Prob$ denotes the distribution over covariates.
+			
+			\item \textbf{This Chapter}: Let $\{\bx_i\}_{i = 1}^{n}$ be the set of fixed covariates and $\Prob_n$ be their Empirical measure. Define:
+			\begin{equation*}
+				||f-f\,^\star||_{L^2(\Prob_n)} = \Bigg[\frac{1}{n}\sum_{i = 1}^n \big(f\,(\bx_i) - f\,^\star(\bx_i)\big)^2\Bigg]^{1/2}.
+			\end{equation*}
+			In this talks, we will use this measure and denote it as $||f-f\,^\star||_{n}$.
+		\end{itemize}
+	\end{frame}
+	
+	
+	\begin{frame}
+		\frametitle{Fixed or Stochastic Covariates?}
+		\begin{block}{Note}
+			\begin{itemize}
+				\item We will view the samples $\{\bx_i\}_{i = 1}^n$
+				as being fixed, a set-up known as \textit{regression with a fixed design}.
+				\item Results from Chapter 14 to follow can be used to translate these bounds into equivalent results in the population $L_2(\Prob)$-norm.
+			\end{itemize} 
+		\end{block}		
+	\end{frame}
+
+	\begin{frame}
+	\frametitle{Estimation via Least Squares}	
+		Given a fixed collection $\{\bx_i\}_{i = 1}^n$, model the responses as 		
+		\begin{equation*}
+			y_i = f\,^\star (\bx_i) + \nu_i, \;\;\; \text{for } i = 1, 2, \dots, n.
+		\end{equation*}
+		where $\nu_i = \sigma w_i$ in which  $w_i \sim \mathcal{N}(0, 1)$. The least squares estimate is given by the function
+		\begin{equation*}
+		\widehat{f} \in \arg\min_{f\,\in\cF} \Bigg\{\frac{1}{n} \sum_{i = 1}^{n} \big(y_i - f\,(x_i\,)\big)^2\Bigg\}.
+		\end{equation*}
+		
+		\begin{itemize}
+			\item When $\nu_i \sim \mathcal{N}(0,\sigma^2)$, the LS estimate is equivalent to the constrained maximum likelihood.
+			
+			\item When $\cF$ is an RKHS, it can also be convenient to use regularized estimators of the form:			
+			\begin{equation*}
+			\widehat{f} \in \arg\min_{f\,\in\cF} \Bigg\{\frac{1}{n} \sum_{i = 1}^{n} \big(y_i - f\,(x_i\,)\big)^2 + \lambda_n ||f\,||_\cF^2\Bigg\}.
+			\end{equation*}
+		\end{itemize}
+	\end{frame}
+
+	\section{Examples}
+	\frame{\sectionpage}
+		\begin{frame}
+		\frametitle{Parametric: Linear Regression}
+		
+		\begin{itemize}
+			\item For a given vector $\boldsymbol{\theta} \in \mathbb{R}^d$, define  $f_\theta(\bx) = \langle \boldsymbol{\theta}, \bx \rangle$ and consider the function class
+			$\cF_C = \{f_\theta: \mathbb{R}^d \to \mathbb{R} | \theta \in C\}$
+			for a compact $C$.
+			\item The least squares estimate:
+			\begin{equation*}
+			\widehat\theta \in \arg\min_{\theta \in C} \Bigg\{\frac{1}{n} ||y - \mathbf{X}\theta||_2^2\Bigg\}
+			\end{equation*}
+			where $\mathbf{X} \in \mathbb{R}^{n\times d}$ is the design matrix.
+		\end{itemize}
+		
+		 
+		\begin{itemize}
+			\item The constrained form of Ridge Regression:
+			\begin{equation*}
+				C = \big\{\theta\in \mathbb{R}^d \;\big|\; ||\theta||_2^2\leq R\big\}.
+			\end{equation*}
+			
+			\item The constrained form of LASSO:
+			\begin{equation*}
+			C = \big\{\theta\in \mathbb{R}^d \;\big|\; ||\theta||_1\leq R\big\}.
+			\end{equation*}
+		\end{itemize}		
+		\end{frame}
+	
+		\begin{frame}
+
+		\frametitle{Non-Parametric: Cubic Smoothing Spline}
+		Consider the class of twice cont. differentiable functions $f: [0, 1] \to \mathbb{R}$ and for a given radius $R$, define:
+		\begin{equation*}
+		\cF(R) = \Bigg\{f: [0, 1] \rightarrow \mathbb{R} \;\Bigg|\; \int_{0}^{1} \Big(f\;''(x)\Big)^2 dx \leq R\Bigg\}.
+		\end{equation*}
+		The integral can be understood as a Hilbert norm bound in the second-order Sobolev space.
+		\end{frame}
+	
+	
+		\section{Critical Radius: Bounding the Prediction Error}
+		\frame{\sectionpage}
+		
+		\begin{frame}
+			\frametitle{Critical Radius: Bounding the Prediction Error}
+			\begin{itemize}
+
+			\item Intuitively, the difficulty of estimating the function $f\,^\star$ should depend on the complexity of the function class $\cF$ in which it lies.
+			\item  \textbf{a localized form of Gaussian complexity:} it measures the complexity of the function class $\cF$, locally in a neighborhood around the true regression function $f\,^\star$.
+			\end{itemize}		
+			\begin{block}{Local Gaussian Complexity}
+				Define $\cF\,^\star = \cF - \{f\,^\star\} = \{f - f\,^\star | f \in \cF\}$. For a given radius $\delta > 0$, \textit{the local Gaussian complexity} around $f\,^\star$ at scale $\delta$ is given by:
+				\begin{equation*}
+					\mathcal{G}_n(\delta; \cF\,^\star) = \E_w \Bigg[\sup_{g \in \cF^\star,\, ||g||_n \leq \delta} \Big|\frac{1}{n} \sum_{i = 1}^{n} w_i\, g\,(\bx_i)\Big|\Bigg]
+				\end{equation*}				
+			\end{block}		
+		\end{frame}
+	
+				\begin{frame}
+			\frametitle{Critical Inequality}
+			
+			\begin{block}{Critical Inequality}
+				A central object in our analysis is the set of positive scalars $\delta$ that satisfy the \textit{critical inequality}:
+				\begin{equation*}
+				\frac{\delta}{2\sigma} \geq \frac{\mathcal{G}_n(\delta; \cF^\star)}{\delta}
+				\end{equation*}			
+			\end{block}
+			
+			\begin{itemize}							
+				\item We refer to any $\delta_n > 0$ satisfying the critical inequality as being valid.
+				\item We use $\delta^\star_n$ to denote the smallest positive radius for which the critical inequality holds.
+			\end{itemize}
+		\end{frame}
+		
+		\begin{frame}
+			\frametitle{Some Intuition}
+			\begin{itemize}
+				\item Note that $\frac{1}{2n} \sum_{i = 1}^{n} \big(y_i - \widehat f\, (\bx_i)\big)^2 \leq \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - f\,^\star(\bx_i)\big)^2$.
+				\vspace{0.2cm}
+				
+				\item 					
+				After some computations: $\frac{1}{2} ||\widehat{f} - f\,^\star||_n^2 \leq \frac{\sigma}{n} \sum_{i = 1}^{n} w_i\,\big(\widehat{f}\,(\bx_i) - f\,^\star(\bx_i)\big)$.
+				\vspace{0.2cm}
+				
+				\item  Note that $\widehat{f} - f\,^\star \in \cF\,^\star$.  Reasoning hueristically, this observation suggests that 				
+				\begin{equation*}
+					\frac{\delta^2}{2} \leq \sigma \mathcal{G}_n(\delta; \mathcal{F}^\star) \text{ or equivalently } \frac{\delta}{2\sigma} \leq \frac{\mathcal{G}_n(\delta; \cF^\star)}{\delta}.
+				\end{equation*}	
+				
+				\item We will present a rigorous result later in this talk.
+			\end{itemize}			 
+		\end{frame}
+		
+			
+		
+		\begin{frame}
+			\frametitle{The Main Result}
+			
+				\begin{block}{Star-Shaped Classes}
+				a function class $\cF$ is star-shaped if for any $\alpha \in [0,1]$ we have
+				\begin{equation*}
+				f \in \cF \implies \alpha f \in \cF.
+				\end{equation*}
+			\end{block}
+			
+			\begin{block}{Theorem}
+				Suppose that the shifted function class $\cF^\star$ is star-shaped, and let $\delta_n$ be any solution to the critical inequality. Then for any $t \geq \delta_n$, the nonparametric least-squares estimate $\widehat{f_n}$ satisfies the bound
+				\begin{equation}
+					\Prob\big[||\widehat{f_n} - f\,^\star ||_n^2 \geq 16t\delta\big] \leq \exp\Big(\frac{-nt\delta}{2\sigma^2}\Big)
+				\end{equation}
+			\end{block}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Properties of Star-Shaped Classes}
+			\begin{itemize}
+				\item The star shaped condition on $\cF^\star$ is needed in various parts of the proof, including ensuring a valid radii $\delta_n$ exists.
+				
+				\item $\cF^\star$ Star shaped = $\cF$ is star shaped around $f\,^\star$.				
+				
+				\begin{block}{Property}
+					If $\cF$ is convex, it is star-shaped around any $f\,^\star$. 				
+				\end{block}
+				
+				\begin{block}{Proof}
+					Let $\widetilde{f} = f - f\,^\star \in \cF^\star$ be an arbitrary point in $\cF^\star$ with $f, f\,^\star \in \cF$.\\
+					For any $\alpha \in [0, 1]$, by convexity we have $g = \alpha f + (1-\alpha) f\,^\star \in \cF$.\\			
+					Hence $\alpha \widetilde{f} = \alpha(f - f\,^\star) = g - f\,^\star \in \cF^\star$, proving $\cF^\star$ is star-shaped.			
+				\end{block}
+				\begin{block}{Conversely}
+					Similarly if $\cF$ is not convex, there must exists a $f\,^\star$ such that $\cF$ is not star shaped around $f\,^\star$.	
+				\end{block}
+			\end{itemize}						
+		\end{frame}
+	
+			
+	
+	\begin{frame}
+		\frametitle{Properties of Star-Shaped Classes}
+		\begin{itemize}
+			\item If the star-shaped condition fails to hold, then the main Theorem can instead by applied with $\delta_n$ defined in terms of the star hull (we will see next session.)
+			\begin{equation*}
+				\mathrm{star}(\cF^\star) = \big\{\alpha(f-f\,^\star) | f \in \cF, \alpha \in [0, 1]\big\}.
+			\end{equation*}			
+			
+			\begin{block}{Existence of Critical Radius}
+				For any star shaped class $\mathcal{F}^\star$, the function $\delta \rightarrow \frac{\mathcal{G}_n(\delta, \cF^\star)}{\delta}$ is non-increasing on $(0, \infty)$. Consequently, for any $c>0$, the inequality 
+				\begin{equation*}
+			\frac{\mathcal{G}_n(\delta, \cF^\star)}{\delta} \leq c\delta
+			\end{equation*}
+				has a smallest positive solution.
+			\end{block}
+		\end{itemize}			
+	\end{frame}
+		\begin{frame}
+		\frametitle{Proof of the Existence of Critical Radius}
+			Given $0< \delta \leq t$, we should show that $\frac{\delta}{t}\mathcal{G}_n(t) \leq \mathcal{G}_n(\delta)$. 
+			
+			Given any $h \in \cF^\star$ with $||h||_n\leq t$, define
+			$\widetilde{h} = \frac{\delta}{t}h \in \cF^\star$ (by star-shaped assumption) and write
+			\begin{equation*}
+				\frac{1}{n}\Big\{\frac{\delta}{t} \sum_{i = 1}^{n} w_i h(\bx_i)\} = \frac{1}{n}\Big\{ \sum_{i = 1}^{n} w_i \widetilde{h}(\bx_i)\}.
+			\end{equation*}
+			By construction, $||\widetilde{h}||_n\leq \delta$. Consequently:
+			
+			\begin{itemize}
+				\item  The RHS is at most $\mathcal{G}_n(\delta)$ in expectation.
+				\item Taking supremum  over the set $\cF \cap \{||h||_n\leq t\}$ following by expectation, yields $\frac{\delta}{t}\mathcal{G}_n(t)$ on the left hand side. 
+			\end{itemize}
+		This concludes the proof. \qed
+			 
+		\end{frame}
+	
+		\begin{frame}
+			\begin{figure}
+				\includegraphics[scale=0.4]{example.png}
+			\end{figure}
+		\end{frame}
+	
+		\begin{frame}
+			\frametitle{Proof of the main theorem}
+			\begin{block}{Theorem}
+				Suppose that the shifted function class $\cF^\star$ is star-shaped, and let $\delta$ be any solution to the critical inequality. Then for any $t \geq \delta$, the nonparametric least-squares estimate $\widehat{f_n}$ satisfies the bound
+				\begin{equation*}
+				\Prob\big[||\widehat{f_n} - f\,^\star ||_n^2 \geq 16t\delta\big] \leq \exp\Big(\frac{-nt\delta}{2\sigma^2}\Big)
+				\end{equation*}
+			\end{block}
+		\end{frame}
+	
+	
+		\begin{frame}
+		\begin{itemize}
+		\item Denote $\widehat\Delta = \; \widehat{f} - f\,^\star \in \cF^\star$, we have $\frac{1}{2}||\widehat\Delta||_n^2 \leq \frac{\sigma}{n}\sum_{i = 1}^{n}w_i \widehat\Delta (\bx_i)$.  We need to control the stochastic component of the right-hand side.
+		
+		\begin{block}{Auxillary Lemma}
+		Let $\cF^\star$ be a star-shaped class and $\delta$ satisfy the critical inequality.  Define the bad event $A(u)$ as
+		\begin{small}
+		
+		\vspace{-0.3cm}
+		\begin{equation*}
+		A(u) = \Bigg\{\exists g \in \cF^\star, ||g||_n \geq u \;:\; \Big|\frac{\sigma}{n}\sum_{i = 1}^{n} w_i g(\bx_i)\Big|\geq 2u ||g||_n\Bigg\}.
+		\end{equation*}
+		\end{small}
+		\vspace{-0.3cm}
+		
+		For a given $u \geq \delta$, we have 
+		$\Prob[A(u)]\leq \exp\big(\frac{-nu^2}{2\sigma^2}\big)$.
+		\end{block}
+		 Now consider two cases:
+		\begin{itemize}
+			\item \textbf{Case 1:} $||\widehat\Delta||_n < \sqrt{t\delta}$ which implies $||\widehat\Delta||_n^2\leq t\delta$ trivially.
+			\item \textbf{Case 2:} $||\widehat\Delta||_n \geq \sqrt{t\delta}$.  We condition on $A^c(\sqrt{t\delta_n})$. 		Set $u = \sqrt{t\,\delta}$, so that we have $\Prob[A^c(\sqrt{t\,\delta})]\geq 1 - \exp(\frac{-nt\delta}{2\sigma^2})$. Hence:
+			\begin{equation*}
+				||\widehat\Delta||_n^2 \leq 2\Big|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i \widehat\Delta (\bx_i)\Big| \leq 4||\widehat\Delta||_n\sqrt{t\delta} \implies  ||\Delta||_n^2 \leq 16t\delta.\qed
+			\end{equation*}
+		\end{itemize}
+	\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Proof of the Auxiliary Lemma}
+		Recall 
+		$A(u) = \Big\{\exists g \in \cF^\star, ||g||_n \geq u \;:\; \Big|\frac{\sigma}{n}\sum_{i = 1}^{n} w_i g(\bx_i)\Big|\geq 2u ||g||_n\Big\}.$\\
+		\textbf{Step 1}: reduce  to controlling a $\sup$ over a subset with $||\widetilde g||_n\leq u$.
+		\begin{itemize}		
+			\item Suppose that $A(u)$ is true, hence  there exists				
+			$g \in \cF^\star$ with $||g||_n\geq u$ such that			 
+			 \begin{small}
+			 \begin{equation*}
+			 	\Big|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i g(\bx_i)\Big|\geq 2||g||_n u.
+			 \end{equation*}
+			 \end{small}
+			\item Define $\widetilde{g} = \frac{u}{||g||_n}g \in \cF^\star$, we observe that $||\widetilde{g}||_n = u$. We have 
+			\begin{small}
+			\begin{equation*}
+				\Big|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i\,\widetilde{g}\,(\bx_i)\Big| = \frac{u}{||g||_n}\Big|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i\,g\,(\bx_i)\Big|\geq 2u^2.
+			\end{equation*}
+			\end{small}
+			\item We thus conclude that:
+			\begin{small}
+				\begin{equation*}
+				\Prob[A(u)] \leq \Prob[Z_n(u)\geq 2u^2], \; Z_n(u) := \sup_{\widetilde{g}\,\in \cF^\star, \; ||\,\widetilde{g}\,||_n\, \leq u}\bigg|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i\,\widetilde{g}(\bx_i)\bigg|.
+				\end{equation*}
+			\end{small}			
+		\end{itemize}		
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Proof of the Auxiliary Lemma}
+		\begin{small}
+			$\Prob[A(u)] \leq \Prob[Z_n(u)\geq 2u^2], \; Z_n(u) := \sup_{\widetilde{g}\,\in \cF^\star, \;\;\; ||\,\widetilde{g}\,||_n\, \leq u}\bigg|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i\,\widetilde{g}\,(\bx_i)\bigg|.$
+		\end{small}
+		
+		\textbf{Step 2}: Concentration of suprema.
+		\begin{itemize}			
+
+			\item Recall that $w_i \sim \mathcal{N}(0, 1)$, hence
+			$\frac{\sigma}{n}\sum_{i = 1}^{n}w_i \,\widetilde{g}\,(\bx_i) \sim \mathcal{N}\Big(0, \frac{\sigma^2}{n}||\widetilde{g}\,||_n^2\Big). $
+				
+			\item
+			$Z_n(u) = h(w_1, \dots, w_n)  := \sup_{\;\widetilde{g}\,\in \cF^\star, \;\;\; ||\,\widetilde{g}\,||_n\, \leq u}\bigg|\frac{\sigma}{n}\sum_{i = 1}^{n}w_i\,\widetilde{g}\,(\bx_i)\bigg|.$
+			
+			\item
+			The Lipschitz constant of $h$ is at most $\frac{\sigma u}{\sqrt{n}}$.
+			
+			\item We know that for $Z_i \sim \mathcal{N}(0, \sigma^2)$ and $h$ a L-Lipschitz function:
+			\begin{small}
+				\begin{equation*}
+				\Prob[h(Z\,) - \E h(Z\,) \geq t]\leq e^{-\frac{s^2}{2L^2\sigma^2}}.
+				\end{equation*}
+			\end{small}
+			\vspace{-0.5cm}
+			\item Let $s = u^2$, we obtain $\Prob(Z_n(u) \geq \E[Z_n(u)\,] + u^2) \leq \exp\big(\frac{-nu^2}{2\sigma^2}\big)$.
+
+			
+		\end{itemize}		
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Proof of the Auxiliary Lemma}
+		\textbf{Step 3}: Bounding the expectation.
+		\begin{itemize}					
+		\item Note that $\E[Z_n(u)] = \sigma\, \mathcal{G}_n(u)$.
+		\item We know that $\nu \to \frac{\mathcal{G}_n(\nu)}{\nu}$ is non-increasing. We have also assumed that $u\geq \delta$.
+		\begin{equation*}
+		\sigma\frac{\mathcal{G}_n(u)}{u}\leq\sigma\frac{\mathcal{G}_n(\delta)}{\delta} \leq \frac{\delta}{2}\leq \delta \implies \E[Z_n(u)]\leq u\delta \leq u^2.
+		\end{equation*}
+		Comibining our results, we obtain 
+		\begin{equation*}
+			\Prob[A(u)] \leq \Prob[Z_n(u) \geq 2u^2] \leq \Prob(Z_n(u) \geq \E[Z_n(u)] + u^2) \leq \exp\Big(\frac{-nu^2}{2\sigma^2}\Big),
+		\end{equation*}
+		Which concludes the proof.\qed
+	\end{itemize}
+	\end{frame}
+
+	\section{How to Compute the Critical Radius?}
+	\frame{\sectionpage}
+	
+	\begin{frame}
+		\frametitle{Bounds via Metric Entropy}
+		For any star-shaped function class $\cF^\star$, define:
+		\begin{itemize}
+			\item $B\,(\delta\,; \cF^\star) = \{h\in \cF^\star \;\big|\; ||h||_n\leq \delta\}$
+			\item $\mathcal{N}\,\big(t; B_n(\delta; \cF^\star)\big)$ be the $t$-convering number of $B_n(\delta; \cF)$ in norm $||.||_n$.
+		\end{itemize}
+
+		\begin{block}{Critical Inequality via Metric Entropy}
+			Any $\delta \in (0, \infty]$ satisfying
+			\begin{equation*}
+				\frac{16}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log \mathcal{N}\big(t\,; B(\delta; \cF^\star)\big)} \;dt \leq \frac{\delta^2}{4\sigma},
+			\end{equation*}
+			satisfies the critical inequality.
+		\end{block}
+	\end{frame}
+
+
+	\begin{frame}
+		\frametitle{Bounds via Metric Entropy: Proof}
+		\begin{itemize}
+		\item		
+		Construct a $\frac{\delta^2}{4\sigma}$-covering of the set $B\,(\delta; \cF)$, say $\{g\,^1, \dots, g\,^M\}$. For any function $g\in B(\delta; \cF)$, there is a $j \in [M]$ such that $||g\,^j - g||_n \leq \frac{\delta^2}{4\sigma}$. 
+		\item  We have
+		\begin{small}
+		\begin{align*}
+			\Big|\frac{1}{n}\sum_{i = 1}^{n} &w_i\, g\,(\bx_i) \Big| \leq \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, g\,^j(\bx_i) \Big| + \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, \big(g\,(\bx_i) - g\,^j(\bx_i)\big) \Big|\\
+			&\leq  \max_{j = 1, \dots, M} \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, g\,^j(\bx_i) \Big| + \sqrt{\frac{\sum_{i = 1}^{n}w_i\,^2}{n}} \sqrt{\frac{\sum_{i = 1}^{n}(g\,(\bx_i) - g\,^k(\bx_i))^2}{n}}\\
+			&\leq  \max_{j = 1, \dots, M} \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, g\,^j(\bx_i) \Big| + \frac{\delta^2}{4\sigma}\sqrt{\frac{\sum_{i = 1}^{n}w_i\,^2}{n}}.
+		\end{align*}
+		Hence 
+		\begin{equation*}
+			\mathcal{G}_n(\delta) \leq \E\Bigg[\max_{j = 1, \dots, M} \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, g\,^j(\bx_i) \Big|\Bigg] + \frac{\delta^2}{4\sigma}.
+		\end{equation*}
+				\end{small}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Bounds via Metric Entropy: Proof}
+		\begin{itemize}	
+		\item
+		To upper bound the first term, we use Dudley's Integral. Define $Z(g\,^j) = \frac{1}{\sqrt{n}}\sum_{i = 1}^{n}w_i\, g\,^j\,(\bx_i)$ for $j = 1, \dots, M$. 
+		\item The induced metric: 
+		\begin{small}
+			$\rho_Z^2\,(g\,^j, g\,^k) := \mathrm{Var}\big(Z(g\,^j) - Z(g\,^k)\big) = ||g\,^j - g\^k||_n^2$
+		\end{small}
+
+		\item
+		Since $||g\,||_n \leq \delta$ for all $g \in B_n(\delta, \cF\,^*)$, the coarsest resolution of the chaining can be set to $\delta$. We can terminate it at $\frac{\delta^2}{4\sigma}$ since any member of our finite set can be reconstructed  at this resolution. 
+		\begin{small}
+		\begin{align*}
+			\E\Bigg[\max_{j = 1, \dots, M} \Big|\frac{1}{n}\sum_{i = 1}^{n} w_i\, g\,^j(\bx_i) \Big|\Bigg] &= \E\Bigg[\max_{j = 1, \dots, M} \frac{\Big|Z(g\,^j)\Big|}{\sqrt{n}}\Bigg]\\
+			&\leq \frac{16}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log N_n(t; B_n(\delta; \cF))} dt
+		\end{align*}
+		\end{small}
+
+		Hence $\mathcal{G}_n(\delta) \leq \frac{\delta^2}{4\sigma} + \frac{16}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log N_n(t; B_n(\delta; \cF))} dt$. \qed
+		\end{itemize}
+	\end{frame}
+
+	\section{Examples}
+	\frame{\sectionpage}
+	
+	
+	\begin{frame}
+		\frametitle{Bounds for Linear Regression}
+		\begin{itemize}
+			\item Consider $y_i = \langle \boldsymbol{\theta^\star}, \bx_i \rangle + w_i$ with $\boldsymbol{\theta}^\star \in \mathbb{R}^d$.
+			\item Hypothesis class: $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$.
+			\item Let $\mathbf{X} \in \mathbb{R}^{d \times n}$ be the design matrix with rank $r$.
+			\item $\cF = \cF^\star$ and convex. Thus star-shaped around any point.
+		\end{itemize}
+	\end{frame}
+	\section{Oracle Inequalities}
+	\frame{\sectionpage}
+	
+	
+	\section{Regularized Estimators}
+	\frame{\sectionpage}
+\end{document}
+

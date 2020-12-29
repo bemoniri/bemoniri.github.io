@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Bandits}{4}{0}{1}
+\beamer@sectionintoc {2}{Applications}{6}{0}{2}
+\beamer@sectionintoc {3}{Causal Bandits}{10}{0}{3}
+\beamer@sectionintoc {4}{Causal Bandit Algorithms}{16}{0}{4}
+\beamer@sectionintoc {5}{Experiments}{24}{0}{5}
+\beamer@sectionintoc {6}{Challenges}{27}{0}{6}
+\beamer@sectionintoc {7}{C-UCB Regret Bound Proof}{29}{0}{7}

@@ -1,0 +1,7 @@
+\beamer@sectionintoc {1}{Introduction}{3}{0}{1}
+\beamer@sectionintoc {2}{Examples}{8}{0}{2}
+\beamer@sectionintoc {3}{Critical Radius: Bounding the Prediction Error}{11}{0}{3}
+\beamer@sectionintoc {4}{How to Compute the Critical Radius?}{25}{0}{4}
+\beamer@sectionintoc {5}{Examples}{29}{0}{5}
+\beamer@sectionintoc {6}{Oracle Inequalities}{31}{0}{6}
+\beamer@sectionintoc {7}{Regularized Estimators}{32}{0}{7}
