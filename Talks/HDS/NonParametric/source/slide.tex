@@ -580,6 +580,48 @@
 		\end{block}
 	\end{frame}
 
+		\begin{frame}
+		\frametitle{Parametric Example: Linear Regression}
+		\begin{itemize}
+			\item Consider $y_i = \langle \boldsymbol{\theta^\star}, \bx_i \rangle + w_i$ with $\boldsymbol{\theta}^\star \in \mathbb{R}^d$.
+			\item Hypothesis class: $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$.
+			\item Let $\mathbf{X} \in \mathbb{R}^{d \times n}$ be the design matrix with rank $r$.
+			\item $\cF = \cF^\star$ and convex. Thus star-shaped around any point.			
+			\item $\forall  f_{\boldsymbol{\theta}} \in \cF$, the function $\boldsymbol{\theta} \to  ||f_{\boldsymbol{\theta}}\,||_n^2 = \frac{||\mathbf{X}\boldsymbol{\theta}||_2^2}{n}$, defines a norm on $\mathrm{Range}(\mathbf{X})$ and $B(\delta; \cF)$ is isomorphic to a $\delta$-ball in $\mathrm{Range}(\mathbf{X})$. 
+			\item
+			Dimension of $\mathrm{Range}(\mathbf{X})$ is $r$. By a volume argument:
+			\begin{equation*}
+			\log\Big(\mathcal{N}\big(t, B(\delta; \cF)\big)\Big) \leq r \log\big(1 + \frac{2\delta}{t}\big).
+			\end{equation*}
+			\item We have
+			\begin{equation*}
+			\frac{1}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log \mathcal{N}\big(t\,; B\,(\delta; \cF^\star)\big)} \;dt \leq c\delta \sqrt{\frac{r}{n}} \implies ||\fhat - \fstar||_n \leq c\sigma\sqrt{\frac{r}{n}}.
+			\end{equation*}
+		\end{itemize}
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Non-Parametric Example: Lipschitz Functions}
+		\begin{itemize}			
+			\item Consider the function class 
+			\begin{small}
+				\begin{equation*}
+					\cF_{\mathrm{Lip}}(L) = \{f:[0, 1] \to \mathbb{R} \big| f\,(0) = 0, f \text{ is L-Lip} \}.
+				\end{equation*}			
+			\end{small}
+			\item Note that $\cF_{\mathrm{Lip}}(L) - \cF_{\mathrm{Lip}}(L) = 2 \cF_{\mathrm{Lip}}(L) \subseteq \cF_{\mathrm{Lip}}(2L)$.
+			\item The Dudley's integral can be bounded as follows:
+			\begin{small}
+			\begin{align*}
+				\frac{1}{\sqrt{n}}\int_{0}^{\delta}\sqrt{\log N_n\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\; &\lesssim \int_{0}^{\delta}\sqrt{\log N_\infty\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\\
+				&\lesssim \frac{1}{\sqrt{n}}\int_{0}^{\delta} \Big(\frac{L}{t}\Big)^{\frac{1}{2}} \; dt \; \lesssim \sqrt{\frac{L\delta}{n}}.
+			\end{align*}
+			\end{small}	
+			\item It suffices to choose $\delta>0$ such that $\sqrt{\frac{L\delta}{n}} \leq \frac{\delta^2}{\sigma} \implies \delta^2 \simeq \Big(\frac{L\sigma^2}{n}\Big)^{\frac{2}{3}}$.
+			\item According to the main theorem: $||\fhat - \fstar||_n^2 \lesssim \Big(\frac{L\sigma^2}{n}\Big)^{\frac{2}{3}}$ with  probability at least $1 - c_1\exp\big(-c_2\big(\frac{n}{L\sigma^2}\big)^{\frac{1}{3}}\big)$.
+		\end{itemize}
+	\end{frame}
+
 	\section{Oracle Inequalities}
 	\frame{\sectionpage}
 	
@@ -704,7 +746,91 @@
 				||\Dhat||_n^2 \leq \frac{1+4\beta}{1 - 4\beta} ||\ftilde - \fstar||_n^2 + \frac{8}{\beta(1-4\beta)}t\delta.$ \qed
 		\end{itemize}				
 	\end{frame}
+	
+	\section{Examples}
+	\frame{\sectionpage}	
+	
+	\begin{frame}
+		\frametitle{Example: Best Sparse Approximation}
+		\begin{itemize}
+			\item Consider $\cF(s) = \{f = \langle \boldsymbol{\theta}, .\rangle \, \big|\, ||\boldsymbol{\theta}||_0\leq s\}$.
+			\item Disregarding the computational complexity, let
+				\begin{small}
+				\begin{equation*}
+					\widehat{\theta} \in \arg\min_{||\boldsymbol{\theta}||_0\leq s} || y - \mathbf{X}\boldsymbol{\theta}||_0^2.
+				\end{equation*}
+				\end{small}			
+			\item We will prove that with high probability:
+			\begin{small}
+				\begin{equation*}
+					||\widehat{f} - \fstar\,||_n^2 \lesssim \inf_{f\,\in \cF(s)} ||f - \fstar\,||_n^2 +  \underbrace{\frac{\sigma^2s\log(ed/s)}{n}}_{\delta^2}
+				\end{equation*}
+			\end{small}
+			\item The penalty grows linearly with $s$ and logarithmic with $d$. We only pay a logarithmic price for not knowing the support set in advance.			
+		\end{itemize}		
+	\end{frame}
 
+	\begin{frame}
+		\frametitle{Example: Best Sparse Approximation}
+		\begin{itemize}
+			\item Note that $\partial \cF(s) \subset \cF(2s)$. 	Hence $\cG_n(\delta; \partial \cF(s)) \leq \cG_n(\delta; \cF(2s))$.
+			\item Let $S\subseteq \{1, \dots, d\}$ be an arbitrary $2s$-sized subset.
+			\item Let $\mathbf{X}_S \in \mathbb{R}^{n\times 2s}$ the sub-matrix with columns in $S$.
+			\item Define 
+			\begin{small}
+			\begin{equation*}
+						Z_n(S) = \sup_{\begin{scriptsize}
+					\begin{matrix}
+					\boldsymbol{\theta}_S  \in \mathbb{R}^{2s}\\
+					||\mathbf{X}_S\boldsymbol{\theta}_S||_2/\sqrt{n} \leq \delta
+					\end{matrix}
+					\end{scriptsize}}\Big|\frac{\mathbf{w}^T\mathbf{X}_S\boldsymbol{\theta}_S}{n}\Big|.
+			\end{equation*}
+			\end{small}
+			\item We also have $\cG_n\big(\delta; \cF(2s)\big) = \E_w\Big[\max_{|S|=2s} Z_n(S)\Big]$
+			\item Viewed as a function of $\mathbf{w}$, $Z_n(S)$ is $\frac{\delta}{\sqrt{n}}$ Lipschitz. Hence
+			\begin{small}
+				\begin{equation*}
+					\Prob\big[Z_n(S) \geq \E(Z_n(S)) + t\delta\big] \leq \exp\Big(\frac{-nt^2}{2}\Big)
+				\end{equation*}
+			\end{small}						
+		\end{itemize}
+	\end{frame}
+	
+	\begin{frame}
+		\begin{itemize}
+			\item Consider the SVD of $\mathbf{X}_S = \mathbf{U}\mathbf{D}\mathbf{V}^\top$. Note that $||\mathbf{X}_S\boldsymbol{\theta}_S||_2 = ||\mathbf{D}\mathbf{V}^\top\boldsymbol{\theta}||_2$:
+			\begin{small}
+				\begin{equation*}
+					\E\big[Z_n(S)\big] \leq \E \Big[\sup_{
+					\begin{scriptsize}
+					\begin{matrix}
+					\beta \in \mathbb{R}^{2s}\\
+					||\beta||_2 \leq \delta
+					\end{matrix}					
+					\end{scriptsize}						
+				} \big|\frac{1}{\sqrt{n}} \langle \mathbf{U}^\top \mathbf{w}, \beta\rangle\big|\Big] \leq \frac{\delta}{\sqrt{n}} \E\big[||\mathbf{U}^\top \mathbf{w}||_2\big].
+				\end{equation*}
+			\end{small}
+		\item Since $\mathbf{U}$ is orthogonal and $\mathbf{w}\sim \mathcal{N}(0, \mathbf{I}_{n})$, thus $\mathbf{U}^\top\mathbf{w}\sim \mathcal{N}(0, \mathbf{I}_{2s})$.
+		
+		\item Therefore $\E[||\mathbf{U}^\top\mathbf{w}||] \leq \sqrt{2s}$. Applying the union bound to the Lip upper bound:
+		\begin{small}
+			\begin{equation*}
+				\Prob\Big[\max_{|S|=2s} Z_n(S) \geq \delta\Big(\sqrt{\frac{2s}{n}} + t\Big)\Big] \leq {d \choose 2s} \exp\Big(\frac{-nt^2}{2}\Big).
+			\end{equation*}
+		\end{small}
+		\item By integrating:
+		\begin{small}
+			\begin{equation*}
+				\frac{\E[\max_{|S|=2s} Z_n(S)]}{\delta} = \frac{\cG_n(\delta)}{\delta} \lesssim \sqrt{\frac{s}{n}} + \sqrt{\frac{\log{d \choose 2s}}{n}} \lesssim \sqrt{\frac{s\log\big(\frac{ed}{s}\big)}{n}}.
+			\end{equation*}
+		\end{small}
+		\item Thus $\delta \simeq \sigma^2 \frac{s\log(ed/s)}{n}$ satisfies critical inequality.
+		\end{itemize}
+	\end{frame}
+	
+	
 	\section{Regularized Estimators}
 	\frame{\sectionpage}
 	
