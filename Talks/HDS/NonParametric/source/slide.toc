@@ -6,3 +6,4 @@
 \beamer@sectionintoc {6}{Oracle Inequalities}{38}{2}{6}
 \beamer@sectionintoc {7}{Examples}{45}{2}{7}
 \beamer@sectionintoc {8}{Regularized Estimators}{49}{2}{8}
+\beamer@sectionintoc {9}{Kernel Ridge Regression}{61}{2}{9}

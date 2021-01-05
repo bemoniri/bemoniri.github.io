@@ -150,10 +150,19 @@
 \headcommand {\beamer@framepages {59}{59}}
 \headcommand {\slideentry {8}{0}{12}{60/60}{}{2}}
 \headcommand {\beamer@framepages {60}{60}}
-\headcommand {\slideentry {8}{0}{13}{61/61}{}{2}}
+\headcommand {\beamer@sectionpages {49}{60}}
+\headcommand {\beamer@subsectionpages {49}{60}}
+\headcommand {\sectionentry {9}{Kernel Ridge Regression}{61}{Kernel Ridge Regression}{2}}
+\headcommand {\slideentry {9}{0}{1}{61/61}{}{2}}
 \headcommand {\beamer@framepages {61}{61}}
-\headcommand {\beamer@partpages {30}{61}}
-\headcommand {\beamer@subsectionpages {49}{61}}
-\headcommand {\beamer@sectionpages {49}{61}}
-\headcommand {\beamer@documentpages {61}}
-\headcommand {\gdef \inserttotalframenumber {61}}
+\headcommand {\slideentry {9}{0}{2}{62/62}{}{2}}
+\headcommand {\beamer@framepages {62}{62}}
+\headcommand {\slideentry {9}{0}{3}{63/63}{}{2}}
+\headcommand {\beamer@framepages {63}{63}}
+\headcommand {\slideentry {9}{0}{4}{64/64}{}{2}}
+\headcommand {\beamer@framepages {64}{64}}
+\headcommand {\beamer@partpages {30}{64}}
+\headcommand {\beamer@subsectionpages {61}{64}}
+\headcommand {\beamer@sectionpages {61}{64}}
+\headcommand {\beamer@documentpages {64}}
+\headcommand {\gdef \inserttotalframenumber {64}}

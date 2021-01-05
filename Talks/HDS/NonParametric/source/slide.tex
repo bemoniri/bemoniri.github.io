@@ -587,7 +587,9 @@
 			\item Hypothesis class: $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$.
 			\item Let $\mathbf{X} \in \mathbb{R}^{d \times n}$ be the design matrix with rank $r$.
 			\item $\cF = \cF^\star$ and convex. Thus star-shaped around any point.			
-			\item $\forall  f_{\boldsymbol{\theta}} \in \cF$, the function $\boldsymbol{\theta} \to  ||f_{\boldsymbol{\theta}}\,||_n^2 = \frac{||\mathbf{X}\boldsymbol{\theta}||_2^2}{n}$, defines a norm on $\mathrm{Range}(\mathbf{X})$ and $B(\delta; \cF)$ is isomorphic to a $\delta$-ball in $\mathrm{Range}(\mathbf{X})$. 
+			\item $\forall  f_{\boldsymbol{\theta}} \in \cF$, the function $\boldsymbol{\theta} \to  ||f_{\boldsymbol{\theta}}\,||_n^2 = \frac{||\mathbf{X}\boldsymbol{\theta}||_2^2}{n}$.
+			
+			\item $B(\delta; \cF)$ is a $\delta$-ball in $\mathrm{Range}(\mathbf{X})$. 
 			\item
 			Dimension of $\mathrm{Range}(\mathbf{X})$ is $r$. By a volume argument:
 			\begin{equation*}
@@ -663,7 +665,7 @@
 		\begin{itemize}
 			\item When $\fstar \notin \cF$, setting $t = \delta$ and taking infimum over $f\in\cF$, yields 
 			\begin{equation*}
-				||\fhat - \fstar||_n^2 \lesssim \inf_{f\,\in\cF}||\fhat - \fstar||_n^2 + \delta^2
+				||\fhat - \fstar||_n^2 \lesssim \inf_{f\,\in\cF}||f - \fstar||_n^2 + \delta^2
 			\end{equation*}
 			with high probability. The term $\delta^2$ can be viewed as the estimation error and $\inf_{f\,\in\cF}||\fhat - \fstar||_n^2$ as the approximation error.
 		\end{itemize}
@@ -672,35 +674,31 @@
 
 	\begin{frame}
 	\frametitle{Oracle Inequalities: Proof}
-	\begin{itemize}
-		\item Define $\Dhat = \fhat - \fstar$ and $\Dtilde = \fhat - \ftilde$.
-		
-		\item Given an arbitrary $\ftilde \in \cF$, we have 
+		Given an arbitrary $\ftilde \in \cF$, define $\Dhat = \fhat - \fstar$ and $\Dtilde = \fhat - \ftilde$. We have 
 		\begin{small}
 		\begin{align*}
 			0 &\geq \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \fhat_i\,\big)^2 - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2 \\
-			&= \frac{1}{2}||\Dhat||_n^2 +  \frac{1}{2n}\sum_{i = 1}^{n} \big( y_i - {f_i\,^\star}\big)^2 +   \frac{1}{n}\sum_{i = 1}^{n} (y_i - f_i\,^\star)(f_i\,^\star - \fhat_i\,)			
+			&= \frac{1}{2}||\Dhat||_n^2 +  \frac{1}{2n}\sum_{i = 1}^{n} \big( y_i - {f_i\,^\star}\big)^2 +   \frac{1}{n}\sum_{i = 1}^{n} (\underbrace{y_i - f_i\,^\star}_{= \sigma w_i})(f_i\,^\star - \fhat_i\,)			
 			 - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2\\
 		\end{align*}
 		\end{small}
 		Hence 
 		\begin{small}
-		$\frac{1}{2}||\Dhat||_n^2 \leq \frac{1}{2n}\sum_{i = 1}^{n} \big(\Dtilde_i - \Dhat_i\big) (2y_i - \ftilde_i - f_i\,^\star) - \frac{1}{n}\sum_{i = 1}^{n}\sigma w_i (\fstar_i - \fhat_i\,)$. 
+		$\frac{1}{2}||\Dhat||_n^2 \leq \frac{1}{2n}\sum_{i = 1}^{n} \big(\Dtilde_i - \Dhat_i\big) (2y_i - \ftilde_i - f_i\,^\star) - \frac{1}{n}\sum_{i = 1}^{n}\sigma w_i (\fstar_i - \fhat_i\,)$. 	
+		\vspace{-0.5cm}
 		
-		\vspace{-0.3cm}
 		\begin{align*}
 			\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2n}\sum_{i = 1}^{n}\Big[ \big(\Dtilde_i - \Dhat_i\big) (2\sigma w_i - \Dtilde_i - \Dhat_i) + 2\sigma w_i \Dhat_i\Big]\\ 
-			&\leq\frac{1}{n}\sum_{i = 1}^{n}\sigma w_i \Dtilde_i + \frac{1}{2} ||\fstar_i - \ftilde_i||_n^2	 \leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|.
+			&=\frac{1}{n}\sum_{i = 1}^{n}\sigma w_i \Dtilde_i + \frac{1}{2} ||\fstar_i - \ftilde_i||_n^2	 \leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|.
 		\end{align*}
 		\end{small}		
-	\end{itemize}
 	\end{frame}
 	
 	\begin{frame}
 	\frametitle{Oracle Inequalities: Proof}
 	To bound the error, we consider two cases:
 	\begin{itemize}
-		\item \textbf{Case 1}: Suppose that $||\Dhat||_n^2 \leq \sqrt{t\delta}$.
+		\item \textbf{Case 1}: Suppose that $||\Dtilde||_n \leq \sqrt{t\delta}$.
 			\begin{align*}
 				||\Dhat||_n^2 &= ||(\ftilde - \fstar) + \Dtilde||_n^2\leq \Big(||\ftilde - \fstar||_n + \sqrt{t\delta}\Big)^2\\ &\leq (1+2\beta) ||\ftilde - \fstar||_n^2 + \big(1 + \frac{2}{\beta}\big)t\delta.				
 			\end{align*}
@@ -713,7 +711,7 @@
 
 	\begin{frame}
 		\begin{itemize}
-			\item \textbf{Case 2}: Suppose that $||\Dhat||_n^2 > \sqrt{t\delta}$.
+			\item \textbf{Case 2}: Suppose that $||\Dtilde||_n > \sqrt{t\delta}$.
 			\begin{block}{Auxiliary Lemma}
 				Let $\mathcal{H}$ be a star-shaped class and $\delta$ satisfy the critical inequality:
 				\begin{small}
@@ -732,14 +730,14 @@
 				\Prob\Big[2\big|\frac{\sigma}{n} \sum_{i = 1}^{n}w_i \Dtilde(\bx_i)\big|\geq 4\sqrt{t\delta}||\Dtilde||_n\Big]\leq \exp\big(-\frac{nt\delta}{2\sigma^2}\big).
 			\end{equation*}
 			\end{small}
-			\vspace{-0.5cm}
+			\vspace{-0.3cm}
 			
-			Hence
+			Hence, with high probability
 			\begin{small}
 			\begin{align*}
 				||\Dhat||_n^2 &\leq ||\ftilde - \fstar||_n^2 + 4\sqrt{t\delta} ||\Dtilde||_n^2
 				\leq ||\ftilde - \fstar||_n^2 + 4\sqrt{t\delta} \,\Big\{||\Dhat||_n^2 + ||\ftilde - \fstar||_n^2\Big\}\\
-				&\leq ||\ftilde - \fstar||_n^2 + \Big[4\beta ||\Dhat||_n^2 + \frac{4}{\beta}t \delta_n\Big] + \Big[4\beta||\Dhat||_n^2 + \frac{4}{\beta} t\delta\Big].
+				&\leq ||\ftilde - \fstar||_n^2 + \Big[4\beta ||\Dhat||_n^2 + \frac{4}{\beta}t \delta\Big] + \Big[4\beta||\ftilde - \fstar||_n^2 + \frac{4}{\beta} t\delta\Big].
 			\end{align*}
 			\end{small}
 			Rearrenging terms: $
@@ -787,7 +785,7 @@
 					\end{scriptsize}}\Big|\frac{\mathbf{w}^T\mathbf{X}_S\boldsymbol{\theta}_S}{n}\Big|.
 			\end{equation*}
 			\end{small}
-			\item We also have $\cG_n\big(\delta; \cF(2s)\big) = \E_w\Big[\max_{|S|=2s} Z_n(S)\Big]$
+			\item We have $\cG_n\big(\delta; \cF(2s)\big) = \E_w\Big[\max_{|S|=2s} Z_n(S)\Big]$
 			\item Viewed as a function of $\mathbf{w}$, $Z_n(S)$ is $\frac{\delta}{\sqrt{n}}$ Lipschitz. Hence
 			\begin{small}
 				\begin{equation*}
@@ -799,10 +797,10 @@
 	
 	\begin{frame}
 		\begin{itemize}
-			\item Consider the SVD of $\mathbf{X}_S = \mathbf{U}\mathbf{D}\mathbf{V}^\top$. Note that $||\mathbf{X}_S\boldsymbol{\theta}_S||_2 = ||\mathbf{D}\mathbf{V}^\top\boldsymbol{\theta}||_2$:
+			\item Consider the SVD of $\mathbf{X}_S = \mathbf{U}\mathbf{D}\mathbf{V}^\top$. We have $||\mathbf{X}_S\boldsymbol{\theta}_S||_2 = ||\mathbf{D}\mathbf{V}^\top\boldsymbol{\theta}_S||_2$:
 			\begin{small}
 				\begin{equation*}
-					\E\big[Z_n(S)\big] \leq \E \Big[\sup_{
+					\E\big[Z_n(S)\big] = \E \Big[\sup_{
 					\begin{scriptsize}
 					\begin{matrix}
 					\beta \in \mathbb{R}^{2s}\\
@@ -837,7 +835,7 @@
 	\begin{frame}
 		\frametitle{Oracle Inequalities for Regularized Estimators}
 		\begin{itemize}
-			\item Given a space $\cF$ of real-valued functions, an an associated norm $||.||_\cF$, consider the family of regularized least-square problems:
+			\item Given a space $\cF$ of real-valued functions, an associated norm $||.||_\cF$, consider the family of regularized least-square problems:
 			\begin{equation*}
 				\fhat \in \arg\min_{\cF} \Big\{\frac{1}{2n} \sum_{i = 1}^{n} \big(y_i - f\,(\bx_i)\big)^2 + \lambda_n ||f\,||_\cF^2\Big\}.
 			\end{equation*}
@@ -866,7 +864,7 @@
 			\end{equation*}
 			 If $\lambda_n \geq 2\delta^2$. There exists universal constants $c_0, c_1, c_2, c_3$ such that 
 			\begin{equation*}
-			||\fhat - \fstar||_n^2 \leq c_0 \inf_{||f\,||_\cF \leq R} ||f - \fstar||_n^2 + c_1 R^2(\delta^2 +\lambda)
+			||\fhat - \fstar||_n^2 \leq c_0 \inf_{||f\,||_\cF \leq R} ||f - \fstar||_n^2 + c_1 R^2(\delta^2 +\lambda_n)
 			\end{equation*}
 			with probability grater than $1 - c_2 \exp\big(-c_3\frac{nR^2\delta^2}{\sigma^2}\big)$.
 		\end{block}
@@ -888,32 +886,35 @@
 			\end{equation*}
 			\item Denote $\Dhat = \fhat - \fstar$ and $\Dtilde = \fhat - \ftilde$. With a simple calculation\\ (next slide):			
 			\begin{equation*}
-				\frac{1}{2}||\Dhat\,||_n^2 \leq \frac{1}{2}||\ftilde - \fstar||_n^2 + \frac{\widetilde\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde(\bx_i)\Big| + \lambda_n \underbrace{\big[||\ftilde\,||_\cF^2 - ||\fhat\,||_\cF^2\big]}_{\leq 1}.
+				\frac{1}{2}||\Dhat\,||_n^2 \leq \frac{1}{2}||\ftilde - \fstar||_n^2 + \frac{\widetilde\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde(\bx_i)\Big| + \lambda_n \big[||\ftilde\,||_\cF^2 - ||\fhat\,||_\cF^2\big].
 			\end{equation*}
 		\end{itemize}
 	\end{frame}
 
 
 	\begin{frame}
-		\begin{itemize}
-			\item Given an arbitrary $\ftilde \in \cF$, we have 
-			\begin{small}
+		\begin{small}
+			 Given an arbitrary $\ftilde \in \cF$, we have 
+			\begin{scriptsize}
 				\begin{align*}
-				0 &\geq \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \fhat_i\,\big)^2 + \lambda_n ||\fhat\,||_n^2 - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2 - \lambda_n ||\ftilde\,||_n^2  \\
+				0 &\geq \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \fhat_i\,\big)^2 + \lambda_n ||\fhat\,||_\cF^2 - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2 - \lambda_n ||\ftilde\,||_\cF^2  \\
 				&= \frac{1}{2}||\Dhat||_n^2 +  \frac{1}{2n}\sum_{i = 1}^{n} \big( y_i - {f_i\,^\star}\big)^2 + \frac{1}{n}\sum_{i = 1}^{n} (y_i - f_i\,^\star)(f_i\,^\star - \fhat_i\,)\\
-				&\hspace{1cm} - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2 + \lambda_n ||\fhat\,||_n^2 - \lambda_n ||\ftilde\,||_n^2\\
+				&\hspace{1cm} - \frac{1}{2n}\sum_{i = 1}^{n} \big(y_i - \ftilde_i\,\big)^2 + \lambda_n ||\fhat\,||_\cF^2 - \lambda_n ||\ftilde\,||_\cF^2\\
 				\end{align*}		
-				
+			\end{scriptsize}
 				\vspace{-1cm}	
-			\item 	Rearranging terms:
+				
+				
+			 	Rearranging terms:
+			 	\begin{scriptsize}
 			\begin{align*}
-				\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2n}\sum_{i = 1}^{n} \big(\Dtilde_i - \Dhat_i\big) (2y_i - \ftilde_i - f_i\,^\star) - \frac{1}{n}\sum_{i = 1}^{n}\sigma w_i (\fstar_i - \fhat_i\,) + \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2\\
-				&\leq \frac{1}{2n}\sum_{i = 1}^{n}\Big[ \big(\Dtilde_i - \Dhat_i\big) (2\sigma w_i - \Dtilde_i - \Dhat_i) + 2\sigma w_i \Dhat_i\Big] + \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2 \\ 
-				&\leq\frac{1}{n}\sum_{i = 1}^{n}\sigma w_i \Dtilde_i + \frac{1}{2} ||\fstar_i - \ftilde_i||_n^2 + \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2\\
-				&\leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2.
+				\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2n}\sum_{i = 1}^{n} \big(\Dtilde_i - \Dhat_i\big) (2y_i - \ftilde_i - f_i\,^\star) - \frac{1}{n}\sum_{i = 1}^{n}\sigma w_i (\fstar_i - \fhat_i\,) + \lambda_n ||\ftilde\,||_\cF^2 - \lambda_n ||\fhat\,||_\cF^2\\
+				&\leq \frac{1}{2n}\sum_{i = 1}^{n}\Big[ \big(\Dtilde_i - \Dhat_i\big) (2\sigma w_i - \Dtilde_i - \Dhat_i) + 2\sigma w_i \Dhat_i\Big] + \lambda_n ||\ftilde\,||_\cF^2 - \lambda_n ||\fhat\,||_\cF^2 \\ 
+				&\leq\frac{1}{n}\sum_{i = 1}^{n}\sigma w_i \Dtilde_i + \frac{1}{2} ||\fstar_i - \ftilde_i||_n^2 + \lambda_n ||\ftilde\,||_\cF^2 - \lambda_n ||\fhat\,||_\cF^2\\
+				&\leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n ||\ftilde\,||_\cF^2 - \lambda_n ||\fhat\,||_\cF^2.
 				\end{align*}
-			\end{small}			
-		\end{itemize}
+			\end{scriptsize}			
+			\end{small}
 	\end{frame}
 	
 	\begin{frame}
@@ -924,88 +925,89 @@
 			\item 
 			Assume that \textbf{$||\Dtilde||_n > \sqrt{t\delta}\,$}. 
 			\begin{itemize}
-				\item \textbf{Case 1} Suppose that $||\fhat\,||_\cF \leq 2$. 
-				\item \textbf{Case 2} Suppose that $||\fhat\,||_\cF > 2$.
+				\item \textbf{Case 1} Suppose that $||\fhat\,||_\cF \leq 2$.  This is also very similar to the previous session.
+				\item \textbf{Case 2} Suppose that $||\fhat\,||_\cF > 2$. We will prove this statement here.
 			\end{itemize}			
 		\end{itemize}
 	\end{frame}
 	
-	\begin{frame}	
-		\begin{small}
-			\textbf{Case 1}: $||\fhat\,||_\cF \leq 2$.
-			\begin{center}
-				 $\frac{1}{2}||\Dhat||_n^2  \leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2$.
-				\vspace{-0.5cm}	
-							
-			\end{center}					
-				\end{small}
-					\begin{block}{Auxiliary Lemma}						
-					Let $\mathcal{H}$ be a star-shaped class and $\delta$ satisfy the critical inequality:
-					\begin{small}
-						
-						\vspace{-0.3cm}
-						\begin{equation*}
-						\forall u\geq \delta:\;\;\;\Prob\Bigg[\exists\, g \in \mathcal{H}, ||g||_n \geq u \;:\; \Big|\frac{\sigma}{n}\sum_{i = 1}^{n} w_i g(\bx_i)\Big|\geq 2u ||g||_n\Bigg] \leq \exp\big(\frac{-nu^2}{2\sigma^2}\big).
-						\end{equation*}
-					\end{small}
-					\vspace{-0.3cm}
-					
-				\end{block}
-				Let $||\ftilde\,||_\cF \leq 1$, hence $||\Dtilde||_\cF \leq 3$. Apply lemma to $\{g \ \in \partial\cF\;\big|\; ||g||_\cF \leq 3 \}$:
-				\begin{small}
-
-				\begin{equation*}
-					\frac{\widetilde{\sigma}}{n}\Big|\sum_{i = 1}^{n} w_i \Dtilde(\bx_i)\Big| \leq c_0 \sqrt{t\delta}||\Dtilde||_n, \text{ with prob. at least } 1 - \exp\big(-\frac{t^2}{2\tilde{\sigma}^2}\big).
-				\end{equation*}			
-				By triangle inequality: 
-				\begin{align*}
-					2\sqrt{t\delta}\;||\Dtilde||_n^2 &\leq 2 \sqrt{t\delta} \; ||\Dhat||_n^2 + 2\sqrt{t\delta} ||\ftilde - \fstar||_n \\
-					&\leq 2 \sqrt{t\delta} \; ||\Dhat||_n^2 + 2t\delta + \frac{||\ftilde - \fstar||_n^2}{2}					
-				\end{align*}
-				\end{small}
-			Hence $\frac{1}{2}||\Dhat||_n^2  \leq \frac{1}{2}(1+c_0)||\ftilde - \fstar||_n^2 + 2c_0t\delta + 2c_0\sqrt{t\delta}||\Dhat||_n + \lambda $
-	\end{frame}
+%	\begin{frame}	
+%		\begin{small}
+%			\textbf{Case 1}: $||\fhat\,||_\cF \leq 2$: We have
+%				 $\frac{1}{2}||\Dhat||_n^2  \leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + \frac{\tilde\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n$.							
+%
+%					\begin{block}{Auxiliary Lemma}						
+%					Let $\mathcal{H}$ be a star-shaped class and $\delta$ satisfy the critical inequality:
+%						
+%						\vspace{-0.3cm}
+%						\begin{equation*}
+%						\forall u\geq \delta:\;\;\;\Prob\Bigg[\exists\, g \in \mathcal{H}, ||g||_n \geq u \;:\; \Big|\frac{\tilde\sigma}{n}\sum_{i = 1}^{n} w_i g(\bx_i)\Big|\geq 2u ||g||_n\Bigg] \leq \exp\big(\frac{-nu^2}{2\sigma^2}\big).
+%						\end{equation*}
+%					\vspace{-0.3cm}
+%					
+%				\end{block}
+%				Let $||\ftilde\,||_\cF \leq 1$, hence $||\Dtilde||_\cF \leq 3$. Apply lemma to $\{g \ \in \partial\cF\;\big|\; ||g||_\cF \leq 3 \}$:
+%
+%				\begin{equation*}
+%					\frac{\widetilde{\sigma}}{n}\Big|\sum_{i = 1}^{n} w_i \Dtilde(\bx_i)\Big| \leq c_0 \sqrt{t\delta}||\Dtilde||_n, \text{ with prob. at least } 1 - \exp\big(-\frac{t^2}{2\tilde{\sigma}^2}\big).
+%				\end{equation*}			
+%				By triangle inequality: 
+%				\begin{align*}
+%					2\sqrt{t\delta}\;||\Dtilde||_n^2 &\leq 2 \sqrt{t\delta} \; ||\Dhat||_n^2 + 2\sqrt{t\delta} ||\ftilde - \fstar||_n \\
+%					&\leq 2 \sqrt{t\delta} \; ||\Dhat||_n^2 + 2t\delta + \frac{||\ftilde - \fstar||_n^2}{2}					
+%				\end{align*}
+%
+%			Hence $\frac{1}{2}||\Dhat||_n^2  \leq \frac{1}{2}(1+c_0)||\ftilde - \fstar||_n^2 + 2c_0t\delta + 2c_0\sqrt{t\delta}||\Dhat||_n + \lambda_n $
+%			\end{small}
+%	\end{frame}
 	
 	\begin{frame}
 		\vspace{0.5cm}
-		
-		\textbf{Case 2}: $||\fhat\,||_\cF > 2 > 1 \geq ||\ftilde\,||_\cF$. We have
+		\begin{small}
+		\textbf{Case 2}: $||\fhat\,||_\cF > 2 > 1 \geq ||\ftilde\,||_\cF$.		
+		\begin{align*}
+		\frac{1}{2}||\Dhat||_n^2  &\leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + \frac{\tilde\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2
+		\end{align*}				
+		 We have
 		\begin{equation*}
-			||\ftilde\,||_\cF^2 - ||\fhat\,||_\cF^2 = \underbrace{\Big[||\ftilde\,||_\cF + ||\fhat\,||_\cF\Big]}_{>1}\;.\; \underbrace{\Big[||\ftilde\,||_\cF - ||\fhat\,||_\cF\Big]}_{<0} \leq \underbrace{\Big[||\ftilde\,||_\cF + ||\fhat\,||_\cF\Big]}_{<0}.
+			||\ftilde\,||_\cF^2 - ||\fhat\,||_\cF^2 = \underbrace{\Big[||\ftilde\,||_\cF + ||\fhat\,||_\cF\Big]}_{>1}\;.\; \underbrace{\Big[||\ftilde\,||_\cF - ||\fhat\,||_\cF\Big]}_{<0} \leq \Big[||\ftilde\,||_\cF -  ||\fhat\,||_\cF\Big].
 		\end{equation*}
 		Writing $\fhat = \ftilde + \Dtilde \implies ||\fhat\,||_\cF \geq ||\Dtilde\.||_\cF - ||\ftilde\,||_\cF$:
 		\begin{align*}
-			\lambda \Big[||\ftilde\,||_\cF^2  - ||\fhat\,||_\cF^2\Big] &\leq \lambda \Big[||\ftilde\,||_\cF - ||\fhat\,||_\cF\Big]\\
-			&\leq \lambda \Big[2||\ftilde\,||_\cF - ||\Dtilde||_\cF\Big] \leq \lambda \Big[2 - ||\Dtilde\,||_\cF\Big].
+			\lambda_n \Big[||\ftilde\,||_\cF^2  - ||\fhat\,||_\cF^2\Big] &\leq \lambda_n \Big[||\ftilde\,||_\cF - ||\fhat\,||_\cF\Big]\\
+			&\leq \lambda_n \Big[2||\ftilde\,||_\cF - ||\Dtilde||_\cF\Big] \leq \lambda_n \Big[2 - ||\Dtilde\,||_\cF\Big].
 		\end{align*}
 		Substituting in the basic inequality:
 		\begin{align*}
-			\frac{1}{2}||\Dhat||_n^2  &\leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ \lambda_n ||\ftilde\,||_n^2 - \lambda_n ||\fhat\,||_n^2\\
-			&\leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ 2\lambda_n - \lambda_n ||\Dtilde||_\cF.\\
+			\frac{1}{2}||\Dhat||_n^2 \leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + \frac{\tilde\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|+ 2\lambda_n - \lambda_n ||\Dtilde||_\cF.\\
 		\end{align*}
+		\end{small}
 	\end{frame}
 	
 	
 	
 	\begin{frame}
-		\begin{block}{Auxiliary Lemma 2}
+		\begin{small}		
+		\begin{block}{Auxiliary Lemma 2}			
 			There exists positive constants $c_1, c_2$ such that with prob. at least $1 - c_1 \exp\big(\frac{-n\delta^2}{c_2 \tilde{\sigma}^2}\big)$, we have
 			\begin{equation*}
 				\Big|\frac{\tilde\sigma}{n} \sum_{i = 1}^{n} w_i\,\Delta(\bx_i)\Big| \leq 2\delta||\Delta||_n + 2\delta^2 ||\Delta||_\cF + \frac{1}{16} ||\Delta||_n^2,
 			\end{equation*}
 			for all $\Delta \in \partial \cF$ with $||\Delta||_\cF\geq 1$.
 		\end{block}
-		\begin{small}
-	 	$||\ftilde\,||_\cF \leq 1, ||\fhat\,||_\cF > 2$, the trig. ineq. yields: $||\Dtilde||_\cF \geq ||\fhat\,||_\cF - ||\ftilde\,||_\cF > 1$. This yields:
+	 	$||\ftilde\,||_\cF \leq 1, ||\fhat\,||_\cF > 2$, the trig. ineq. yields: $||\Dtilde||_\cF \geq ||\fhat\,||_\cF - ||\ftilde\,||_\cF > 1$.
+	 	\vspace{0.2cm}
+	 	
 	 	\begin{align*}
-	 	\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + 2\delta||\Dtilde||_n + (2\delta^2 - \lambda_n)||\Dtilde||_\cF + 2\lambda_n + \frac{||\Dtilde||_n^2}{16}\\ 
-	 	&\leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \underbrace{2\delta||\Dtilde||_n}_{\leq 2\delta||\ftilde - \fstar||_n + 2\delta ||\Dhat||_n} +2\lambda_n+ \underbrace{\frac{||\Dtilde||_n^2}{16}}_{\leq \frac{1}{8}\big[||\ftilde - \fstar||_n^2 +||\Dhat||_n^2\big]}. \qed
+	 	\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + 2\delta||\Dtilde||_n + (2\delta^2 - \lambda_n)||\Dtilde||_\cF + 2\lambda_n + \frac{||\Dtilde||_n^2}{16}\\ 
+	 	&\leq \frac{1}{2} \,||\fstar - \ftilde\,||_n^2 + \underbrace{2\delta||\Dtilde||_n}_{\leq 2\delta||\ftilde - \fstar||_n + 2\delta ||\Dhat||_n} +2\lambda_n+ \underbrace{\frac{||\Dtilde||_n^2}{16}}_{\leq \frac{1}{8}\big[||\ftilde - \fstar||_n^2 +||\Dhat||_n^2\big]}. \qed
 		\end{align*}
 	 	\end{small}
 	\end{frame}
 
 	\begin{frame}
 		\frametitle{Proof of Auxiliary Lemma 2}
+		\begin{small}		
 		\begin{block}{Auxiliary Lemma 2}
 			There exists positive constants $c_1, c_2$ such that with prob. at least $1 - c_1 \exp\big(\frac{-n\delta^2}{c_2 \tilde{\sigma}^2}\big)$, we have
 			\begin{equation*}
@@ -1013,13 +1015,18 @@
 			\end{equation*}
 			for all $\Delta \in \partial \cF$ with $||\Delta||_\cF\geq 1$.
 		\end{block}
-		It suffices to prove the theorem for $g\in \partial\cF$ such that $||g||_\cF = 1$. Given $\Delta \in \partial \cF$ with $||\Delta||>1$. Apply the lemma for $g = \frac{\Delta}{||\Delta||_\cF} \in \cF$. Hence:
+		It suffices to prove the theorem for $g\in \partial\cF$ such that $||g||_\cF = 1$. Given $\Delta \in \partial \cF$ with $||\Delta||_\cF>1$, apply the lemma for $g = \frac{\Delta}{||\Delta||_\cF} \in \cF$. Hence:
 		\begin{align*}
 			\Big|\frac{\tilde \sigma}{n}\sum_{i = 1}^{n}w_i\,\Delta(\bx_i)\,\Big| &\leq c_1 \delta ||\Delta||_n + c_2\delta^2||\Delta||_n + \frac{1}{16}\overbrace{\frac{||\Delta||_n^2}{||\Delta||_\cF}}^{\leq ||\Delta||_n^2}.
 		\end{align*}
+		\end{small}
 	\end{frame}
+
 	\begin{frame}
 		\frametitle{Proof of Auxiliary Lemma 2}
+		\begin{small}
+
+		\end{small}
 		\begin{itemize}
 			\item We first consider it over $\{||g\,||_n\leq t\}$. Define
 			\begin{small}
@@ -1036,19 +1043,19 @@
 					\Big|.
 			\end{equation*}
             \end{small}
-			Lipschitz with constant $\frac{\tilde \sigma}{\sqrt{n}}$. Consequently,
+			Lipschitz with constant $\frac{\tilde \sigma t}{\sqrt{n}}$. Consequently,
 			\begin{small}
 			\begin{equation*}
 				\Prob\big[Z_n(t)\geq \E[Z_n(t)] + u\big] \leq \exp\Big(\frac{-nu^2}{2t^2\tilde{\sigma}^2}\Big).
 			\end{equation*}
 			\end{small}
-		\item We first derive a bound for $t = \delta$. Note that $\E[Z_n(\delta)]\leq \tilde{\sigma}\cG_n(\delta)\leq \delta^2$.
+		\item Let $t = \delta$. Note that $\E[Z_n(\delta)]\leq \tilde{\sigma}\cG_n(\delta)\leq \delta^2$.
 		\begin{small}
 			\begin{equation*}
 			\Prob\big[Z_n(\delta)\geq 2\delta^2\big] \leq \exp\Big(\frac{-n\delta^2}{2\tilde{\sigma}^2}\Big).
 			\end{equation*}
 		\end{small}
-		\item Also note that $\E[Z_n(t)] = \tilde{\sigma}\leq \tilde{\sigma}\cG_n(t) = t\frac{\tilde{\sigma}\cG_n(t)}{t} \leq t\frac{\tilde{\sigma}\cG_n(t)}{\delta} \leq t \delta$:
+		\item Also note that $\E[Z_n(t)] \leq \tilde{\sigma}\cG_n(t) = t\frac{\tilde{\sigma}\cG_n(t)}{t} \leq t\frac{\tilde{\sigma}\cG_n(\delta)}{\delta} \leq t \delta$:
 		\begin{equation*}
 			\Prob\Big[Z_n(t) \geq t\delta + \frac{t^2}{32}\Big] \leq \exp\Big(\frac{-c_2 nt^2}{\tilde{\sigma}^2}\Big), \text{ for } t>\delta.
 		\end{equation*}
@@ -1070,7 +1077,7 @@
 			\item For $a, b \in \mathbb{R}$, let $\mathcal{E}(a, b)$ be the event that (2) is violated for some function such that $||g\,||_n \in [a, b]$ and $||g\,||_\cF = 1$.
 			\item For $m \in \mathbb{I}$, define $t_m = 2^m \delta$. We have $\mathcal{E} = \mathcal{E}(0, t_0) \cup \Big(\bigcup_{m = 0}^{\infty}\mathcal{E}(t_m, t_{m+1})\Big)$.
 			\item Hence, $\Prob[\mathcal{E}] \leq \Prob[\mathcal{E}(0, t_0)] + \sum_{m = 0}^{\infty} \Prob[\mathcal{E}(t_m, t_{m+1})]$.
-			\item Since $t = \delta$, we have $\Prob[\mathcal{E}(0, t_0)] \leq \Prob\big[Z_n(\delta)\geq 2\delta^2\big] \leq \exp\big(\frac{-n\delta^2}{2\tilde{\sigma}^2}\big)$.
+			\item Since $t_0 = \delta$, we have $\Prob[\mathcal{E}(0, t_0)] \leq \Prob\big[Z_n(\delta)\geq 2\delta^2\big] \leq \exp\big(\frac{-n\delta^2}{2\tilde{\sigma}^2}\big)$.
 			\end{small}
 		\end{itemize}
 	\end{frame}
@@ -1100,55 +1107,65 @@
 		\end{small}\qed
 		\end{itemize}
 	\end{frame}
-\end{document}
 
-			Hence 
-\begin{small}
+\section{Kernel Ridge Regression}
+\frame{\sectionpage}
 
-	
-	\vspace{-0.3cm}
-	\begin{align*}
-	\frac{1}{2}||\Dhat||_n^2 &\leq \frac{1}{2n}\sum_{i = 1}^{n}\Big[ \big(\Dtilde_i - \Dhat_i\big) (2\sigma w_i - \Dtilde_i - \Dhat_i) + 2\sigma w_i \Dhat_i\Big]\\ 
-	&\leq\frac{1}{n}\sum_{i = 1}^{n}\sigma w_i \Dtilde_i + \frac{1}{2} ||\fstar_i - \ftilde_i||_n^2	 \leq \frac{1}{2} \,||\fstar_i - \ftilde_i\,||_n^2 + \frac{\sigma}{n}\Big|\sum_{i = 1}^{n}w_i \Dtilde_i\Big|.
-	\end{align*}
-\end{small}		
-
-	\begin{frame}
-	\frametitle{Parametric Example: Bounds for Linear Regression}
-	\begin{itemize}
-		\item Consider $y_i = \langle \boldsymbol{\theta^\star}, \bx_i \rangle + w_i$ with $\boldsymbol{\theta}^\star \in \mathbb{R}^d$.
-		\item Hypothesis class: $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$.
-		\item Let $\mathbf{X} \in \mathbb{R}^{d \times n}$ be the design matrix with rank $r$.
-		\item $\cF = \cF^\star$ and convex. Thus star-shaped around any point.			
-		\item $\forall  f_{\boldsymbol{\theta}} \in \cF$, the function $\boldsymbol{\theta} \to  ||f_{\boldsymbol{\theta}}\,||_n^2 = \frac{||\mathbf{X}\boldsymbol{\theta}||_2^2}{n}$, defines a norm on $\mathrm{Range}(\mathbf{X})$ and $B(\delta; \cF)$ is isomorphic to a $\delta$-ball in $\mathrm{Range}(\mathbf{X})$. 
-		\item
-		Dimension of $\mathrm{Range}(\mathbf{X})$ is $r$. By a volume argument:
+\begin{frame}
+	\frametitle{Local Gaussian Complexity of unit Ball of an RKHS}
+	\begin{block}{Theorem}
+		Consider an RKHS with kernel $k$. For a given set of points $\{\bx_i\}_{i = 1}^{n}$, let $\hat{\mu}_1 \geq \hat{\mu}_2 \geq \dots \geq \hat{\mu}_n \geq 0$ be the eigenvalues of normalized kernel matrix $\mathbf{K}$ with entries $\mathbf{K}_{ij} = k(\bx_i, \bx_j)/n$. For all $\delta >0$, we have
 		\begin{equation*}
-		\log\Big(\mathcal{N}\big(t, B(\delta; \cF)\big)\Big) \leq r \log\big(1 + \frac{2\delta}{t}\big).
+			\E\Bigg[\sup_{
+		\begin{scriptsize}
+		\begin{matrix}
+		||f\,||_\cF \leq 1\\
+		||f\,||_n\leq \delta
+		\end{matrix}
+		\end{scriptsize}}
+	\Big|\frac{1}{n} \sum_{i = 1}^{n} w_i f\,(\bx_i)\,\Big|\Bigg] \leq \sqrt{\frac{2}{n}}\sqrt{\sum_{j = 1}^{n} \min\big(\delta^2, \hat\mu_j\big)}
 		\end{equation*}
-		\item We have
+	\end{block}
+		It suffices to consider functions of the form $g(.) = \frac{1}{\sqrt{n}} \sum_{i = 1}^{n} \alpha_i k(., \bx_i)$. Any function of the Hilbert space $\cF$ can be written as $f = g + g^\perp$. We must have $g\,^\perp(\bx_i) = \langle g\,^\perp, k\,(., \bx)\rangle = 0$. We also have $||f\,||_\cF^2 = ||g\,||_\cF^2 + ||g\,^\perp||_\cF^2$. Without loss of generality, we can assume $g\,^\perp = 0$.	
+\end{frame}
+\begin{frame}
+	\begin{itemize}
+		\item The constraint $||g\,||_n\leq \delta$ is equivalent to $||\mathbf{K}\alpha||_2 \leq \delta$.
+		\item The constraint $||g\,||_\cF\leq 1$ is equivalent to $\alpha^\top\mathbf{K}\alpha \leq 1$.
+		\item The local complexity:
 		\begin{equation*}
-		\frac{1}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log \mathcal{N}\big(t\,; B\,(\delta; \cF^\star)\big)} \;dt \leq c\delta \sqrt{\frac{r}{n}} \implies ||\fhat - \fstar||_n \leq c\sigma\sqrt{\frac{r}{n}}.
+		\cG_n(\delta) = \frac{1}{\sqrt{n}}\E\Bigg[\sup_{
+			\begin{scriptsize}
+			\begin{matrix}
+			\alpha^\top \mathbf{K} \alpha \leq 1\\
+			\alpha \mathbf{K}^2\alpha \leq \delta^2
+			\end{matrix}
+			\end{scriptsize}}
+		\Big|w^\top \mathbf{K} \alpha\Big|\Bigg]
+		\end{equation*}
+		\item $\mathbf{K}$ is PSD, hence $\mathbf{K} = \mathbf{U}^\top \Lambda \mathbf{U}$: $
+		\cG_n(\delta) = \frac{1}{\sqrt{n}} \E\big[\sup_{\beta \in D} |w^\top \beta|\big]$
+		where $D = \Big\{\beta\in \mathbb{R}^n\; \big| \;||\beta\,||_2^2 \leq \delta^2, \sum_{j = 1}^{n}\frac{\beta_j^2}{\hat \mu_j} \leq 1\Big\}$
+		\item Define $\mathcal{E} = \{\beta \in \mathbb{R}^d\; \big|\; \sum_{j = 1}^{n} \eta_j \beta_j^2 \leq 2\}$, where $\eta_j = \max\{\delta^{-2}, \hat{\mu}_j^{-1}\}$
+		\item For any $\beta \in D$, we have $
+			\sum_{j = 1}^{n} \max\{\delta^{-2}, \hat{\mu}_j^{-1}\} \beta_j^2 \leq \sum_{j = 1}^{m} \frac{\beta_j^2}{\delta^2} + \frac{\beta_j^2}{\hat\mu_j} \leq 2.$ Hence $D \subseteq D$.
+		\item As a result, by H\"older Inequality
+		\begin{equation*}
+			\cG_n(\delta) \leq \sqrt{\frac{2}{n}}\E\sqrt{\sum_{j = 1}^{n} \frac{w_j^2}{\eta_j}} \leq \sqrt{\frac{2}{n}}\sqrt{\sum_{j = 1}^{n} \frac{1}{\eta_j}}. \qed
 		\end{equation*}
 	\end{itemize}
 \end{frame}
 
 \begin{frame}
-	\frametitle{Non-Parametric Example: Bounds for Lipschitz Functions}
-	\begin{itemize}
-		\item Consider $y_i = \langle \boldsymbol{\theta^\star}, \bx_i \rangle + w_i$ with $\boldsymbol{\theta}^\star \in \mathbb{R}^d$.
-		\item Hypothesis class: $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$.
-		\item Let $\mathbf{X} \in \mathbb{R}^{d \times n}$ be the design matrix with rank $r$.
-		\item $\cF = \cF^\star$ and convex. Thus star-shaped around any point.			
-		\item $\forall  f_{\boldsymbol{\theta}} \in \cF$, the function $\boldsymbol{\theta} \to  ||f_{\boldsymbol{\theta}}\,||_n^2 = \frac{||\mathbf{X}\boldsymbol{\theta}||_2^2}{n}$, defines a norm on $\mathrm{Range}(\mathbf{X})$ and $B(\delta; \cF)$ is isomorphic to a $\delta$-ball in $\mathrm{Range}(\mathbf{X})$. 
-		\item
-		Dimension of $\mathrm{Range}(\mathbf{X})$ is $r$. By a volume argument:
+	\begin{block}{Corollary}
+		Any $\delta>0$ satisfying
 		\begin{equation*}
-		\log\Big(\mathcal{N}\big(t, B(\delta; \cF)\big)\Big) \leq r \log\big(1 + \frac{2\delta}{t}\big).
+			\sqrt{\frac{2}{n}}\sqrt{\sum_{j = 1}^{n} \min\big(\delta^2, \hat\mu_j\big)} \leq \frac{R}{4\sigma} \delta,
 		\end{equation*}
-		\item We have
-		\begin{equation*}
-		\frac{1}{\sqrt{n}} \int_{\frac{\delta^2}{4\sigma}}^{\delta} \sqrt{\log \mathcal{N}\big(t\,; B\,(\delta; \cF^\star)\big)} \;dt \leq c\delta \sqrt{\frac{r}{n}} \implies ||\fhat - \fstar||_n \leq c\sigma\sqrt{\frac{r}{n}}.
-		\end{equation*}
-	\end{itemize}
+		satisfies the critical inequality.
+	\end{block}
+
+	Some examples from the book here...
 \end{frame}
+
+\end{document}
