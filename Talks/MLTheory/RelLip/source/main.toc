@@ -1,0 +1,5 @@
+\beamer@sectionintoc {1}{Online Convex Optimization}{3}{0}{1}
+\beamer@sectionintoc {2}{Classic Results for Lipschitz Losses}{10}{0}{2}
+\beamer@sectionintoc {3}{Relative Lipschitz Functions}{13}{0}{3}
+\beamer@sectionintoc {4}{Relative Lipschitz Functions in Online Learning}{15}{0}{4}
+\beamer@sectionintoc {5}{Bibliography}{21}{0}{5}
