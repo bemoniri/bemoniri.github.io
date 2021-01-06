@@ -517,12 +517,15 @@
 	\end{frame}
 	
 	\begin{frame}				
-		\begin{block}{Star-Shaped Classes}
-			A function class $\cF$ is star-shaped if for any $\alpha \in [0,1]$ we have
+		\begin{block}{Local Gaussian Complexity}
 			\begin{equation*}
-			f \in \cF \implies \alpha f \in \cF.
+			\cG_n(\delta)  \E_w\Bigg[\sup_{
+				\begin{scriptsize}
+				\begin{matrix}
+				g\in \cF\\||\,g\,||_n \leq \delta
+				\end{matrix}
+				\end{scriptsize}}\Big|\frac{1}{n}\sum_{i = 1}^{n}w_i\, f\;(\bx_i)\Big|\Bigg] 
 			\end{equation*}
-			\vspace{-0.5cm}
 		\end{block}
 		
 		\begin{block}{Critical Inequality}
@@ -615,7 +618,7 @@
 			\item The Dudley's integral can be bounded as follows:
 			\begin{small}
 			\begin{align*}
-				\frac{1}{\sqrt{n}}\int_{0}^{\delta}\sqrt{\log N_n\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\; &\lesssim \int_{0}^{\delta}\sqrt{\log N_\infty\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\\
+				\frac{1}{\sqrt{n}}\int_{0}^{\delta}\sqrt{\log N_n\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\; &\lesssim\frac{1}{\sqrt{n}} \int_{0}^{\delta}\sqrt{\log N_\infty\Big(t; B_n\big(\cF_{\mathrm{Lip}}(2L)\big)\Big)} \; dt\\
 				&\lesssim \frac{1}{\sqrt{n}}\int_{0}^{\delta} \Big(\frac{L}{t}\Big)^{\frac{1}{2}} \; dt \; \lesssim \sqrt{\frac{L\delta}{n}}.
 			\end{align*}
 			\end{small}	
