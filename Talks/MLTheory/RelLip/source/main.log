@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.8)  6 JAN 2021 23:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.12.8)  7 JAN 2021 14:15
 entering extended mode
  restricted \write18 enabled.
  Source specials enabled.
@@ -1283,11 +1283,21 @@ Overfull \hbox (56.90549pt too wide) in paragraph at lines 248--248
 File: graphics/polloPallido.png Graphic file (type bmp)
 <graphics/polloPallido.png>
 
-Overfull \hbox (56.90549pt too wide) in paragraph at lines 278--278
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 280--280
 [][]  
  []
 
 [22
+
+]
+File: graphics/polloPallido.png Graphic file (type bmp)
+<graphics/polloPallido.png>
+
+Overfull \hbox (56.90549pt too wide) in paragraph at lines 280--280
+[][]  
+ []
+
+[23
 
 ]
 \tf@nav=\write6
@@ -1299,21 +1309,21 @@ Overfull \hbox (56.90549pt too wide) in paragraph at lines 278--278
 \tf@snm=\write8
 \openout8 = `main.snm'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 281.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 281.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 283.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 283.
  (./main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 281.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 281.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 283.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 283.
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: CF7F5549C60F6EA75C6F12FD77D9D7AD;363.
  ) 
 Here is how much of TeX's memory you used:
  26612 strings out of 479418
  513668 string characters out of 5884585
- 755644 words of memory out of 5000000
+ 766023 words of memory out of 5000000
  43536 multiletter control sequences out of 15000+600000
  560485 words of font info for 71 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  60i,16n,78p,798b,780s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on main.pdf (22 pages).
+Output written on main.pdf (23 pages).
