@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Frequentist Setting}{4}{0}{1}
+\beamer@sectionintoc {2}{‌Bayesian Setting}{30}{0}{2}

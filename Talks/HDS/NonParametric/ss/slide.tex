@@ -1,0 +1,166 @@
+\documentclass[11pt]{beamer}
+\usetheme{CambridgeUS}           % Use metropolis theme
+\usepackage{amssymb}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\cL}{\mathcal{L}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\cG}{\mathcal{G}}
+
+\newcommand{\fstar}{f\,^\star}
+\newcommand{\fhat}{\widehat{f}}
+\newcommand{\ftilde}{\widetilde{f}}
+
+\newcommand{\Dhat}{\widehat{\Delta}}
+\newcommand{\Dtilde}{\widetilde{\Delta}}
+
+
+\title[Non-Parametric Least Squares]{Non-Parametric Least Squares} 
+\subtitle{Based on Chapter 13 of \textit{High Dimensional Statistics}\\ by Martin Wainwright}
+\author[Behrad Moniri (EE @ Sharif)]{Behrad Moniri}
+\institute[]{
+	Department of Electrical Engineering\\
+	Sharif University of Technology\\
+	\vspace{2cm}
+	
+	Statistics Reading Group\\ Tehran Institute for Advanced Studies (TeIAS)
+}
+\date{}
+\newtheorem{prop}{Proposition}
+
+
+
+
+\begin{document}	
+	\begin{frame}
+		\titlepage
+	\end{frame}		
+	\section{Review of Definitions}
+	\frame{\sectionpage}
+	
+	\begin{frame}
+		\frametitle{Review: Estimator, Models, and Definitions}
+		\begin{block}{Model}
+			Let $\cF$ be a function class and $\fstar \in \cF$ and $\{\bx_i\}_{i = 1}^{n}$ be a set of $n$ covariates. Assume that $y_i = \fstar(\bx_i) + \sigma w_i$ where $w_i \sim \mathcal{N}(0, 1)$.
+		\end{block}
+		\begin{block}{Estimator}
+			Given the set $\{(\bx_1, y_1), \dots, (\bx_n, y_n) \}$:
+			\begin{small}
+				\vspace{-0.2cm}
+				\begin{equation*}
+				\fhat \in \arg\min_{f\in\cF} \frac{1}{n} \sum_{i = 1}^{n} \Big(y_i - f\,(\bx_i)\Big)^2.
+				\end{equation*}
+				\vspace{-0.3cm}
+			\end{small}
+		\end{block}
+		\begin{block}{Measure of Goodness}
+			Let $\{\bx_i\}_{i = 1}^{n}$ be the set of fixed covariates:
+			\vspace{-0.3cm}
+			\begin{small}
+				\begin{equation*}
+				||f-\fstar||_n^2 := \Bigg[\frac{1}{n}\sum_{i = 1}^n \big(f\,(\bx_i) - \fstar(\bx_i)\big)^2\Bigg].
+				\end{equation*}
+			\end{small}			
+			\vspace{-0.3cm}
+		\end{block}
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Review: Estimator, Models, and Definitions}				
+		\begin{block}{Local Gaussian Complexity}
+			\begin{equation*}
+			\cG_n(\delta) = \E_w\Bigg[\sup_{
+				\begin{scriptsize}
+				\begin{matrix}
+				g\in \cF\\||\,g\,||_n \leq \delta
+				\end{matrix}
+				\end{scriptsize}}\Big|\frac{1}{n}\sum_{i = 1}^{n}w_i\, f\;(\bx_i)\Big|\Bigg] 
+			\end{equation*}
+		\end{block}
+		
+		\begin{block}{Critical Inequality}
+			The \textit{critical inequality}:
+			\begin{equation*}
+			\frac{\delta}{2\sigma} \geq \frac{\cG_n(\delta; \cF^\star)}{\delta}
+			\end{equation*}			
+			\vspace{-0.3cm}
+		\end{block}										
+		\begin{block}{Existence of Critical Radius}
+			For any star shaped class $\mathcal{F}^\star$, the function $\delta \rightarrow \frac{\cG_n(\delta, \cF^\star)}{\delta}$ is non-increasing on $(0, \infty)$. Consequently, for any $c>0$, the inequality $\frac{\cG_n(\delta, \cF^\star)}{\delta} \leq c\delta$
+			has a smallest positive solution.
+		\end{block}			
+	\end{frame}
+	
+	\section{Review of Theorems}
+	\frame{\sectionpage}
+	
+	\begin{frame}
+		\frametitle{Review: Realizable Case}
+		\begin{block}{Auxiliary Lemma}
+			Let $\cF^\star$ be a star-shaped class and $\delta$ satisfy the critical inequality.  Define the bad event $A(u)$ as
+			\begin{small}
+				
+				\vspace{-0.3cm}
+				\begin{equation*}
+				A(u) = \Bigg\{\exists g \in \cF^\star, ||g||_n \geq u \;:\; \Big|\frac{\sigma}{n}\sum_{i = 1}^{n} w_i g(\bx_i)\Big|\geq 2u ||g||_n\Bigg\}.
+				\end{equation*}
+			\end{small}
+			\vspace{-0.3cm}
+			
+			For a given $u \geq \delta$, we have 
+			$\Prob[A(u)]\leq \exp\big(\frac{-nu^2}{2\sigma^2}\big)$.
+		\end{block}		
+		\begin{block}{Theorem}
+			Suppose that the shifted function class $\cF^\star$ is star-shaped, and let $\delta$ be any solution to the critical inequality. Then for any $t \geq \delta$, the nonparametric least-squares estimate $\widehat{f_n}$ satisfies the bound
+			\begin{equation*}
+			\Prob\big[||\widehat{f_n} - \fstar ||_n^2 \geq 16t\delta\big] \leq \exp\Big(\frac{-nt\delta}{2\sigma^2}\Big)
+			\end{equation*}
+		\end{block}		
+	\end{frame}	
+
+	\begin{frame}
+	\frametitle{Review: Non-Realizable Case (Oracle Inequalities)}
+	\begin{block}{Oracle Inequality}
+		Let $\delta$ be any positive solution to the critical inequality
+		$\frac{\cG_n(\delta, \partial \cF)}{\delta} \leq \frac{\delta}{2\sigma}.$
+		
+		For any $t\geq \delta$, the non-parametric least-square estimate $\fhat$ satisfies the bound
+		\begin{small}
+			\begin{equation*}
+			||\fhat - \fstar||_n^2 \leq \inf_{\gamma \in (0, 1)}\Big\{\frac{1+\gamma}{1-\gamma} ||f-\fstar||_n^2 + \frac{c_0}{\gamma(1-\gamma)}t\delta\Big\} \text{  for all } f\in \cF, 
+			\end{equation*}
+		\end{small}
+		with probability at least $1 - c_1 \exp(-\frac{c_2 n t\delta}{\sigma^2})$.			
+	\end{block}		
+	\end{frame}
+	\section{Review of Some Examples}
+	\frame{\sectionpage}
+	
+	\begin{frame}
+	\frametitle{Some Examples: Realizable Case}
+	\begin{itemize}
+		\item (\textbf{Linear Regression}) $\cF = \{f_{\boldsymbol{\theta}}(.) = \langle \boldsymbol{\theta}, . \rangle\;|\; \boldsymbol{\theta} \in \mathbb{R}^d\}$. 			
+		\begin{equation*}
+		||\fhat - \fstar||_n \lesssim \sigma\sqrt{\frac{r}{n}}
+		\end{equation*}
+		\pause
+		\item (\textbf{Lipschitz}) $\cF_{\mathrm{Lip}}(L) = \{f:[0, 1] \to \mathbb{R} \big| f\,(0) = 0, f \text{ is L-Lip} \}$.
+		\begin{equation*}
+			||\fhat - \fstar||_n^2 \lesssim \Big(\frac{L\sigma^2}{n}\Big)^{\frac{2}{3}}
+		\end{equation*}				
+	\end{itemize}
+	\end{frame}	
+	\begin{frame}
+		\frametitle{Some Examples: Oracles Inequalities}
+		\begin{itemize}
+		\item (\textbf{Sparse}) $\cF(s) = \{f = \langle \boldsymbol{\theta}, .\rangle \, \big|\, ||\boldsymbol{\theta}||_0\leq s\}$.
+		\begin{equation*}
+		||\widehat{f} - \fstar\,||_n^2 \lesssim \inf_{f\,\in \cF(s)} ||f - \fstar\,||_n^2 +  {\frac{\sigma^2s\log(ed/s)}{n}}
+		\end{equation*}
+		\end{itemize}
+		\begin{block}{Note}
+			Note that $||\widehat{f} - \fstar\,||_n^2 = \frac{1}{n}\sum_{i = 1}^{n}\big(\langle \hat{\boldsymbol{\theta}} - \boldsymbol{\theta}^\star, \bx_i\rangle\big)^2 = \frac{||\mathbf{X}(\hat{\boldsymbol{\theta}} - \boldsymbol{\theta}^\star)||_2^2}{n}$. We need the RE condition to bound $||\hat{\boldsymbol{\theta}} - \boldsymbol{\theta}^\star||_2^2$.
+		\end{block}
+	\end{frame}
+\end{document}

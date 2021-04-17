@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{Quick Review of Information Theory}{4}{0}{1}
+\beamer@sectionintoc {2}{‌Bayesian Setting}{35}{0}{2}

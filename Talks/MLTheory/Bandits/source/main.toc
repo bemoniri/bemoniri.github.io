@@ -1,0 +1,4 @@
+\beamer@sectionintoc {1}{What are Bandits?}{3}{0}{1}
+\beamer@sectionintoc {2}{Bandit Algorithms}{9}{0}{2}
+\beamer@subsectionintoc {2}{1}{Explore then Commit}{10}{0}{2}
+\beamer@subsectionintoc {2}{2}{Upper Confidence Bound}{16}{0}{2}

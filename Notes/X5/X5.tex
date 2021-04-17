@@ -1,0 +1,244 @@
+\documentclass[]{article}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{note}{Note}
+
+%\renewcommand{\baselinestretch}{1.15}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\thetab}{\boldsymbol{{\theta}}}
+\newcommand{\h}{\mathbf{h}}
+
+\newcommand{\btheta}{{\boldsymbol{\theta}}}
+\newcommand{\bsigma}{{\boldsymbol{\sigma}}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cH}{\mathcal{H}}
+\newcommand{\cF}{\mathcal{F}}
+\newcommand{\Rad}{\mathcal{R}}
+\newcommand{\cX}{\mathcal{X}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\KL}{\mathrm{D}_{KL}}
+
+
+
+\title{On Bounding Radamacher Complexities}
+\author{Behrad Moniri\\
+	{\small Department of Electrical Engineering}\\{\small Sharif University of Technology}}
+\date{}
+
+\usepackage{sectsty} \sectionfont{\fontsize{15}{15}\selectfont}
+\begin{document}
+%	\setcounter{section}{-1}
+
+	\maketitle
+	%\tableofcontents
+	\begin{abstract}
+		We prove various properties of Radamacher complexities. We also present bounds for Radamacher complexity of various hypothesis classes.
+	\end{abstract}
+
+	\section{Radamacher Complexity}
+	The empirical Radamacher complexity of a class of real-valued functions $\cF$, given the set of instances $\{\bx_1, \dots, \bx_n\}$ is defined as
+	\begin{equation*}
+		\mathcal{R}_S(\cF) := \E_{\sigma_1, \dots, \sigma_n} \Big[\sup_{f\in\cF}\sum_{i = 1}^{n} \sigma_i f(\bx_i)\Big].
+	\end{equation*}
+	We define the (population) Radamacher complexity of class $\cF$ as
+	\begin{equation*}
+		\mathcal{R}_n(\cF) = \E_{\bx_1, \dots, \bx_n}\Big[\E_{\sigma_1, \dots, \sigma_n} \Big[\sup_{f\in\cF}\sum_{i = 1}^{n} \sigma_i f(\bx_i)\Big]\Big].
+	\end{equation*}
+	We also define a absolute valued Radamacher complexity of class $\cF$ as
+	\begin{equation*}
+	\widetilde{\mathcal{R}}_n(\cF) = \E_{\bx_1, \dots, \bx_n}\Big[\E_{\sigma_1, \dots, \sigma_n} \Big[\sup_{f\in\cF}\Big|\sum_{i = 1}^{n} \sigma_i f(\bx_i)\Big|\Big]\Big].
+	\end{equation*}
+		
+	\section{Basic Properties of Radamacher Complexity}
+	In this section, we will prove several basic properties of Radamacher complexity. Let $\cF$ and $\mathcal{G}$ be arbitrary hypothesis classes.
+	\begin{theorem}
+		Let $\mathcal{F} \subseteq \mathcal{G}$,
+		then $\mathcal{R}_n(\mathcal{F}) \leq \mathcal{R}_n(\mathcal{G})$.			
+	\end{theorem}
+	\begin{proof}
+		For any fixed $\bsigma$, we have
+		\begin{equation*}
+		\sup_{f\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i f(\bx_i) \leq \sup_{g\in\mathcal{G}}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i g(\bx_i),
+		\end{equation*}
+		because $\cF\subseteq \mathcal{G}$. Hence			
+		\begin{equation*}
+		\Rad_n(\cF) = \E_\bsigma\Big[\sup_{f\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i f(\bx_i)\Big] \leq \E_\bsigma\Big[\sup_{g\in\mathcal{G}}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i g(\bx_i)\Big] = \Rad_n(\mathcal{G}).
+		\end{equation*}
+		which concludes the proof.
+	\end{proof}
+	
+	\begin{theorem}
+		For any $\alpha \in \R$, $	
+		\mathcal{R}_n(\alpha\mathcal{F}) = |\alpha| \mathcal{R}_n(\mathcal{F})$.
+	\end{theorem}
+	\begin{proof}
+		The proof follows easily from the definition
+		\begin{equation*}
+		\Rad_n(\alpha\cF) = \E_\bsigma\Big[\sup_{f\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i \alpha f(\bx_i)\Big] = |\alpha|\;\E_\bsigma\Big[\sup_{f\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i  f(\bx_i)\Big] = |\alpha|\,\Rad_n(\cF).
+		\end{equation*}
+		the second equality follows from the fact that $-\sigma_i$ and $\sigma_i$ have the same distribution.
+	\end{proof}
+	
+	\begin{theorem}
+		$\mathcal{R}_n(\mathcal{F}) = \mathcal{R}_n\Big(\mathrm{conv}(\mathcal{F})\Big)$.
+	\end{theorem}	
+	\begin{proof}
+		Based on theorem (1), we have 
+		$\Rad_n(\cF) \leq \Rad_n(\mathrm{conv}\big(\cF)\big)$.
+		Based on the definition of Radamacher complexity,
+		\begin{align*}
+		\mathcal{R}_n\Big(\mathrm{conv}(\mathcal{F})\Big) &= \E_\bsigma\Big[\sup_{f\in\mathrm{conv}(\cF)}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i  f(\bx_i)\Big]\\
+		&=\E_\bsigma\Big[\sup_{f_j\in\cF,\; \sum\alpha_i = 1}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i  \sum_{j} \alpha_j f_j(\bx_i)\Big].
+		\end{align*}
+		The maximum of a linear program occurs at a corner point. Hence
+		\begin{align*}
+		\E_\bsigma\Big[\sup_{f_j\in\cF,\; \sum\alpha_i = 1}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i  \sum_{j} \alpha_j f_j(\bx_i)\Big] = \E_\bsigma\Big[\sup_{f_k\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i f_k(\bx_i)\Big] = \Rad(\cF),
+		\end{align*}
+		which concludes the proof.
+	\end{proof}
+	
+	\begin{theorem}
+		$\mathcal{R}_n(\mathcal{F} + \mathcal{G})\leq \mathcal{R}_n(\mathcal{F}) + \mathcal{R}_n(\mathcal{G})$.
+	\end{theorem}
+	\begin{proof}
+		Using the basic property $\sup(a+b) \leq \sup(a) + \sup (b)$, we can write
+		\begin{align*}
+		\Rad_n(\cF + \mathcal{G})&=  \E_\bsigma\Big[\sup_{h\in\cF + \mathcal{G}}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i h(\bx_i)\Big]\\
+		&= \E_\bsigma\Big[\sup_{f\in\cF, \; g\in \mathcal{G}}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i\big( f(\bx_i) + g(\bx_i)\big)\Big]\\
+		&\leq\E_\bsigma\Big[\sup_{f\in\cF}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i f(\bx_i) \big)\Big] + \E_\bsigma\Big[\sup_{f\in\mathcal{G}}\frac{1}{n}\sum_{i = 1}^{n}\sigma_i g(\bx_i) \big)\Big]\\
+		&= \Rad_n(\cF) + \Rad_n(\mathcal{G}).
+		\end{align*}
+		This property is indeed tight!
+	\end{proof}
+	\begin{theorem}
+		$\widetilde{\mathcal{R}}_n(\mathcal{F} + \{g\})\leq \tilde{\mathcal{R}}_n(\mathcal{F}) + \frac{||g||_\infty}{\sqrt{n}}$.
+	\end{theorem}
+	\begin{proof}
+		Based on the definition of Radamacher complexity:
+		\begin{align*}
+		\widetilde\Rad_n\big(\mathcal{F} + \{g\}\big) &= \E_\bsigma\Big[\sup_{h\in\cF + \{g\}}\Big|\frac{1}{n}\sum_{i = 1}^{n}\sigma_i h(\bx_i)\Big|\Big]\\			
+		&= \E_\bsigma\Big[\sup_{f\in\cF}\Big|\frac{1}{n}\sum_{i = 1}^{n}\sigma_i \big(f(\bx_i) + g(\bx_i)\big)\Big|\Big]\\
+		&\leq \E_\bsigma\Big[\sup_{f\in\cF}\Big|\frac{1}{n}\sum_{i = 1}^{n}\sigma_i f(\bx_i)\Big|\Big] + \E_\bsigma\Big[\Big|\frac{1}{n}\sum_{i = 1}^{n}\sigma_i g(\bx_i)\Big|\Big]&&(\text{Triangle Inequality})\\
+		&= \Rad_n(\cF) + \E_\bsigma\Big|\frac{1}{n}\sum_{i = 1}^{n}\sigma_i g(\bx_i)\Big|\\
+		&\leq \Rad_n(\cF) +\frac{1}{n} \sqrt{\E_\bsigma\Big|\sum_{i = 1}^{n}\sigma_i g(\bx_i)\Big|^2}&&\text{(Jensen's Inequality)}\\
+		&=\Rad_n(\cF) + \sqrt{\E_\bsigma\Big[\sum_{i = 1}^{n} \sigma_i^2g^2(\bx_i) + \sum_{i \neq j} \sigma_i\sigma_j g(\bx_i)g(\bx_j)\Big]}\\
+		&=\Rad_n(\cF) + \sqrt{\E_\bsigma\sum_{i = 1}^{n} \sigma_i^2g^2(\bx_i)} \leq \Rad_n(\cF) + \frac{||g||_\infty}{\sqrt{n}}.\\
+		\end{align*}
+		Which concludes the proof.
+	\end{proof}
+	
+	\section{Complexity of Unit Balls}
+	
+	Let $\cF = \{x\to \langle \btheta, \bx \rangle\;|\;\btheta \in \Theta\}$ be a hypothesis class. In this section, we will bound the Radamacher complexity of $\cF$ for different choices of $\Theta$.
+	
+	\subsection{$L_2$ Ball}
+	
+	Assume that $\Theta = \{\btheta \in \R^n \;|\; ||\theta||_2 \leq r\}$ and let $S = \{\bx_1, \bx_2, \dots, \bx_n\}$ be the sample points. We can write the following chain of inequalities for the empirical Radamacher complexity.
+	
+	\begin{align*}
+	\Rad_S(\cF) &= \E_{\bsigma}\Big[\sup_{||\theta||_2 \leq r} \frac{1}{n}\sum_{i = 1}^{n} \sigma_i \langle \bx_i, \btheta\rangle\Big]
+	= \frac{1}{n} \E_{\bsigma} \Big[\sup_{||\theta||_2 \leq r} \Big\langle \sum_{i = 1}^{n} \sigma_i \bx_i, \btheta\Big\rangle\Big]\\		
+	&\leq \frac{1}{n} \E_{\bsigma} \Big[\sup_{||\theta||_2 \leq r} \big|\big| \sum_{i = 1}^{n} \sigma_i \bx_i\big|\big|_2 \big|\big|\btheta\big|\big|_2\Big] && (\text{Cauchy-Schwartz})\\		
+	&\leq \frac{r}{n} \E_{\bsigma} \Big[ \big|\big| \sum_{i = 1}^{n} \sigma_i \bx_i\big|\big|_2 \Big] 
+	= \frac{r}{n} \E_{\bsigma} \Big[ \big|\big| \sum_{i = 1}^{n} (\sigma_i x_{i1}, \dots, \sigma_i x_{id})^\top \big|\big|_2 \Big]\\
+	&= \frac{r}{n} \E_{\bsigma} \Bigg[ \sqrt{\sum_{j = 1}^{d} \Big(\sum_{i = 1}^{n} \sigma_i x_{ij}\Big)^2} \Bigg] \\
+	&\leq \frac{r}{n}  \sqrt{  \sum_{j = 1}^{d} \E_{\bsigma}\Big(\sum_{i = 1}^{n} \sigma_i x_{ij}\Big)^2} && (\text{Jensen's Inequality})\\
+	&\leq \frac{r}{n}  \sqrt{  d \max_j \Big[ \E_{\bsigma}\Big(\sum_{i = 1}^{n} \sigma_i x_{ij} \Big)^2 \Big]}
+	 \leq \frac{r}{n}\sqrt{dnb^2} = \frac{rb\sqrt{d}}{\sqrt{n}}.
+	\end{align*}
+
+
+	\subsection{$L_1$ Ball}
+	
+	Now, consider  $\Theta = \{\btheta \in \R^n \;\big|\; ||\theta||_1 \leq r\}$. The empirical Radamacher complexity can be bounded from above as follows:	
+	\begin{align*}
+	\Rad_S(\cF) &= \E_{\bsigma}\Big[\sup_{||\theta||_1 \leq r} \frac{1}{n}\sum_{i = 1}^{n} \sigma_i \langle \bx_i, \btheta\rangle\Big]
+	= \frac{1}{n} \E_{\bsigma} \Big[\sup_{||\theta||_1 \leq r} \Big\langle \sum_{i = 1}^{n} \sigma_i \bx_i, \btheta\Big\rangle\Big]\\		
+	&\leq \frac{1}{n} \E_{\bsigma} \Big[\sup_{||\theta||_1 \leq r} \big|\big| \sum_{i = 1}^{n} \sigma_i \bx_i\big|\big|_\infty \big|\big|\btheta\big|\big|_1\Big] 
+	\leq \frac{r}{n} \E_{\bsigma} \Big[\;\; \big|\big| \sum_{i = 1}^{n} \sigma_i \bx_i\big|\big|_\infty\Big]	&& (\text{H\"older's Inequality})\\
+	&\leq \frac{r}{n} \E_{\bsigma} \Big[\;\; \max_{j\in [d]} \underbrace{\sum_{i = 1}^{n} \sigma_i x_{ij}}_{H_j}\Big].
+	\end{align*}
+	The term $\E_\bsigma\Big[ \max_{j\in [d]} (H_j)\Big]$ can be bounded from above by $b\sqrt{2\log(d)}$ using Massart's Lemma \cite{mohri}:
+	\begin{align*}
+	\exp\Big(\lambda \E\max_{j\in [d]} \sum_{i = 1}^n \sigma_i x_{ij}\Big) &\leq \E\Big[\exp\big(\lambda \E\max_{j\in [d]} \sum_{i = 1}^{n} \sigma_i x_{ij}\big)\Big] && \text{(Jensen's Inequality)}\\
+	&\leq \E\Big[\max_{j\in [d]} \exp\big(\lambda  \sum_{i = 1}^n \sigma_i x_{ij}\big)\Big]\\
+	&\leq \E\Big[\sum_{j = 1}^{d} \exp\big(\lambda  \sum_{i = 1}^n \sigma_i x_{ij}\big)\Big]\\
+	&\leq \sum_{j = 1}^{d} \prod_{i = 1}^{n}\E e^{\lambda \sigma_i x_{ij}} =  \sum_{j = 1}^{d} \prod_{i = 1}^{n} \Big[\frac{1}{2} e^{\lambda x_{ij}} + \frac{1}{2} e^{-\lambda x_{ij}}\Big]\\
+	&=  \sum_{j = 1}^{d} \prod_{i = 1}^{n} e^{{\lambda x_{ij}^2}/2} \leq d \exp\Big(\frac{\lambda^2 b^2}{2}\Big).
+	\end{align*}
+	By optimizing $\lambda$, we can conclude that
+	$\E_\bsigma \Big[\max_{j\in [d]} \sum_{i = 1}^n \sigma_i x_{ij}\Big] \leq b\sqrt{2\log(d)}$. Thus
+	\begin{equation*}
+	\Rad_S(\cF) \leq \frac{rb\sqrt{2\log(d)}}{\sqrt{n}}.
+	\end{equation*}
+	
+	\subsection{RKHS Ball}
+	Let $k:\cX \times \cX \to \R$ be a PSD kernel and $\cH$ be the corresponding Reproducing Kernel Hilbert Space. Let $\cH_\lambda = \{f\in \cH \;:\; ||f||_\cH \leq \lambda\}$.
+    The empirical Radamacher Complexity of the this hypothesis class is defined as
+	\begin{align*}
+	\Rad_S(\cF) &= \E_{\bsigma}\Big[\sup_{f \in \cH_\lambda} \frac{1}{n}\sum_{i = 1}^{n} \sigma_i f(\bx_i)\Big].
+	\end{align*}
+	Based on the reproducing property of the RKHS, $f(\bx_i)$ can be written as $ f(\bx_i) = \langle f, k(., \bx_i) \rangle_\cH$, where $k(., \bx_i)$ is the evaluation functional. Hence
+	\begin{align*}
+	\Rad_S(\cF) &= \E_{\bsigma}\Big[\sup_{f \in \cH_\lambda} \frac{1}{n}\sum_{i = 1}^{n} \sigma_i \langle f, k(., \bx_i)\rangle_\cH\Big]
+	= \E_{\bsigma}\Big[\sup_{f \in \cH_\lambda}  \langle f, \frac{1}{n}\sum_{i = 1}^{n} \sigma_i k(., \bx_i)\rangle_\cH\Big]\\
+	&\leq \E_{\bsigma}\Big[\sup_{f \in \cH_\lambda}  ||f||_\cH .\; \Big|\Big|\frac{1}{n}\sum_{i = 1}^{n} \sigma_i k(., \bx_i)\Big|\Big|_\cH\Big] && \text{(Cauchy-Schwartz)}\\
+	&\leq \frac{\lambda}{n}\E_{\bsigma} \Big|\Big|\sum_{i = 1}^{n} \sigma_i k(., \bx_i)\Big|\Big|_\cH\\
+	&\leq \frac{\lambda}{n}\sqrt{\E_{\bsigma}  \Big|\Big|\sum_{i = 1}^{n} \sigma_i k(., \bx_i)\Big|\Big|_\cH^2} = \frac{\lambda}{n}\sqrt{\E_{\bsigma}  \Big\langle\sum_{i = 1}^{n} \sigma_i k(., \bx_i), \sum_{j = 1}^{n} \sigma_j k(., \bx_j)\Big\rangle_\cH} && \text{(Jensen's Inequality)}\\
+	&= \frac{\lambda}{n}\sqrt{\E_{\bsigma} \sum_{j = 1}^{n} \sum_{i = 1}^{n} \sigma_i \sigma_j\Big\langle k(., \bx_i), k(., \bx_j)\Big\rangle_\cH} =  \frac{\lambda}{n}\sqrt{\E_{\bsigma} \sum_{j = 1}^{n} \sum_{i = 1}^{n} \sigma_i \sigma_j k(\bx_i, \bx_j)} \\
+	&\leq \frac{\lambda}{n} \sqrt{\sum_{i = 1}^{n}k(\bx_i, \bx_i)}	\leq
+	 \frac{C_k\lambda}{\sqrt{n}}.
+	\end{align*}
+	Where $C_k^2 = \sup_{\bx} K(\bx, \bx)$.
+	
+	
+	\begin{align*}
+	\mathcal{R}_S(\cH) &= \frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{n}\sigma_if_\theta(x_i)\Bigg]\\
+	&=\frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{n}\sigma_i \sum_{j = 1}^{m} w_j \Phi(u_j^\top x)\Bigg]\\
+	&=\frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{n}\sigma_i \sum_{j = 1}^{m} w_j ||u_j||_2\Phi(\hat u_j^\top x)\Bigg] && (\forall a > 0: \Phi(ax) = a \Phi(x))\\
+	&=\frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{n}\sigma_i \sum_{j = 1}^{m} w_j ||u_j||_2\Phi(\hat u_j^\top x)\Bigg]\\
+	&=\frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{m} w_j ||u_j||_2
+	\sum_{i = 1}^{n}\sigma_i \Phi(\hat u_j^\top x_i)\Bigg]\\
+	&\leq \frac{1}{n}\E_{\sigma_i}\Bigg[\sup_{f_\theta \in \cH} \sum_{i = 1}^{m} |w_j|\; ||u_j||_2
+	\max_{j\in[m]}\Big|\sum_{i = 1}^{n}\sigma_i \Phi(\hat u_j^\top x_i)\Big|\Bigg]&&
+	\text{
+		(Holder)}
+	\\
+	&\leq \frac{B}{n}\E_{\sigma_i}\Bigg[
+	\max_{j\in[m]}\Big|\sum_{i = 1}^{n}\sigma_i \Phi(\hat u_j^\top x_i)\Big|\Bigg]	\\
+	&\leq \frac{B}{n}\E_{\sigma_i}\Bigg[
+	\sup_{||u||=1}\Big|\sigma_i \Phi( u^\top x_i)\Big|\Bigg]	\\
+	&\leq \frac{B}{n}\times 2n \mathcal{R}_n\Bigg(\{x\to\Phi(u^\top x): ||u||_2\leq 1\}\Bigg) && \text{به کمک راهنمایی}	\\
+	&\leq \frac{B}{n}\times 2n \mathcal{R}_n\Bigg(\{x\to u^\top x: ||u||_2\leq 1\}\Bigg) && \text{لم تالاگراند و لیپشیتز بودن رِلو}	\\
+	&\leq \frac{B}{n}2n \frac{C}{\sqrt{n}} = \frac{2BC}{\sqrt{n}}.
+	\end{align*}
+	\bibliography{bib}
+	\bibliographystyle{alpha}
+	
+	
+\end{document}

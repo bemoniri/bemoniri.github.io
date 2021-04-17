@@ -1,0 +1,58 @@
+\documentclass[]{article}  
+
+% Default font is the helvetica postscript font
+\usepackage{helvet}
+\usepackage{hyperref}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[a4paper,margin=25mm]{geometry}
+\usepackage{fancyhdr}
+\usepackage{lipsum}
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{graphicx}
+
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{defn}[theorem]{Definition}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{corollary}[theorem]{Corollary}
+%\renewcommand{\baselinestretch}{1.15}
+\newcommand{\s}{\mathbf{s}}
+\newcommand{\ba}{\mathbf{a}}
+\newcommand{\bw}{\mathbf{w}}
+\newcommand{\bx}{\mathbf{x}}
+\newcommand{\bv}{\mathbf{v}}
+\newcommand{\thetab}{\boldsymbol{{\theta}}}
+\newcommand{\h}{\mathbf{h}}
+
+\newcommand{\cA}{\mathcal{A}}
+\newcommand{\cW}{\mathcal{W}}
+\newcommand{\cH}{\mathcal{H}}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\mathbb{E}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\KL}{\mathrm{D}_{KL}}
+
+
+
+\title{Four Cute Facts on Basic Concentration Inequalities}
+\author{Behrad Moniri\\\texttt{bemoniri@live.com}}
+\date{}
+
+\usepackage{sectsty} \sectionfont{\fontsize{15}{15}\selectfont}
+\begin{document}
+%\setcounter{section}{-1}
+\maketitle
+
+Let $A$ and $B$ be two classes of binary function and define $C = A\cap B \triangleq \{a\cap B| a\in A, b \in B\}$. Note that 
+
+\begin{equation}
+	C = \{a(b(x)) | a\in A, b \in B\}
+\end{equation}
+
+\end{document}
