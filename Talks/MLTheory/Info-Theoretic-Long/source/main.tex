@@ -72,14 +72,12 @@
 \title[Information-Theoretic Analysis of Learning Algorithms]{‌\vspace{0.5cm}\\
 Information-Theoretic Analysis of Learning Algorithms}
 \author[Behrad ]{
-  Behrad Moniri\\
-  \vspace{0.2cm}
-  \scriptsize{Département de mathématiques appliquées\\
-  	Institut avancé pour le chômage\\
-  \texttt{bemoniri@live.com}}
+  Behrad Moniri
+  \pdfnewline
+  \texttt{bemoniri@ee.sharif.edu}
 }
-\institute{\small{Sharif University of Technology: EE Seminars}}
-\date{February 27, 2021}
+\institute{\small{EE Department - Sharif University of Technology}}
+\date{February 8, 2021}
 \begin{document}
 
 \begin{frame}
@@ -89,62 +87,20 @@ Information-Theoretic Analysis of Learning Algorithms}
 \begin{frame}
 	\frametitle{Overview of Talk}
 	
-	\textbf{Goal}: Analysis of the performance of learning algorithms using tools from information theory and communication theory.
-	
+	\textbf{Goal}: Analysis of the performance of learning algorithms using tools from information theory.
 	\pause
 	
 	\vspace{1cm}
 	\begin{enumerate}
-		\item Quick Review of Information Theory
-		\item Bounding Generalization Gap
-		\item Gibbs' Algorithm and Noisy ERM
-		\item Tight Bounds: Chaining
-		\item Connections to VC Theory
-		\item Minimum Excess Risk
+		\item Frequentist Setting.
+		\item Bayesian Setting.
 	\end{enumerate}
 \end{frame}
 
-\section{Quick Review of Information Theory}
-\framecard{\LARGE Quick Review of Information Theory}
+\section{Frequentist Setting}
+\framecard{\LARGE Frequentist Setting}
 
-\begin{frame}
-	\frametitle{Quick Review of Information Theory}
-	
-	\begin{alertblock}{Entropy}
-		Let $Q$ be a probability distribution on the discrete set $\mathcal{X}$. Entropy is defined as 
-		\begin{equation}
-		H(Q) = -\sum_{x \in \mathcal{X}} q(x) \log(q(x)).
-		\end{equation}
-	\end{alertblock}
-	\pause
-	\begin{block}{Differential Entropy}
-		Let $Q$ be a probability distribution on the set $\mathcal{X}$ with density $q$ wrt. Lebesgue measure. Entropy is defined as 
-		\begin{equation}
-			H(Q) = -\E \big[\log q(X)\big] = -\int_{\mathcal{X}} q(x) \log(q(x)) dx.
-		\end{equation}
-	\end{block}
-\end{frame}
 
-\begin{frame}
-	\frametitle{Quick Review of Information Theory}
-	\begin{itemize}
-		\item Entropy is non-negative.
-		\pause
-		\item If $|\mathcal{X}| < \infty$: $H(Q) \leq \log(|\mathcal{X}|)$
-		\pause
-		\begin{exampleblock}{Shannon's First Theorem  {\scriptsize (Shannon 1948)}}
-			 \textbf{(Informal Statement)}
-			 \vspace{0.1cm}
-			 
-			 Let $X_1, \dots, X_n \sim P_X$ be $n$ i.i.d. variables with entropy $H(P_X)$. 
-			\begin{itemize}
-				\item This sequence can be compressed into $nH(X)$ bits as $n\to \infty$.
-				\item If compressed to less than $nH(X)$ bits, information is lost.
-			\end{itemize}
-			
-		\end{exampleblock}
-	\end{itemize}
-\end{frame}
 
 \begin{frame}
 	\frametitle{Problem Formulation}
