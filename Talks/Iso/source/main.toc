@@ -1,0 +1,2 @@
+\beamer@sectionintoc {1}{L\'evy Inequalities}{4}{0}{1}
+\beamer@sectionintoc {2}{‌Bayesian Setting}{33}{0}{2}
